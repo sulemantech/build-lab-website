@@ -1,6 +1,7 @@
 export const programs = [
   {
     id: 'young-creators',
+    audienceId: 'kids',
     name: 'Young Creators',
     audience: 'For ages 10–15',
     duration: '3–4 weeks',
@@ -11,6 +12,7 @@ export const programs = [
   },
   {
     id: 'digital-builders',
+    audienceId: 'teens',
     name: 'Digital Builders',
     audience: 'For ages 15–18',
     duration: '4–6 weeks',
@@ -21,6 +23,7 @@ export const programs = [
   },
   {
     id: 'university-builders',
+    audienceId: 'university',
     name: 'University Builders',
     audience: 'For university students',
     duration: '4–8 weeks',
@@ -31,6 +34,7 @@ export const programs = [
   },
   {
     id: 'ai-builders',
+    audienceId: 'advanced',
     name: 'AI Builders',
     audience: 'For advanced students & developers',
     duration: '4–6 weeks',

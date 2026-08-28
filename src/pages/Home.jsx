@@ -4,6 +4,7 @@ import { showcase } from '../data/showcase.js'
 import ProjectRow from '../components/ProjectRow.jsx'
 import CategoryRow from '../components/CategoryRow.jsx'
 import CategoryExplorer from '../components/CategoryExplorer.jsx'
+import ProgramColumns from '../components/ProgramColumns.jsx'
 import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
 import ToolsTicker from '../components/ToolsTicker.jsx'
@@ -212,6 +213,18 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* PROGRAM COLUMNS */}
+      <section className="section section--border-top section--alt">
+        <div className="container">
+          <div className="section-head">
+            <p className="eyebrow">Pick your track</p>
+            <h2>See what each program actually builds.</h2>
+            <p>A quick look at real projects students in each track work on.</p>
+          </div>
+          <ProgramColumns />
         </div>
       </section>
 
