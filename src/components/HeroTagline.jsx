@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const WORDS = ['Learn', 'Practice', 'Create']
+const WORDS = ['Learn', 'Build', 'Ship']
 const STEP_MS = 1500
 
 function prefersReducedMotion() {
@@ -8,7 +8,7 @@ function prefersReducedMotion() {
 }
 
 /**
- * Animated hero tagline: cycles emphasis through Learn → Practice → Create,
+ * Animated hero tagline: cycles emphasis through Learn → Build → Ship,
  * looping back to Learn. Arrows stay static; only the words scale/bold/recolor.
  * Falls back to plain, unanimated text when the user prefers reduced motion.
  */

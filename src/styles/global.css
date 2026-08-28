@@ -409,6 +409,7 @@ main { flex: 1; }
   background: #fff;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  transform: translateZ(0);
   box-shadow: var(--shadow-pop);
   color: var(--text-primary);
 }
@@ -422,9 +423,18 @@ main { flex: 1; }
    Carousel (generic)
    ============================================================ */
 .carousel { outline: none; }
-.carousel-viewport { overflow: hidden; border-radius: var(--radius-lg); }
-.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
-.carousel-slide { flex: 0 0 100%; min-width: 0; }
+.carousel-viewport { overflow: hidden; border-radius: var(--radius-lg); transform: translateZ(0); }
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+/* Each slide gets its own stable compositing layer so its rounded,
+   clipped content (hero-project-card, story-slide) doesn't render
+   square-cornered for a frame while the track's transform animates —
+   a known Chrome/Safari quirk with border-radius + overflow:hidden
+   inside a transformed ancestor. */
+.carousel-slide { flex: 0 0 100%; min-width: 0; transform: translateZ(0); }
 .carousel-controls {
   display: flex;
   align-items: center;
@@ -812,6 +822,7 @@ main { flex: 1; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  transform: translateZ(0);
   box-shadow: var(--shadow-pop);
   min-height: 360px;
 }
