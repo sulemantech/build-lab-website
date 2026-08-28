@@ -319,7 +319,7 @@ export const projects = [
     category: 'design',
     audiences: ['teens', 'university'],
     tags: ['Illustrator', 'Vector Art', 'Logo Design', 'Typography'],
-    featured: true,
+    featured: false,
     build: flow(['Sketch your concept', 'Build with vector shapes', 'Refine color & type', 'Export a final set']),
     learn: ['Adobe Illustrator', 'Vector fundamentals', 'Logo design', 'Typography'],
     journey: [

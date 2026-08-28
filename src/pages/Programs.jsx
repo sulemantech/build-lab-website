@@ -43,7 +43,7 @@ export default function Programs() {
                 <span className="duration">{p.duration}</span>
                 <p className="desc">{p.description}</p>
                 <div className="program-focus">
-                  {p.focus.map((f) => <span className="tag-chip" key={f}>{f}</span>)}
+                  {p.focus.map((f) => <TagChip label={f} key={f} />)}
                 </div>
               </div>
             ))}
