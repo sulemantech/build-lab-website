@@ -716,7 +716,7 @@ main { flex: 1; }
 /* Colorful "course thumbnail" cover replacing a plain photo */
 .project-cover {
   position: relative;
-  height: 108px;
+  height: 138px;
   background: var(--cat-color, var(--coral));
   background: linear-gradient(135deg, color-mix(in srgb, var(--cat-color, var(--coral)) 88%, black 0%), color-mix(in srgb, var(--cat-color, var(--coral)) 55%, black 25%));
   display: flex;
@@ -733,16 +733,17 @@ main { flex: 1; }
   opacity: 0.35;
 }
 .project-cover .cover-emoji {
-  font-size: 46px;
+  font-size: 44px;
   position: relative;
   z-index: 1;
+  margin-bottom: 16px;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
 }
 .project-cover .cover-badge {
   position: absolute;
   top: 12px;
   right: 12px;
-  z-index: 1;
+  z-index: 2;
   font-family: var(--ff-mono);
   font-size: 10.5px;
   padding: 4px 10px;
@@ -753,9 +754,55 @@ main { flex: 1; }
   letter-spacing: 0.04em;
   font-weight: 600;
 }
-.project-card-body { padding: 22px 26px 26px; display: flex; flex-direction: column; flex: 1; }
-.project-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
-.project-emoji { font-size: 30px; }
+/* Small flag/ribbon badge, top-left of the cover — carries the Build Lab mark */
+.cover-ribbon {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  z-index: 2;
+  width: 32px;
+  padding: 8px 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+}
+.cover-ribbon-mark {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--coral);
+  transform: rotate(45deg);
+}
+/* Bold category label bar across the bottom of the cover */
+.cover-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--cat-color, var(--coral)) 65%, black 35%);
+  color: #fff;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.project-card-body { padding: 20px 26px 26px; display: flex; flex-direction: column; flex: 1; }
+.project-provider {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+}
+.provider-mark { width: 8px; height: 8px; border-radius: 2px; background: var(--coral); transform: rotate(45deg); flex-shrink: 0; }
 .badge {
   font-family: var(--ff-mono);
   font-size: 11px;
@@ -771,8 +818,17 @@ main { flex: 1; }
 .badge.badge-level-advanced { color: var(--coral-dark); border-color: rgba(252, 85, 70, 0.35); background: rgba(252, 85, 70, 0.08); }
 
 .project-card h3 { font-size: 19px; margin-bottom: 8px; }
-.project-card .desc { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 16px; flex: 1; }
-.project-meta { display: flex; gap: 14px; font-family: var(--ff-mono); font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px; }
+.project-card .desc { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 14px; flex: 1; }
+.project-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.project-rating .star { color: #e0a012; font-size: 13px; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 .tag-chip {
   display: inline-flex;
