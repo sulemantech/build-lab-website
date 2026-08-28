@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer dark-band">
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
@@ -38,7 +38,7 @@ export default function Footer() {
               <h5>Get in touch</h5>
               <ul>
                 <li><a href="mailto:hello@buildlab.dev">hello@buildlab.dev</a></li>
-                <li><a href="https://metafront.dev" target="_blank" rel="noreferrer">metafront.dev</a></li>
+                <li><a href="https://metafront.net" target="_blank" rel="noreferrer">metafront.net</a></li>
               </ul>
             </div>
           </div>
@@ -51,6 +51,7 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <div className="footer-accent-bar" />
     </footer>
   )
 }

@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import AnnouncementBar from './components/AnnouncementBar.jsx'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <ScrollToTop />
+      <AnnouncementBar />
       <Nav />
       <main>
         <Routes>

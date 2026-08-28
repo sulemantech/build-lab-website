@@ -2,34 +2,82 @@ import { Link } from 'react-router-dom'
 import { categories, featuredProjects } from '../data/projects.js'
 import { showcase } from '../data/showcase.js'
 import ProjectCard from '../components/ProjectCard.jsx'
+import Carousel from '../components/Carousel.jsx'
+
+const stats = [
+  { num: '3', lbl: 'Age tracks — 10 to university' },
+  { num: '12', lbl: 'Guided build projects' },
+  { num: '3', lbl: 'Steps: Learn → Build → Ship' },
+  { num: '1', lbl: 'Ship Day every cohort' },
+]
 
 export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="glow-bg hero">
+      <section className="hero-band dark-band">
         <div className="container">
-          <p className="hero-credibility">A hands-on learning initiative by MetaFront</p>
-          <h1 style={{ marginTop: 18 }}>
-            Don't just learn. <span className="accent">Build.</span>
-          </h1>
-          <p className="hero-flow">
-            <span>Learn</span> <span className="arrow">→</span> <span>Build</span>{' '}
-            <span className="arrow">→</span> <span>Ship</span>
-          </p>
-          <p className="sub">
-            Hands-on programs where kids, teenagers, and university students turn ideas into real digital
-            products — through mentorship, guided projects, and shipped work.
-          </p>
-          <div className="hero-actions">
-            <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
-            <Link to="/join" className="btn btn-secondary">Join a Program</Link>
+          <div className="hero-grid">
+            <div>
+              <span className="hero-pill">
+                <span className="mark" /> A hands-on learning initiative by MetaFront
+              </span>
+              <h1>
+                Don't just learn. <span className="accent">Build.</span>
+              </h1>
+              <p className="hero-flow">
+                <span>Learn</span> <span className="arrow">→</span> <span>Build</span>{' '}
+                <span className="arrow">→</span> <span>Ship</span>
+              </p>
+              <p className="sub">
+                Hands-on programs where kids, teenagers, and university students turn ideas into real digital
+                products — through mentorship, guided projects, and shipped work.
+              </p>
+              <div className="hero-actions">
+                <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
+                <Link to="/join" className="btn btn-secondary">Join a Program</Link>
+              </div>
+            </div>
+
+            <div className="hero-carousel-wrap">
+              <Carousel
+                ariaLabel="Featured projects"
+                items={featuredProjects}
+                theme="dark"
+                autoPlayMs={4500}
+                renderItem={(p) => (
+                  <Link to={`/projects/${p.slug}`} className="hero-project-card" style={{ '--cat-color': `var(--cat-${p.category})` }}>
+                    <div className="tag-strip">{p.level} · {p.duration}</div>
+                    <div className="card-body">
+                      <span className="emoji">{p.emoji}</span>
+                      <h4>{p.title}</h4>
+                      <p>{p.tagline}</p>
+                      <div className="meta-row">
+                        <span>{p.tags.slice(0, 2).join(' · ')}</span>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* STATS STRIP */}
+      <div className="container">
+        <div className="stats-strip">
+          {stats.map((s) => (
+            <div className="stat-item" key={s.lbl}>
+              <div className="num">{s.num}</div>
+              <div className="lbl">{s.lbl}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* WHAT DO YOU WANT TO BUILD */}
-      <section className="section section--border-top">
+      <section className="section">
         <div className="container">
           <div className="section-head center">
             <p className="eyebrow">Start here</p>
@@ -55,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="section section--border-top">
+      <section className="section section--border-top section--alt">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">Explore Projects</p>
@@ -104,7 +152,7 @@ export default function Home() {
       </section>
 
       {/* FOR KIDS */}
-      <section className="section section--border-top">
+      <section className="section section--border-top section--alt">
         <div className="container">
           <div className="split-section">
             <div className="split-copy">
@@ -138,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* FOR UNIVERSITY STUDENTS */}
-      <section className="section section--border-top">
+      <section className="section section--border-top section--alt">
         <div className="container">
           <div className="split-section reverse">
             <div className="split-copy">
@@ -192,23 +240,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOWCASE PREVIEW */}
-      <section className="section section--border-top">
+      {/* SHOWCASE CAROUSEL */}
+      <section className="section section--border-top section--alt">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">Real work, real students</p>
             <h2>Built at Build Lab</h2>
             <p>Every project starts with a problem and ends with a real, working product.</p>
           </div>
-          <div className="showcase-grid">
-            {showcase.slice(0, 3).map((s) => (
-              <div className="showcase-card" key={s.name}>
-                <div className="showcase-card-head">
-                  <div className="emoji">{s.emoji}</div>
-                  <h3>{s.name}</h3>
-                  <p className="builder">Built by {s.builder} · {s.meta}</p>
+          <Carousel
+            ariaLabel="Student showcase stories"
+            items={showcase}
+            autoPlayMs={5500}
+            renderItem={(s) => (
+              <div className="story-slide">
+                <div className="story-visual">
+                  <span className="emoji">{s.emoji}</span>
+                  <span className="builder-tag">Built by {s.builder} · {s.meta}</span>
                 </div>
-                <div className="showcase-card-body">
+                <div className="story-content">
+                  <h3>{s.name}</h3>
                   <div className="showcase-line">
                     <span className="label">Problem</span>
                     <p>{s.problem}</p>
@@ -222,8 +273,8 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            )}
+          />
           <div className="text-center mt-40">
             <Link to="/showcase" className="btn btn-secondary">See the Full Showcase</Link>
           </div>
@@ -231,7 +282,7 @@ export default function Home() {
       </section>
 
       {/* SHIP DAY */}
-      <section className="shipday section section--tight">
+      <section className="shipday dark-band section section--tight">
         <div className="container">
           <div className="shipday-inner">
             <div>
@@ -278,12 +329,12 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="section section--tight">
+      <section className="section section--tight section--border-top">
         <div className="container">
           <div className="cta-band">
             <h2>What will you build?</h2>
             <p>Explore the projects, pick one that excites you, and start building this week.</p>
-            <div className="hero-actions" style={{ marginBottom: 0 }}>
+            <div className="hero-actions" style={{ justifyContent: 'center' }}>
               <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
               <Link to="/join" className="btn btn-secondary">Join a Program</Link>
             </div>

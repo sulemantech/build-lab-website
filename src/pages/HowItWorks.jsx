@@ -56,7 +56,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <section className="shipday section section--tight section--border-top">
+      <section className="shipday dark-band section section--tight section--border-top">
         <div className="container">
           <div className="shipday-inner">
             <div>
