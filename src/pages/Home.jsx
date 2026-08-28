@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { categories, featuredProjects } from '../data/projects.js'
 import { showcase } from '../data/showcase.js'
 import ProjectRow from '../components/ProjectRow.jsx'
+import CategoryRow from '../components/CategoryRow.jsx'
 import CategoryExplorer from '../components/CategoryExplorer.jsx'
 import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
@@ -96,21 +97,7 @@ export default function Home() {
             <h2>What do you want to build?</h2>
             <p>Pick a direction. We'll teach you everything you need to make it real.</p>
           </div>
-          <div className="category-grid">
-            {categories.map((cat) => (
-              <Link
-                to={`/projects?category=${cat.id}`}
-                key={cat.id}
-                className="category-card"
-                style={{ '--cat-color': `var(--cat-${cat.id})` }}
-              >
-                <span className="cat-icon-tile"><span className="emoji">{cat.emoji}</span></span>
-                <h3>{cat.label}</h3>
-                <p>{cat.blurb}</p>
-                <span className="cat-link">Explore {cat.label} projects →</span>
-              </Link>
-            ))}
-          </div>
+          <CategoryRow categories={categories} />
         </div>
       </section>
 

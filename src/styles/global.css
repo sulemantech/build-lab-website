@@ -577,6 +577,8 @@ main { flex: 1; }
 
 .category-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -599,7 +601,7 @@ main { flex: 1; }
 }
 .category-card .emoji { font-size: 28px; line-height: 1; }
 .category-card h3 { font-size: 21px; margin-bottom: 8px; }
-.category-card p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 16px; }
+.category-card p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 16px; flex: 1; }
 .category-card .cat-link { font-family: var(--ff-mono); font-size: 12.5px; color: var(--cat-color, var(--coral)); text-transform: uppercase; letter-spacing: 0.06em; }
 .category-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--cat-color, var(--coral)); }
 
@@ -635,6 +637,10 @@ main { flex: 1; }
 }
 .project-row-item .project-card { height: 100%; }
 .project-row-wrap .carousel-controls { margin-top: 24px; }
+.category-row-item .category-card { height: 100%; }
+@media (min-width: 721px) {
+  .category-row-item { width: 320px; }
+}
 
 /* Reusable pin for a light-theme "card surface" nested inside a .dark-band
    ancestor — same technique as .hero-project-card, generalized. Redefining
