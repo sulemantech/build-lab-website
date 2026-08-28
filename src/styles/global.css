@@ -610,6 +610,84 @@ main { flex: 1; }
 @media (max-width: 980px) { .project-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } }
 
+/* Horizontally-scrollable course row — native CSS scroll-snap, a peek of
+   the next card, and hidden scrollbars (dots/arrows drive navigation). */
+.project-row-wrap { position: relative; }
+.project-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 4px 10px;
+  margin: -4px -4px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.project-row::-webkit-scrollbar { display: none; }
+.project-row-item {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: start;
+}
+@media (max-width: 720px) {
+  .project-row-item { width: 82vw; max-width: 320px; }
+}
+.project-row-item .project-card { height: 100%; }
+.project-row-wrap .carousel-controls { margin-top: 24px; }
+
+/* Reusable pin for a light-theme "card surface" nested inside a .dark-band
+   ancestor — same technique as .hero-project-card, generalized. */
+.light-surface {
+  --bg-alt: #f3efe8;
+  --bg-card: #ffffff;
+  --border: #e6e0d4;
+  --border-soft: #ede8dd;
+  --text-primary: #0b0620;
+  --text-secondary: #5b5666;
+  --text-tertiary: #8a8494;
+}
+
+/* ============================================================
+   Category Explorer — tabbed filter banner with a live project row
+   ============================================================ */
+.category-explorer {
+  border-radius: var(--radius-lg);
+  padding: 44px 40px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.category-explorer-copy h3 { font-size: clamp(22px, 3vw, 28px); color: #fff; margin-bottom: 12px; }
+.category-explorer-copy p { color: var(--text-secondary); margin-bottom: 20px; font-size: 15px; line-height: 1.6; }
+.category-explorer-copy .btn-ghost { color: var(--lime); }
+.category-explorer-main { min-width: 0; }
+
+.tab-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.tab-pill {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  background: #fff;
+  color: var(--navy-900);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.tab-pill:hover:not(.active) { background: #f0ede7; }
+.tab-pill.active { background: var(--coral); color: #fff; }
+.tab-pill:active { transform: scale(0.97); }
+
+.category-explorer-empty { color: var(--text-tertiary); font-size: 14.5px; padding: 30px 4px; }
+
+@media (max-width: 860px) {
+  .category-explorer { grid-template-columns: 1fr; gap: 28px; padding: 34px 26px; }
+}
+
 .project-card {
   display: flex;
   flex-direction: column;

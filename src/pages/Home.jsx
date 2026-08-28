@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { categories, featuredProjects } from '../data/projects.js'
 import { showcase } from '../data/showcase.js'
-import ProjectCard from '../components/ProjectCard.jsx'
+import ProjectRow from '../components/ProjectRow.jsx'
+import CategoryExplorer from '../components/CategoryExplorer.jsx'
 import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
 import ToolsTicker from '../components/ToolsTicker.jsx'
@@ -121,14 +122,17 @@ export default function Home() {
             <h2>Pick something you want to build.</h2>
             <p>We'll teach you what you need to make it happen — no prerequisites, just curiosity.</p>
           </div>
-          <div className="project-grid">
-            {featuredProjects.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
-            ))}
-          </div>
+          <ProjectRow projects={featuredProjects} />
           <div className="text-center mt-40">
             <Link to="/projects" className="btn btn-secondary">View All Projects</Link>
           </div>
+        </div>
+      </section>
+
+      {/* CATEGORY EXPLORER */}
+      <section className="section section--border-top section--tight">
+        <div className="container">
+          <CategoryExplorer />
         </div>
       </section>
 
