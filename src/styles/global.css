@@ -637,7 +637,12 @@ main { flex: 1; }
 .project-row-wrap .carousel-controls { margin-top: 24px; }
 
 /* Reusable pin for a light-theme "card surface" nested inside a .dark-band
-   ancestor — same technique as .hero-project-card, generalized. */
+   ancestor — same technique as .hero-project-card, generalized. Redefining
+   the custom properties alone isn't enough: .dark-band explicitly sets
+   `color: var(--text-primary)` on itself, and since `color` is an inherited
+   property, that *resolved* value cascades to any descendant that doesn't
+   also explicitly re-set `color` (e.g. a plain <h3>). Re-declaring `color`
+   here forces a fresh resolution against the overridden variables below. */
 .light-surface {
   --bg-alt: #f3efe8;
   --bg-card: #ffffff;
@@ -646,6 +651,7 @@ main { flex: 1; }
   --text-primary: #0b0620;
   --text-secondary: #5b5666;
   --text-tertiary: #8a8494;
+  color: var(--text-primary);
 }
 
 /* ============================================================
