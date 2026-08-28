@@ -1,5 +1,6 @@
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { getProjectBySlug, projects, categoryLabel } from '../data/projects.js'
+import TagChip from '../components/TagChip.jsx'
 
 export default function ProjectDetail() {
   const { slug } = useParams()
@@ -12,13 +13,13 @@ export default function ProjectDetail() {
 
   return (
     <>
-      <section className="pd-hero glow-bg">
+      <section className="pd-hero glow-bg" style={{ '--cat-color': `var(--cat-${project.category})` }}>
         <div className="container">
           <p className="pd-breadcrumb">
             <Link to="/projects">Projects</Link> / {project.title}
           </p>
           <div className="pd-hero-top">
-            <span className="emoji">{project.emoji}</span>
+            <span className="pd-icon-tile"><span className="emoji">{project.emoji}</span></span>
             <div>
               <h1>{project.title}</h1>
               <p className="tagline">{project.tagline}</p>
@@ -84,7 +85,7 @@ export default function ProjectDetail() {
 
                 <h4 style={{ marginTop: 24 }}>What you'll learn</h4>
                 <div className="project-tags" style={{ marginBottom: 24 }}>
-                  {project.learn.map((l) => <span className="tag-chip" key={l}>{l}</span>)}
+                  {project.learn.map((l) => <TagChip label={l} key={l} />)}
                 </div>
 
                 <Link to="/join" className="btn btn-primary btn-block">Join This Program</Link>
@@ -100,8 +101,8 @@ export default function ProjectDetail() {
             <p className="pd-section-title">Related projects</p>
             <div className="related-strip">
               {related.map((r) => (
-                <Link to={`/projects/${r.slug}`} className="related-card" key={r.slug}>
-                  <span style={{ fontSize: 24 }}>{r.emoji}</span>
+                <Link to={`/projects/${r.slug}`} className="related-card" key={r.slug} style={{ '--cat-color': `var(--cat-${r.category})` }}>
+                  <span className="related-card-icon">{r.emoji}</span>
                   <h4>{r.title}</h4>
                   <span>{r.level} · {r.duration}</span>
                 </Link>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { showcase } from '../data/showcase.js'
 import Carousel from '../components/Carousel.jsx'
+import TagChip from '../components/TagChip.jsx'
 
 export default function Showcase() {
   return (
@@ -18,7 +19,7 @@ export default function Showcase() {
             items={showcase}
             autoPlayMs={5500}
             renderItem={(s) => (
-              <div className="story-slide">
+              <div className="story-slide" style={{ '--cat-color': `var(--cat-${s.category})` }}>
                 <div className="story-visual">
                   <span className="emoji">{s.emoji}</span>
                   <span className="builder-tag">Built by {s.builder} · {s.meta}</span>
@@ -34,7 +35,7 @@ export default function Showcase() {
                     <p>{s.product}</p>
                   </div>
                   <div className="project-tags">
-                    {s.tags.map((t) => <span className="tag-chip" key={t}>{t}</span>)}
+                    {s.tags.map((t) => <TagChip label={t} key={t} />)}
                   </div>
                 </div>
               </div>
@@ -51,7 +52,7 @@ export default function Showcase() {
           </div>
           <div className="showcase-grid">
             {showcase.map((s) => (
-              <div className="showcase-card" key={s.name}>
+              <div className="showcase-card" key={s.name} style={{ '--cat-color': `var(--cat-${s.category})` }}>
                 <div className="showcase-card-head">
                   <div className="emoji">{s.emoji}</div>
                   <h3>{s.name}</h3>
@@ -67,7 +68,7 @@ export default function Showcase() {
                     <p>{s.product}</p>
                   </div>
                   <div className="project-tags">
-                    {s.tags.map((t) => <span className="tag-chip" key={t}>{t}</span>)}
+                    {s.tags.map((t) => <TagChip label={t} key={t} />)}
                   </div>
                 </div>
               </div>
@@ -98,7 +99,7 @@ export default function Showcase() {
             <div className="profile-section">
               <span className="label">Skills</span>
               <div className="project-tags">
-                {['Python', 'AI', 'React', 'Figma'].map((s) => <span className="tag-chip" key={s}>{s}</span>)}
+                {['Python', 'AI', 'React', 'Figma'].map((s) => <TagChip label={s} key={s} />)}
               </div>
             </div>
             <div className="profile-stats">

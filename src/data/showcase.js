@@ -7,6 +7,7 @@ export const showcase = [
     product: 'An AI assistant that reads notes and answers questions in plain language.',
     tags: ['AI', 'Python', 'RAG'],
     emoji: '🤖',
+    category: 'ai',
   },
   {
     name: 'Habit Tracker',
@@ -16,6 +17,7 @@ export const showcase = [
     product: 'A mobile app with streaks, reminders, and a friendly daily check-in.',
     tags: ['Mobile', 'UI/UX'],
     emoji: '📱',
+    category: 'mobile',
   },
   {
     name: 'AI Support Bot',
@@ -25,6 +27,7 @@ export const showcase = [
     product: 'A chatbot trained on business FAQs, deployed to a live website.',
     tags: ['AI', 'APIs', 'Chatbot'],
     emoji: '💬',
+    category: 'ai',
   },
   {
     name: 'Campus Marketplace',
@@ -34,6 +37,7 @@ export const showcase = [
     product: 'A full web marketplace with listings, search, and messaging.',
     tags: ['React', 'Database', 'Web'],
     emoji: '🛍️',
+    category: 'web',
   },
   {
     name: 'Pixel Runner',
@@ -43,6 +47,7 @@ export const showcase = [
     product: 'A side-scrolling platformer game with levels and a scoring system.',
     tags: ['Game', 'Logic'],
     emoji: '🎮',
+    category: 'game',
   },
   {
     name: 'Guest Insight Agent',
@@ -52,5 +57,26 @@ export const showcase = [
     product: 'An AI agent that analyzes feedback and routes action items to staff.',
     tags: ['AI Agents', 'LangGraph'],
     emoji: '🏨',
+    category: 'ai',
+  },
+  {
+    name: 'Community Event Posters',
+    builder: 'Zara',
+    meta: 'Age 13 · Young Creators',
+    problem: 'Her school club needed posters for events but had no design budget.',
+    product: 'A full poster and social media set designed in Canva for every school event.',
+    tags: ['Canva', 'Branding', 'Social Media'],
+    emoji: '🖼️',
+    category: 'design',
+  },
+  {
+    name: 'Short Film: "Neighbors"',
+    builder: 'Omar',
+    meta: 'Age 16 · Digital Builders',
+    problem: 'Wanted to tell a real story instead of just filming random clips.',
+    product: 'A 4-minute short film shot on a phone and edited in Premiere Pro.',
+    tags: ['Premiere Pro', 'Storytelling', 'Sound & Color'],
+    emoji: '🎬',
+    category: 'design',
   },
 ]

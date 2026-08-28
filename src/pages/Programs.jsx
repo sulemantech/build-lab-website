@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { programs } from '../data/programs.js'
+import TagChip from '../components/TagChip.jsx'
 
 export default function Programs() {
   return (
