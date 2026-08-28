@@ -84,6 +84,24 @@ main { flex: 1; }
   padding: 0 24px;
 }
 
+/* Grid/flex items default to min-width:auto, flooring them at their
+   content's intrinsic width — on a track that collapses to fewer
+   columns at mobile widths this can force real horizontal overflow.
+   Applied broadly across the site's grid layouts as a safe default;
+   it only removes the auto floor, it never forces anything to shrink
+   visually. */
+.pd-grid > *,
+.programs-vs > *,
+.mentor-grid > *,
+.story-slide > *,
+.program-grid > *,
+.project-grid > *,
+.category-grid > *,
+.showcase-grid > *,
+.trust-grid > * {
+  min-width: 0;
+}
+
 .section { padding: 96px 0; }
 .section--tight { padding: 64px 0; }
 .section--border-top { border-top: 1px solid var(--border-soft); }
@@ -129,8 +147,10 @@ main { flex: 1; }
 .dark-band .btn-secondary { border-color: rgba(255, 255, 255, 0.35); color: #fff; }
 .dark-band .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; }
 
-/* Background noise/gradient accents used behind hero-like sections */
-.glow-bg { position: relative; isolation: isolate; }
+/* Background noise/gradient accents used behind hero-like sections.
+   overflow:hidden contains the pseudo-element's intentional bleed past
+   the section edge so it can't create real horizontal scroll on mobile. */
+.glow-bg { position: relative; isolation: isolate; overflow: hidden; }
 .glow-bg::before {
   content: '';
   position: absolute;
@@ -308,12 +328,18 @@ main { flex: 1; }
   gap: 56px;
   align-items: center;
 }
+/* Grid items default to min-width:auto, which floors them at their
+   content's max-content width and can blow out the track on mobile
+   (e.g. the hero-pill's un-wrapped text). Let them shrink and wrap. */
+.hero-grid > * { min-width: 0; }
 @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
 
 .hero-pill {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+  max-width: 100%;
   font-family: var(--ff-mono);
   font-size: 12.5px;
   padding: 8px 16px;
@@ -343,8 +369,23 @@ main { flex: 1; }
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
-.hero-flow span { color: #fff; }
+.hero-flow .flow-word {
+  display: inline-block;
+  color: #fff;
+  font-weight: 500;
+  transform: scale(1);
+  transform-origin: center;
+  transition: color 0.45s ease, transform 0.45s ease, font-weight 0.45s ease;
+}
+.hero-flow .flow-word.is-active {
+  color: var(--lime);
+  font-weight: 700;
+  transform: scale(1.14);
+}
 .hero-flow .arrow { color: var(--coral); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-flow .flow-word { transition: none; }
+}
 .hero-band p.sub { max-width: 480px; color: #c7c2d6; font-size: 17px; line-height: 1.65; margin-bottom: 32px; }
 .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 0; }
 .cta-band .hero-actions, .shipday .hero-actions { justify-content: center; }
@@ -352,6 +393,18 @@ main { flex: 1; }
 /* Hero carousel cards */
 .hero-carousel-wrap { max-width: 380px; margin: 0 auto; }
 .hero-project-card {
+  /* Pin light-theme tokens: this card is always a white surface, even
+     when it sits inside a .dark-band (the hero carousel does), so its
+     nested text/tags must not inherit the dark-band's light-on-dark
+     color overrides. */
+  --bg-alt: #f3efe8;
+  --bg-card: #ffffff;
+  --border: #e6e0d4;
+  --border-soft: #ede8dd;
+  --text-primary: #0b0620;
+  --text-secondary: #5b5666;
+  --text-tertiary: #8a8494;
+
   display: block;
   background: #fff;
   border-radius: var(--radius-lg);
@@ -649,6 +702,7 @@ main { flex: 1; }
    Split sections (For Kids / For University)
    ============================================================ */
 .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.split-section > * { min-width: 0; }
 .split-section.reverse .split-visual { order: 2; }
 @media (max-width: 880px) {
   .split-section { grid-template-columns: 1fr; gap: 32px; }
@@ -803,6 +857,7 @@ main { flex: 1; }
    Ship Day / Impact band (dark, full-bleed)
    ============================================================ */
 .shipday-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.shipday-inner > * { min-width: 0; }
 @media (max-width: 880px) { .shipday-inner { grid-template-columns: 1fr; gap: 30px; } }
 .shipday h2 { font-size: clamp(30px, 5vw, 46px); margin-bottom: 16px; color: #fff; }
 .shipday .rocket { font-size: 20px; }

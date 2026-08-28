@@ -5,6 +5,7 @@ import ProjectCard from '../components/ProjectCard.jsx'
 import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
 import ToolsTicker from '../components/ToolsTicker.jsx'
+import HeroTagline from '../components/HeroTagline.jsx'
 
 const stats = [
   { num: '3', lbl: 'Age tracks — 10 to university' },
@@ -20,17 +21,14 @@ export default function Home() {
       <section className="hero-band dark-band">
         <div className="container">
           <div className="hero-grid">
-            <div>
+            <div className="hero-copy">
               <span className="hero-pill">
                 <span className="mark" /> A hands-on learning initiative by MetaFront
               </span>
               <h1>
                 Don't just learn. <span className="accent">Build.</span>
               </h1>
-              <p className="hero-flow">
-                <span>Learn</span> <span className="arrow">→</span> <span>Build</span>{' '}
-                <span className="arrow">→</span> <span>Ship</span>
-              </p>
+              <HeroTagline />
               <p className="sub">
                 Hands-on programs where kids, teenagers, and university students turn ideas into real digital
                 products — through mentorship, guided projects, and shipped work.
