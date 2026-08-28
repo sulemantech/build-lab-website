@@ -358,7 +358,28 @@ main { flex: 1; }
   line-height: 1.05;
   margin-bottom: 22px;
 }
-.hero-band h1 .accent { color: var(--lime); }
+
+/* Second headline line ("Build your ___.") reserves height for up to two
+   wrapped lines (longer words like "experience"/"portfolio" can wrap on
+   narrow screens) so switching phrases never shifts the content below it. */
+.headline-rotate-row {
+  display: block;
+  min-height: 2.2em;
+}
+.rotate-phrase {
+  display: inline-block;
+  color: var(--lime);
+  animation: rotate-phrase-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rotate-phrase-in {
+  from { opacity: 0; transform: translateY(0.4em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotate-phrase { animation: none; }
+}
+
+/* Secondary tagline row — visually subordinate to the main headline above. */
 .hero-flow {
   font-family: var(--ff-mono);
   font-size: clamp(14px, 1.6vw, 17px);
@@ -368,6 +389,7 @@ main { flex: 1; }
   gap: 12px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+  opacity: 0.85;
 }
 .hero-flow .flow-word {
   display: inline-block;
@@ -380,7 +402,7 @@ main { flex: 1; }
 .hero-flow .flow-word.is-active {
   color: var(--lime);
   font-weight: 700;
-  transform: scale(1.14);
+  transform: scale(1.08);
 }
 .hero-flow .arrow { color: var(--coral); }
 @media (prefers-reduced-motion: reduce) {

@@ -6,6 +6,7 @@ import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
 import ToolsTicker from '../components/ToolsTicker.jsx'
 import HeroTagline from '../components/HeroTagline.jsx'
+import HeroHeadlineRotator from '../components/HeroHeadlineRotator.jsx'
 
 const stats = [
   { num: '3', lbl: 'Age tracks — 10 to university' },
@@ -26,7 +27,9 @@ export default function Home() {
                 <span className="mark" /> A hands-on learning initiative by MetaFront
               </span>
               <h1>
-                Don't just learn. <span className="accent">Build.</span>
+                Don't just learn.
+                <br />
+                <HeroHeadlineRotator />
               </h1>
               <HeroTagline />
               <p className="sub">
