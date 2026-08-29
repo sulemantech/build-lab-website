@@ -904,6 +904,16 @@ main { flex: 1; }
   .step-arrow { width: auto; transform: rotate(90deg); padding: 4px 0; }
 }
 
+/* Four-step process grid (Learn / Build / Test / Ship) — no arrows, a
+   plain grid of equal cards, matching the reference exactly. */
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 880px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .process-grid { grid-template-columns: 1fr; } }
+.process-step { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; min-height: 190px; }
+.process-step .stepnum { font-size: 11px; color: var(--coral); font-weight: 900; letter-spacing: 0.1em; }
+.process-step h3 { font-size: 21px; margin: 24px 0 6px; }
+.process-step p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.55; margin: 0; }
+
 /* ============================================================
    Split sections (For Kids / For University)
    ============================================================ */
@@ -965,6 +975,66 @@ main { flex: 1; }
   align-items: center;
   gap: 10px;
 }
+
+/* Numbered row list inside a dark panel — "Why [Brand]" and "AI philosophy" */
+.panel-rows { position: relative; z-index: 1; }
+.panel-row { display: flex; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.panel-row:last-child { border-bottom: none; }
+.panel-check {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.panel-row strong { display: block; font-size: 13.5px; color: #fff; }
+.panel-row span { display: block; font-size: 12.5px; color: #aaa3b7; }
+
+/* Skills grid */
+.skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+@media (max-width: 880px) { .skill-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .skill-grid { grid-template-columns: 1fr; } }
+.skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+.skill-card .cat-icon-tile { background: var(--lav, #f0ebff); }
+.skill-card h3 { margin: 0 0 6px; font-size: 19px; }
+.skill-card p { margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+
+/* Ship Day — coral gradient band (distinct from the navy dark-band look) */
+.shipday-coral {
+  background: linear-gradient(135deg, var(--coral), #ff816f);
+  color: #fff;
+}
+.shipday-coral .eyebrow { color: var(--lime); }
+.shipday-coral h2 { color: #fff; }
+.shipday-coral p.lead { color: #ffefec; }
+.shipday-coral .btn-primary { background: #fff; color: var(--coral-dark); }
+.shipday-coral .btn-primary:hover { background: #fff0ed; }
+.ship-list { display: grid; gap: 9px; }
+.ship-item { padding: 14px 17px; border-radius: 14px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); font-size: 13px; font-weight: 800; }
+
+/* Parents section (homepage) — points list + pull quote */
+.parent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+@media (max-width: 880px) { .parent-grid { grid-template-columns: 1fr; gap: 30px; } }
+.parent-points { display: grid; gap: 10px; margin-top: 20px; }
+.parent-point { padding: 15px 17px; border: 1px solid var(--border); border-radius: 15px; font-size: 13px; font-weight: 700; }
+.parent-point::before { content: '✓'; color: var(--coral); margin-right: 9px; }
+.quote-card { background: color-mix(in srgb, var(--purple) 8%, var(--bg-alt) 92%); border-radius: var(--radius-lg); padding: 28px; align-self: start; }
+.quote-card .mark { font-size: 40px; color: var(--purple); line-height: 1; margin-bottom: 8px; }
+.quote-card p { font-size: 19px; font-weight: 800; line-height: 1.28; letter-spacing: -0.01em; margin: 0 0 10px; }
+.quote-card small { color: var(--text-tertiary); font-size: 13px; }
+
+/* FAQ accordion */
+.faq-list { max-width: 850px; margin: 0 auto; display: grid; gap: 9px; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 17px 19px; }
+.faq-item summary { font-size: 14.5px; font-weight: 800; cursor: pointer; color: var(--text-primary); }
+.faq-item summary::marker { color: var(--coral); }
+.faq-item p { font-size: 13px; color: var(--text-secondary); margin: 12px 0 0; line-height: 1.55; }
 
 /* ============================================================
    Mentorship
@@ -1102,15 +1172,33 @@ main { flex: 1; }
 /* ============================================================
    Programs page
    ============================================================ */
-.program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-@media (max-width: 760px) { .program-grid { grid-template-columns: 1fr; } }
-.program-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; position: relative; overflow: hidden; box-shadow: var(--shadow-card); }
-.program-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--prog-color, var(--coral)); }
-.program-card .audience-badge { font-family: var(--ff-mono); font-size: 12px; color: var(--prog-color, var(--coral)); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; display: block; }
-.program-card h3 { font-size: 24px; margin-bottom: 6px; }
-.program-card .duration { font-family: var(--ff-mono); font-size: 13px; color: var(--text-tertiary); margin-bottom: 16px; display: block; }
-.program-card p.desc { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
-.program-focus { display: flex; gap: 8px; flex-wrap: wrap; }
+.program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .program-grid { grid-template-columns: 1fr; } }
+.program-card {
+  color: var(--navy-950);
+  background: color-mix(in srgb, var(--prog-color, var(--coral)) 10%, #fff 90%);
+  border-radius: 22px;
+  padding: 28px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+.program-card .level-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.13em; font-weight: 900; color: var(--text-secondary); }
+.program-card h3 { font-size: 36px; line-height: 1; margin: 10px 0 6px; letter-spacing: -0.02em; color: var(--navy-950); }
+.program-card .promise { font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+.program-card p.desc { font-size: 13.5px; color: var(--text-secondary); margin: 0 0 14px; }
+.program-focus { padding: 0; margin: 0 0 18px; list-style: none; display: grid; gap: 7px; }
+.program-focus li { font-size: 12.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.program-focus li::before { content: '✓'; color: var(--prog-color, var(--coral)); flex-shrink: 0; }
+.program-build {
+  margin-top: auto;
+  border-top: 1px solid rgba(21, 17, 38, 0.1);
+  padding-top: 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.program-build strong { display: block; text-transform: uppercase; font-size: 9.5px; letter-spacing: 0.1em; color: var(--navy-950); margin-bottom: 4px; }
+.program-card .cta-link { margin-top: 16px; font-size: 13px; font-weight: 900; color: var(--navy-950); }
 
 .programs-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
 @media (max-width: 700px) { .programs-vs { grid-template-columns: 1fr; } }
