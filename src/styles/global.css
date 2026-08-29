@@ -1,57 +1,56 @@
 /* ============================================================
-   Build Lab — Design Tokens
-   Palette rooted in MetaFront's brand (deep navy + coral) with
-   Build Lab's own lime "spark" accent, executed in a warm,
-   edX-inspired light layout: cream surfaces, full-bleed dark
-   bands, and pill-shaped controls.
+   AI Inventor Lab — Design Tokens
+   Ink-purple dark bands, a bright lime spark accent, a warm coral
+   call-to-action color, and soft pastel category tints on a paper
+   background — built for a focused, kid-friendly AI + programming
+   product for ages 10–12.
    ============================================================ */
 :root {
-  --bg: #fbf9f5;
-  --bg-alt: #f3efe8;
+  --bg: #faf9f5;
+  --bg-alt: #f1eee8;
   --bg-card: #ffffff;
-  --bg-card-hover: #fffdf9;
-  --border: #e6e0d4;
-  --border-soft: #ede8dd;
+  --bg-card-hover: #fdfcfa;
+  --border: #e9e4dc;
+  --border-soft: #eeeae3;
 
-  --text-primary: #0b0620;
-  --text-secondary: #5b5666;
-  --text-tertiary: #8a8494;
+  --text-primary: #151126;
+  --text-secondary: #716b7e;
+  --text-tertiary: #9c95a8;
 
-  /* MetaFront navy — used for dark bands, footer, nav pill */
-  --navy-950: #0a0620;
-  --navy-900: #150c2e;
-  --navy-800: #1d1035;
-  --navy-700: #2e2141;
+  /* Ink — used for dark bands, footer, nav pill */
+  --navy-950: #151126;
+  --navy-900: #1c1733;
+  --navy-800: #211a3c;
+  --navy-700: #2b2350;
 
-  /* MetaFront coral — primary call-to-action color */
-  --coral: #fc5546;
-  --coral-dark: #e0402f;
+  /* Coral — primary call-to-action color */
+  --coral: #ff6658;
+  --coral-dark: #e04d40;
   --coral-ink: #ffffff;
 
-  /* Build Lab's own spark accent, used sparingly for its identity */
-  --lime: #c8f04b;
-  --lime-dim: #9fc23a;
-  --lime-ink: #16210a;
+  /* Bright lime spark accent */
+  --lime: #d9ff3f;
+  --lime-dim: #b8d934;
+  --lime-ink: #151126;
 
-  --blue: #2f6fe4;
+  --blue: #6f9adf;
   --purple: #8b5cf6;
   --gold: #c98a1c;
 
-  --cat-web: #2563eb;
-  --cat-mobile: #7c3aed;
-  --cat-ai: #6b8e23;
-  --cat-design: #db2777;
-  --cat-game: #ea580c;
-  --cat-product: #b45309;
+  --cat-website: #6c63c9;
+  --cat-game: #8b5cf6;
+  --cat-ai-tool: #5a9216;
+  --cat-app: #ff6658;
+  --cat-digital-product: #c98a1c;
 
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 22px;
+  --radius-lg: 20px;
   --radius-full: 999px;
 
-  --container: 1220px;
-  --shadow-card: 0 1px 0 rgba(11, 6, 32, 0.02) inset, 0 14px 30px -20px rgba(11, 6, 32, 0.16);
-  --shadow-pop: 0 24px 60px -20px rgba(11, 6, 32, 0.28);
+  --container: 1160px;
+  --shadow-card: 0 1px 0 rgba(21, 17, 38, 0.02) inset, 0 14px 30px -20px rgba(21, 17, 38, 0.14);
+  --shadow-pop: 0 24px 60px -20px rgba(21, 17, 38, 0.26);
 
   --ff-display: 'Space Grotesk', 'Inter', sans-serif;
   --ff-body: 'Inter', system-ui, sans-serif;
@@ -275,12 +274,13 @@ main { flex: 1; }
 .brand-mark {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-family: var(--ff-display);
   font-weight: 700;
-  font-size: 19px;
+  font-size: 16px;
   letter-spacing: -0.01em;
   color: var(--navy-900);
+  white-space: nowrap;
 }
 .brand-mark .dot {
   width: 10px;
@@ -419,13 +419,13 @@ main { flex: 1; }
      when it sits inside a .dark-band (the hero carousel does), so its
      nested text/tags must not inherit the dark-band's light-on-dark
      color overrides. */
-  --bg-alt: #f3efe8;
+  --bg-alt: #f1eee8;
   --bg-card: #ffffff;
-  --border: #e6e0d4;
-  --border-soft: #ede8dd;
-  --text-primary: #0b0620;
-  --text-secondary: #5b5666;
-  --text-tertiary: #8a8494;
+  --border: #e9e4dc;
+  --border-soft: #eeeae3;
+  --text-primary: #151126;
+  --text-secondary: #716b7e;
+  --text-tertiary: #9c95a8;
 
   display: block;
   background: #fff;
@@ -520,6 +520,51 @@ main { flex: 1; }
 }
 
 /* ============================================================
+   Intent banner — "What brings you to Build Lab today?" quick paths
+   ============================================================ */
+.intent-banner {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--coral) 7%, var(--bg-alt) 93%), var(--bg-alt));
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-full);
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.intent-banner h3 { font-size: 19px; margin: 0; flex-shrink: 0; }
+.intent-options { display: flex; gap: 12px; flex-wrap: wrap; }
+.intent-pill {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 8px 20px 8px 8px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.intent-pill:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--intent-color, var(--coral)); }
+.intent-pill-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--intent-color, var(--coral));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .intent-banner { flex-direction: column; align-items: flex-start; border-radius: var(--radius-lg); padding: 24px; }
+}
+
+/* ============================================================
    Tools ticker — scrolling strip of skills/tools taught
    ============================================================ */
 .tools-ticker-section { padding: 44px 0; border-bottom: 1px solid var(--border-soft); }
@@ -579,37 +624,32 @@ main { flex: 1; }
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--cat-color, var(--coral));
-  background: color-mix(in srgb, var(--cat-color, var(--coral)) 7%, var(--bg-card) 93%);
-  border: 1px solid color-mix(in srgb, var(--cat-color, var(--coral)) 24%, var(--border) 76%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 30px 26px;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 26px;
+  min-height: 190px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
 }
 .category-card:hover {
   transform: translateY(-4px);
-  border-color: var(--cat-color, var(--coral));
-  box-shadow: 0 20px 46px -18px color-mix(in srgb, var(--cat-color, var(--coral)) 55%, transparent);
+  box-shadow: 0 18px 45px -14px color-mix(in srgb, var(--navy-800) 12%, transparent);
 }
 .cat-icon-tile {
-  width: 58px;
-  height: 58px;
-  border-radius: var(--radius-md);
-  background: var(--cat-color, var(--coral));
-  background: linear-gradient(135deg, color-mix(in srgb, var(--cat-color, var(--coral)) 92%, black 0%), color-mix(in srgb, var(--cat-color, var(--coral)) 58%, black 26%));
-  box-shadow: 0 8px 18px -6px color-mix(in srgb, var(--cat-color, var(--coral)) 65%, transparent);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--cat-color, var(--coral)) 20%, white 80%);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 18px;
 }
-.category-card .emoji { font-size: 28px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22)); }
-.category-card h3 { font-size: 21px; margin-bottom: 8px; }
-.category-card p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 16px; flex: 1; }
-.category-card .cat-link { font-family: var(--ff-mono); font-size: 12.5px; font-weight: 700; color: var(--cat-color, var(--coral)); text-transform: uppercase; letter-spacing: 0.06em; }
-.category-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--cat-color, var(--coral)), color-mix(in srgb, var(--cat-color, var(--coral)) 60%, white 40%)); }
+.category-card .emoji { font-size: 22px; line-height: 1; }
+.category-card h3 { font-size: 19px; margin-bottom: 6px; }
+.category-card p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin-bottom: 14px; flex: 1; }
+.category-card .cat-link { font-family: var(--ff-mono); font-size: 12px; font-weight: 600; color: var(--cat-color, var(--coral)); text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* ============================================================
    Project cards
@@ -656,13 +696,13 @@ main { flex: 1; }
    also explicitly re-set `color` (e.g. a plain <h3>). Re-declaring `color`
    here forces a fresh resolution against the overridden variables below. */
 .light-surface {
-  --bg-alt: #f3efe8;
+  --bg-alt: #f1eee8;
   --bg-card: #ffffff;
-  --border: #e6e0d4;
-  --border-soft: #ede8dd;
-  --text-primary: #0b0620;
-  --text-secondary: #5b5666;
-  --text-tertiary: #8a8494;
+  --border: #e9e4dc;
+  --border-soft: #eeeae3;
+  --text-primary: #151126;
+  --text-secondary: #716b7e;
+  --text-tertiary: #9c95a8;
   color: var(--text-primary);
 }
 
@@ -777,102 +817,32 @@ main { flex: 1; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
 }
-.project-card:hover { transform: translateY(-3px); border-color: var(--cat-color, var(--border)); box-shadow: var(--shadow-pop); }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 18px 45px -14px color-mix(in srgb, var(--navy-800) 12%, transparent); }
 
-/* Colorful "course thumbnail" cover replacing a plain photo */
-.project-cover {
-  position: relative;
-  height: 138px;
-  background: var(--cat-color, var(--coral));
-  background: linear-gradient(135deg, color-mix(in srgb, var(--cat-color, var(--coral)) 88%, black 0%), color-mix(in srgb, var(--cat-color, var(--coral)) 55%, black 25%));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+/* Dark, color-coded "visual" area with a simple browser-window mockup —
+   stands in for a screenshot without needing real product photography. */
+.project-visual {
+  height: 135px;
+  padding: 13px;
+  background: var(--cat-color, var(--navy-800));
 }
-.project-cover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px);
-  background-size: 18px 18px;
-  opacity: 0.35;
-}
-.project-cover .cover-emoji {
-  font-size: 44px;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 16px;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
-}
-.project-cover .cover-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  font-family: var(--ff-mono);
-  font-size: 10.5px;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--navy-900);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-weight: 600;
-}
-/* Small flag/ribbon badge, top-left of the cover — carries the Build Lab mark */
-.cover-ribbon {
-  position: absolute;
-  top: 0;
-  left: 16px;
-  z-index: 2;
-  width: 32px;
-  padding: 8px 0 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
-}
-.cover-ribbon-mark {
-  width: 9px;
-  height: 9px;
-  border-radius: 2px;
-  background: var(--coral);
-  transform: rotate(45deg);
-}
-/* Bold category label bar across the bottom of the cover */
-.cover-label {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  padding: 8px 16px;
-  background: color-mix(in srgb, var(--cat-color, var(--coral)) 65%, black 35%);
-  color: #fff;
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.03em;
+.project-window { height: 100%; background: #fff; border-radius: 12px; padding: 12px; }
+.project-window .line { height: 7px; background: #e7e2db; border-radius: 9px; margin-bottom: 8px; width: 65%; }
+.project-window .line.short { width: 42%; margin-bottom: 0; }
+.project-card-body { padding: 18px; }
+.project-tag {
+  font-size: 9px;
+  color: var(--coral);
+  font-weight: 900;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
-.project-card-body { padding: 20px 26px 26px; display: flex; flex-direction: column; flex: 1; }
-.project-provider {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  margin-bottom: 10px;
-}
-.provider-mark { width: 8px; height: 8px; border-radius: 2px; background: var(--coral); transform: rotate(45deg); flex-shrink: 0; }
+.project-card h3 { margin: 6px 0; font-size: 18px; }
+.project-card .desc { color: var(--text-secondary); font-size: 13px; margin: 0; }
+
 .badge {
   font-family: var(--ff-mono);
   font-size: 11px;
@@ -887,18 +857,6 @@ main { flex: 1; }
 .badge.badge-level-intermediate { color: #a06a0f; border-color: rgba(201, 138, 28, 0.35); background: rgba(201, 138, 28, 0.08); }
 .badge.badge-level-advanced { color: var(--coral-dark); border-color: rgba(252, 85, 70, 0.35); background: rgba(252, 85, 70, 0.08); }
 
-.project-card h3 { font-size: 19px; margin-bottom: 8px; }
-.project-card .desc { color: var(--text-secondary); font-size: 14.5px; line-height: 1.55; margin-bottom: 14px; flex: 1; }
-.project-rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-}
-.project-rating .star { color: #e0a012; font-size: 13px; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 .tag-chip {
   display: inline-flex;

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 const links = [
-  { to: '/projects', label: 'Projects' },
   { to: '/programs', label: 'Programs' },
+  { to: '/projects', label: 'Projects' },
   { to: '/how-it-works', label: 'How It Works' },
   { to: '/showcase', label: 'Showcase' },
   { to: '/for-parents', label: 'For Parents' },
@@ -19,7 +19,7 @@ export default function Nav() {
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
           <span className="brand-mark">
             <span className="dot" />
-            BUILD LAB
+            AI INVENTOR LAB
           </span>
           <span className="brand-sub">by MetaFront</span>
         </Link>
@@ -34,7 +34,7 @@ export default function Nav() {
 
         <div className="nav-cta">
           <Link to="/join" className="btn btn-primary btn-sm desktop-only">
-            Join a Program
+            Register Now
           </Link>
           <button className="nav-toggle" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
             {open ? '✕' : '☰'}
@@ -49,7 +49,7 @@ export default function Nav() {
           </Link>
         ))}
         <Link to="/join" onClick={() => setOpen(false)} style={{ paddingTop: 16 }}>
-          <span className="btn btn-primary btn-block">Join a Program</span>
+          <span className="btn btn-primary btn-block">Register Now</span>
         </Link>
       </div>
     </header>

@@ -8,47 +8,44 @@ export default function Footer() {
           <div className="footer-brand">
             <span className="brand-mark">
               <span className="dot" />
-              BUILD LAB
+              AI INVENTOR LAB
             </span>
             <p>
-              Learn → Build → Ship. A hands-on learning initiative by MetaFront, helping students turn ideas into
-              real digital products.
+              AI + Programming for young creators. Learn skills. Build projects. Test ideas. Ship something real.
             </p>
           </div>
 
           <div className="footer-links">
             <div className="footer-col">
+              <h5>Programs</h5>
+              <ul>
+                <li><Link to="/programs">AI Creator</Link></li>
+                <li><Link to="/programs">AI Builder</Link></li>
+                <li><Link to="/programs">AI Inventor</Link></li>
+              </ul>
+            </div>
+            <div className="footer-col">
               <h5>Explore</h5>
               <ul>
                 <li><Link to="/projects">Projects</Link></li>
-                <li><Link to="/programs">Programs</Link></li>
                 <li><Link to="/how-it-works">How It Works</Link></li>
-                <li><Link to="/showcase">Showcase</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h5>Build Lab</h5>
-              <ul>
                 <li><Link to="/for-parents">For Parents</Link></li>
                 <li><Link to="/about">About</Link></li>
-                <li><Link to="/join">Join a Program</Link></li>
               </ul>
             </div>
             <div className="footer-col">
-              <h5>Get in touch</h5>
+              <h5>Get Started</h5>
               <ul>
-                <li><a href="mailto:hello@buildlab.dev">hello@buildlab.dev</a></li>
-                <li><a href="https://metafront.net" target="_blank" rel="noreferrer">metafront.net</a></li>
+                <li><Link to="/join">Register Now</Link></li>
+                <li><a href="mailto:hello@ailab.dev">Email Us</a></li>
               </ul>
             </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Build Lab. All rights reserved.</p>
-          <p className="footer-powered">
-            Powered by <strong>MetaFront</strong> — Software • AI • Products
-          </p>
+          <p>© {new Date().getFullYear()} AI Inventor Lab by MetaFront. All rights reserved.</p>
+          <p className="footer-powered">Learn. Build. Test. Ship.</p>
         </div>
       </div>
       <div className="footer-accent-bar" />

@@ -8,6 +8,7 @@ import ProgramColumns from '../components/ProgramColumns.jsx'
 import Carousel from '../components/Carousel.jsx'
 import TagChip from '../components/TagChip.jsx'
 import ToolsTicker from '../components/ToolsTicker.jsx'
+import IntentBanner from '../components/IntentBanner.jsx'
 import HeroTagline from '../components/HeroTagline.jsx'
 import HeroHeadlineRotator from '../components/HeroHeadlineRotator.jsx'
 
@@ -82,6 +83,11 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* INTENT BANNER */}
+      <div className="container" style={{ marginTop: 40 }}>
+        <IntentBanner />
       </div>
 
       {/* TOOLS TICKER */}
