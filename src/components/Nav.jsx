@@ -42,36 +42,42 @@ export default function Nav() {
   }, [open])
 
   return (
-    <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
-      <div className="nav-inner">
-        <Link to="/" className="brand" onClick={close}>
-          <span className="mark">A</span>
-          <span className="brand-text">
-            AI INVENTOR LAB
-            <small>by MetaFront</small>
-          </span>
-        </Link>
+    <>
+      <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
+        <div className="nav-inner">
+          <Link to="/" className="brand" onClick={close}>
+            <span className="mark">A</span>
+            <span className="brand-text">
+              AI INVENTOR LAB
+              <small>by MetaFront</small>
+            </span>
+          </Link>
 
-        <nav className="nav-links">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="nav-links">
+            {links.map((l) => (
+              <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
+                {l.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
+          <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
 
-        <button
-          className="nav-toggle"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
+          <button
+            className="nav-toggle"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </header>
 
+      {/* Rendered as a sibling of <header>, not inside it — .nav carries a
+          `transform` for the hide-on-scroll effect, and any transformed
+          ancestor becomes the containing block for `position: fixed`
+          descendants, breaking this menu's full-viewport sizing. */}
       <div className={`nav-mobile ${open ? 'open' : ''}`}>
         <nav>
           {links.map((l) => (
@@ -80,6 +86,6 @@ export default function Nav() {
         </nav>
         <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
       </div>
-    </header>
+    </>
   )
 }

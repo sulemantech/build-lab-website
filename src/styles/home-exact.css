@@ -476,13 +476,16 @@
 }
 .home-exact .process.in-view::before { transform: scaleX(1); }
 .home-exact .step {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
   padding: 25px;
   min-height: 205px;
   position: relative;
   z-index: 1;
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.3s ease;
 }
-.home-exact .step:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(33, 26, 60, 0.1); }
+.home-exact .step:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(33, 26, 60, 0.1); border-color: #d7d0c6; }
 .home-exact .stepnum {
   display: inline-block;
   font-size: 10px;
