@@ -16,24 +16,34 @@ export default function Nav() {
   const [hidden, setHidden] = useState(false)
   const close = () => setOpen(false)
 
-  // Lock body scroll while the full-screen mobile menu is open.
+  // Lock body scroll while the dropdown menu is open.
   useEffect(() => {
     document.body.classList.toggle('menu-open', open)
     return () => document.body.classList.remove('menu-open')
   }, [open])
 
-  // Compact the bar once past the very top, and hide it on scroll-down /
-  // reveal it on scroll-up — gives content more room while scrolling
-  // through a page, without losing quick access back to nav.
+  // Auto-close if the viewport is resized (or rotated) past the mobile
+  // breakpoint — otherwise it stays stuck open under the desktop nav.
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1001px)')
+    const onChange = (e) => { if (e.matches) close() }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Compact the bar once past the very top, and hide it on scroll-down /
+  // reveal it on scroll-up. Suspended while the dropdown is open (body
+  // scroll is locked then, and the dropdown is anchored to the header —
+  // it should stay put while you're using it, not slide away mid-read).
+  useEffect(() => {
+    if (open) return
     let lastY = window.scrollY
     const onScroll = () => {
       const y = window.scrollY
       setScrolled(y > 8)
-      if (!open) {
-        const scrollingDown = y > lastY
-        setHidden(scrollingDown && y > 160)
-      }
+      const scrollingDown = y > lastY
+      setHidden(scrollingDown && y > 160)
       lastY = y
     }
     onScroll()
@@ -42,50 +52,49 @@ export default function Nav() {
   }, [open])
 
   return (
-    <>
-      <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
-        <div className="nav-inner">
-          <Link to="/" className="brand" onClick={close}>
-            <span className="mark">A</span>
-            <span className="brand-text">
-              AI INVENTOR LAB
-              <small>by MetaFront</small>
-            </span>
-          </Link>
+    <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
+      <div className="nav-inner">
+        <Link to="/" className="brand" onClick={close}>
+          <span className="mark">A</span>
+          <span className="brand-text">
+            AI INVENTOR LAB
+            <small>by MetaFront</small>
+          </span>
+        </Link>
 
-          <nav className="nav-links">
-            {links.map((l) => (
-              <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
-                {l.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
-
-          <button
-            className="nav-toggle"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            <span /><span /><span />
-          </button>
-        </div>
-      </header>
-
-      {/* Rendered as a sibling of <header>, not inside it — .nav carries a
-          `transform` for the hide-on-scroll effect, and any transformed
-          ancestor becomes the containing block for `position: fixed`
-          descendants, breaking this menu's full-viewport sizing. */}
-      <div className={`nav-mobile ${open ? 'open' : ''}`}>
-        <nav>
+        <nav className="nav-links">
           {links.map((l) => (
-            <Link key={l.to} to={l.to} onClick={close}>{l.label}</Link>
+            <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
+              {l.label}
+            </NavLink>
           ))}
         </nav>
-        <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
+
+        <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
+
+        <button
+          className={`nav-toggle ${open ? 'is-open' : ''}`}
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+        >
+          <span /><span /><span />
+        </button>
       </div>
-    </>
+
+      {/* A compact dropdown anchored right below the header (not a
+          full-screen takeover) — expands/collapses its real height via
+          the grid-rows trick, so it never needs a guessed max-height. */}
+      <div className={`nav-dropdown ${open ? 'open' : ''}`}>
+        <div className="nav-dropdown-inner">
+          <nav>
+            {links.map((l) => (
+              <Link key={l.to} to={l.to} onClick={close}>{l.label}</Link>
+            ))}
+          </nav>
+          <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
+        </div>
+      </div>
+    </header>
   )
 }

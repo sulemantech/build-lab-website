@@ -378,23 +378,54 @@ main { flex: 1; }
   border-radius: 50%;
   cursor: pointer;
   flex-shrink: 0;
+  position: relative;
 }
-.nav-toggle span { display: block; width: 17px; height: 2px; background: var(--navy-950); margin: 4px auto; border-radius: 2px; transition: 0.25s cubic-bezier(0.2, 0.75, 0.2, 1); }
+.nav-toggle span {
+  display: block;
+  width: 17px;
+  height: 2px;
+  background: var(--navy-950);
+  margin: 4px auto;
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.2s ease;
+}
+/* Morphs into an × when acting as the overlay's close button. */
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* Full-screen dark takeover menu on mobile */
-.nav-mobile {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 45;
-  background: rgba(21, 17, 38, 0.98);
-  color: #fff;
-  padding: 110px 28px 40px;
+/* Compact dropdown anchored to the header (not a full-screen takeover) —
+   .nav is the nearest positioned ancestor (sticky), so this sits right
+   below it automatically. Height animates via the grid-rows trick (same
+   technique as the FAQ accordion) so it never needs a guessed max-height
+   for however many links there are. */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  background: var(--navy-950);
+  transition: grid-template-rows 0.35s cubic-bezier(0.2, 0.75, 0.2, 1);
 }
-.nav-mobile.open { display: block; }
-.nav-mobile nav { display: grid; gap: 8px; }
-.nav-mobile nav a { padding: 16px 0; font-size: 28px; font-weight: 850; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.nav-mobile .mobile-cta { margin-top: 20px; }
+.nav-dropdown.open { grid-template-rows: 1fr; }
+.nav-dropdown-inner { overflow: hidden; min-height: 0; }
+.nav-dropdown nav { display: flex; flex-direction: column; padding: 8px 24px 0; }
+.nav-dropdown nav a {
+  padding: 14px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+.nav-dropdown.open nav a { opacity: 1; transform: translateX(0); }
+.nav-dropdown .mobile-cta { margin: 12px 24px 24px; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown, .nav-dropdown nav a, .nav-toggle span { transition: grid-template-rows 0.15s ease, opacity 0.15s ease; transform: none; }
+}
 
 @media (max-width: 1000px) {
   .nav-links { display: none; }
