@@ -79,16 +79,13 @@
   overflow: hidden;
   position: relative;
 }
-.home-exact .hero::before,
-.home-exact .hero::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(217, 255, 63, 0.22);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.home-exact .hero::before { width: 620px; height: 620px; right: -220px; top: -290px; }
-.home-exact .hero::after { width: 420px; height: 420px; left: -260px; bottom: -270px; }
+/* Parallax background layer — a real element (not ::before/::after) so
+   it can carry its own scroll-bound transform, moving slower than the
+   foreground headline for a classic depth-parallax feel. */
+.home-exact .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.home-exact .hero-ring { position: absolute; border: 1px solid rgba(217, 255, 63, 0.22); border-radius: 50%; }
+.home-exact .hero-ring--a { width: 620px; height: 620px; right: -220px; top: -290px; }
+.home-exact .hero-ring--b { width: 420px; height: 420px; left: -260px; bottom: -270px; }
 .home-exact .hero-grid {
   display: grid;
   grid-template-columns: 1.03fr 0.97fr;

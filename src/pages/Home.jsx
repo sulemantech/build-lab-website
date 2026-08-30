@@ -188,6 +188,9 @@ export default function Home() {
   const reduceMotion = useReducedMotion()
   const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const headlineY = useTransform(heroProgress, [0, 1], [0, reduceMotion ? 0 : -50])
+  // Background layer moves at a fraction of the headline's speed — the
+  // lag between the two is what reads as parallax depth.
+  const bgY = useTransform(heroProgress, [0, 1], [0, reduceMotion ? 0 : -16])
 
   // Draws the connecting line across the 4 process steps once the section
   // scrolls into view, instead of it just sitting there statically.
@@ -256,7 +259,11 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero" ref={heroRef}>
-        <div className="hero-orbit" aria-hidden="true" />
+        <motion.div className="hero-bg" style={{ y: bgY }} aria-hidden="true">
+          <div className="hero-ring hero-ring--a" />
+          <div className="hero-ring hero-ring--b" />
+          <div className="hero-orbit" />
+        </motion.div>
         <div className="wrap hero-grid">
           <div className="reveal">
             <div className="eyebrow">AI + Programming · Ages 9–15</div>
