@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { categories, getProjectBySlug } from '../data/projects.js'
 import { programs } from '../data/programs.js'
@@ -10,9 +11,17 @@ const stats = [
   { num: '1', lbl: 'Creator Journey' },
 ]
 
-const homeProjects = ['personal-portfolio', 'quiz-game', 'habit-tracker', 'ai-study-assistant']
-  .map(getProjectBySlug)
-  .filter(Boolean)
+// Abbreviated tag + display duration for the 4 featured cards, matching
+// the reference's exact card copy (shorter than the catalog's full
+// category labels / this project's real multi-week data-model duration).
+const homeProjects = [
+  { slug: 'personal-portfolio', tagLabel: 'Web' },
+  { slug: 'quiz-game', tagLabel: 'Game' },
+  { slug: 'habit-tracker', tagLabel: 'App', duration: '5 weeks' },
+  { slug: 'ai-study-assistant', tagLabel: 'AI' },
+]
+  .map((o) => ({ ...o, project: getProjectBySlug(o.slug) }))
+  .filter((o) => o.project)
 
 const whyRows = [
   { n: '01', title: 'Think', detail: 'Break problems into manageable steps.' },
@@ -63,14 +72,50 @@ const faqs = [
 ]
 
 export default function Home() {
+  const projectGridRef = useRef(null)
+
+  // Lightweight pointer tilt for the featured project cards — mirrors the
+  // reference exactly, including its hover/reduced-motion guards. Scoped to
+  // this page's own grid via event delegation so the shared ProjectCard
+  // component stays untouched (the catalog page doesn't get this effect).
+  useEffect(() => {
+    const grid = projectGridRef.current
+    if (!grid) return
+    const canTilt =
+      window.matchMedia('(hover: hover)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!canTilt) return
+
+    const onMove = (e) => {
+      const card = e.target.closest('.project-card')
+      if (!card || !grid.contains(card)) return
+      const r = card.getBoundingClientRect()
+      const x = (e.clientX - r.left) / r.width - 0.5
+      const y = (e.clientY - r.top) / r.height - 0.5
+      card.style.transform = `perspective(900px) rotateX(${y * -2.2}deg) rotateY(${x * 2.2}deg) translateY(-7px)`
+    }
+    const onLeave = (e) => {
+      const card = e.target.closest('.project-card')
+      if (card) card.style.transform = ''
+    }
+    grid.addEventListener('pointermove', onMove)
+    grid.addEventListener('pointerleave', onLeave, true)
+    return () => {
+      grid.removeEventListener('pointermove', onMove)
+      grid.removeEventListener('pointerleave', onLeave, true)
+    }
+  }, [])
+
   return (
     <>
+      <div className="scroll-progress" aria-hidden="true" />
+
       {/* HERO */}
       <section className="hero-band dark-band">
         <div className="hero-orbit" aria-hidden="true" />
         <div className="container">
           <div className="hero-grid">
-            <div className="hero-copy">
+            <div className="hero-copy reveal">
               <p className="eyebrow">AI + Programming · Ages 9–15</p>
               <h1>
                 Don't just learn.
@@ -90,7 +135,7 @@ export default function Home() {
               <p className="hero-note">No prior coding experience required for AI Creator.</p>
             </div>
 
-            <div className="hero-mock">
+            <div className="hero-mock reveal">
               <div className="hero-mock-bar"><span /><span /><span /></div>
               <div className="hero-mock-screen">
                 <p className="hero-mock-tiny">AI Inventor Lab · Project</p>
@@ -126,7 +171,7 @@ export default function Home() {
       {/* WHAT DO YOU WANT TO BUILD */}
       <section className="section">
         <div className="container">
-          <div className="section-head center">
+          <div className="section-head center reveal">
             <p className="eyebrow" style={{ justifyContent: 'center' }}>Start with an idea</p>
             <h2>What do you want to build?</h2>
             <p>Your idea is the starting point. Build the skills to make it real.</p>
@@ -136,7 +181,7 @@ export default function Home() {
               <Link
                 to={`/projects?category=${cat.id}`}
                 key={cat.id}
-                className="category-card"
+                className="category-card reveal"
               >
                 <span className="cat-icon-tile"><span className="emoji">{cat.emoji}</span></span>
                 <h3>{cat.label}</h3>
@@ -150,16 +195,17 @@ export default function Home() {
       {/* PROJECTS */}
       <section className="section section--border-top section--alt">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head reveal">
             <p className="eyebrow">Built around creation</p>
             <h2>See what you could build.</h2>
             <p>Don't just complete exercises. Create projects you can explain, improve and show.</p>
           </div>
-          <div className="project-grid home-projects">
-            {homeProjects.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+          <div className="project-grid home-projects" ref={projectGridRef}>
+            {homeProjects.map((o) => (
+              <ProjectCard key={o.slug} project={o.project} tagLabel={o.tagLabel} duration={o.duration} />
             ))}
           </div>
+          <p className="carousel-note">Explore more projects as you progress through the creator journey.</p>
           <div className="text-center mt-40">
             <Link to="/projects" className="btn btn-secondary">View All Projects</Link>
           </div>
@@ -176,7 +222,7 @@ export default function Home() {
           </div>
           <div className="program-grid">
             {programs.map((prog) => (
-              <article className="program-card" key={prog.id}>
+              <article className="program-card reveal" key={prog.id}>
                 <span className="level-label">{prog.levelLabel}</span>
                 <h3>{prog.name}</h3>
                 <div className="promise">{prog.promise}</div>
@@ -198,28 +244,28 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section className="section section--border-top">
         <div className="container">
-          <div className="section-head center">
+          <div className="section-head center reveal">
             <p className="eyebrow" style={{ justifyContent: 'center' }}>Our approach</p>
             <h2>Learn. Build. Test. Ship.</h2>
             <p>Because the best way to learn technology is to use it.</p>
           </div>
           <div className="process-grid">
-            <div className="process-step">
+            <div className="process-step reveal">
               <span className="stepnum">01 — LEARN</span>
               <h3>Understand the skill.</h3>
               <p>Learn the programming, AI and creative concepts needed to move your project forward.</p>
             </div>
-            <div className="process-step">
+            <div className="process-step reveal">
               <span className="stepnum">02 — BUILD</span>
               <h3>Put it into action.</h3>
               <p>Use what you've learned to create something of your own.</p>
             </div>
-            <div className="process-step">
+            <div className="process-step reveal">
               <span className="stepnum">03 — TEST</span>
               <h3>Find it. Fix it. Improve it.</h3>
               <p>Test projects, discover mistakes, debug code and make creations better.</p>
             </div>
-            <div className="process-step">
+            <div className="process-step reveal">
               <span className="stepnum">04 — SHIP</span>
               <h3>Finish it. Show it.</h3>
               <p>Complete the project, explain your decisions and confidently present what you built.</p>
@@ -232,7 +278,7 @@ export default function Home() {
       <section className="section section--border-top dark-band">
         <div className="container">
           <div className="split-section">
-            <div className="split-copy">
+            <div className="split-copy reveal">
               <p className="eyebrow">Why AI Inventor Lab?</p>
               <h2>Turn screen time into creation time.</h2>
               <p className="lead">
@@ -240,7 +286,7 @@ export default function Home() {
                 — to explore ideas, solve problems, learn new skills and create things of their own.
               </p>
             </div>
-            <div className="split-visual panel-visual">
+            <div className="split-visual panel-visual reveal">
               <div className="panel-rows">
                 {whyRows.map((r) => (
                   <div className="panel-row" key={r.n}>
@@ -257,14 +303,14 @@ export default function Home() {
       {/* SKILLS */}
       <section className="section section--border-top section--alt">
         <div className="container">
-          <div className="section-head center">
+          <div className="section-head center reveal">
             <p className="eyebrow" style={{ justifyContent: 'center' }}>More than coding</p>
             <h2>Build skills that go beyond programming.</h2>
             <p>Technology is the tool. Thinking is the skill.</p>
           </div>
           <div className="skill-grid">
             {skills.map((s) => (
-              <div className="skill-card" key={s.title}>
+              <div className="skill-card reveal" key={s.title}>
                 <span className="cat-icon-tile"><span className="emoji">{s.emoji}</span></span>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
@@ -278,7 +324,7 @@ export default function Home() {
       <section className="section section--border-top dark-band">
         <div className="container">
           <div className="split-section">
-            <div className="split-copy">
+            <div className="split-copy reveal">
               <p className="eyebrow">Our AI philosophy</p>
               <h2>AI is the assistant.<br />The child is the creator.</h2>
               <p className="lead">
@@ -286,7 +332,7 @@ export default function Home() {
                 remains responsible for understanding, testing, improving and making decisions.
               </p>
             </div>
-            <div className="split-visual panel-visual">
+            <div className="split-visual panel-visual reveal">
               <div className="panel-rows">
                 {aiRows.map((r) => (
                   <div className="panel-row" key={r.title}>
@@ -304,7 +350,7 @@ export default function Home() {
       <section className="section section--border-top shipday-coral">
         <div className="container">
           <div className="shipday-inner">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">The finish line</p>
               <h2>Every cohort ends with Ship Day. 🚀</h2>
               <p className="lead">
@@ -314,7 +360,7 @@ export default function Home() {
               <Link to="/join" className="btn btn-primary">Join the Next Cohort →</Link>
             </div>
             <div className="ship-list">
-              {shipItems.map((item) => <div className="ship-item" key={item}>{item}</div>)}
+              {shipItems.map((item) => <div className="ship-item reveal" key={item}>{item}</div>)}
             </div>
           </div>
         </div>
@@ -324,7 +370,7 @@ export default function Home() {
       <section className="section section--border-top">
         <div className="container">
           <div className="parent-grid">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">For parents</p>
               <h2>More than a coding class.</h2>
               <p style={{ color: 'var(--text-secondary)' }}>
@@ -335,8 +381,8 @@ export default function Home() {
                 {parentPoints.map((p) => <div className="parent-point" key={p}>{p}</div>)}
               </div>
             </div>
-            <div className="quote-card">
-              <div className="mark">"</div>
+            <div className="quote-card reveal">
+              <div className="quote-mark">"</div>
               <p>A certificate shows that a course was completed. A project shows what a child can create.</p>
               <small>— The AI Inventor Lab philosophy</small>
             </div>
@@ -347,13 +393,13 @@ export default function Home() {
       {/* FAQ */}
       <section className="section section--border-top section--alt">
         <div className="container">
-          <div className="section-head center">
+          <div className="section-head center reveal">
             <p className="eyebrow" style={{ justifyContent: 'center' }}>Questions?</p>
             <h2>Questions parents ask.</h2>
           </div>
           <div className="faq-list">
             {faqs.map((f) => (
-              <details className="faq-item" key={f.q}>
+              <details className="faq-item reveal" key={f.q}>
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>
               </details>
@@ -364,7 +410,7 @@ export default function Home() {
 
       {/* FINAL CTA */}
       <section className="section dark-band text-center final-cta">
-        <div className="container">
+        <div className="container reveal">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>Your idea is waiting</p>
           <h2 style={{ fontSize: 'clamp(40px, 6vw, 70px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: '8px 0 14px' }}>What will your child build?</h2>
           <p style={{ color: '#bdb8ca', maxWidth: 580, margin: '0 auto 28px' }}>
