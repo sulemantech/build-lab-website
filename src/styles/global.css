@@ -398,7 +398,7 @@ main { flex: 1; }
 
 @media (max-width: 1000px) {
   .nav-links { display: none; }
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .nav-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }
   .nav-inner .desktop-only { display: none; }
 }
 
