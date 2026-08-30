@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <span className="brand-mark">
-              <span className="dot" />
-              AI INVENTOR LAB
+            <span className="brand">
+              <span className="mark">A</span>
+              <span className="brand-text">AI INVENTOR LAB</span>
             </span>
             <p>
               AI + Programming for young creators. Learn skills. Build projects. Test ideas. Ship something real.

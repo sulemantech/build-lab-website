@@ -6,7 +6,7 @@ export default function Programs() {
     <>
       <section className="section section--tight glow-bg">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head programs-head">
             <p className="eyebrow">Three levels · One creator journey</p>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>

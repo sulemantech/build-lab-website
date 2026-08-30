@@ -155,7 +155,7 @@ export default function Home() {
             <h2>See what you could build.</h2>
             <p>Don't just complete exercises. Create projects you can explain, improve and show.</p>
           </div>
-          <div className="project-grid">
+          <div className="project-grid home-projects">
             {homeProjects.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}
@@ -169,7 +169,7 @@ export default function Home() {
       {/* PROGRAMS */}
       <section className="section section--border-top dark-band">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head programs-head">
             <p className="eyebrow">Three levels · One creator journey</p>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more ambitious projects.</p>
@@ -363,7 +363,7 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="section dark-band text-center">
+      <section className="section dark-band text-center final-cta">
         <div className="container">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>Your idea is waiting</p>
           <h2 style={{ fontSize: 'clamp(40px, 6vw, 70px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: '8px 0 14px' }}>What will your child build?</h2>

@@ -10,6 +10,7 @@ export default function ProjectCard({ project }) {
     >
       <div className="project-visual">
         <div className="project-window">
+          <div className="window-head"><i /><i /><i /></div>
           <div className="line" />
           <div className="line" />
           <div className="line short" />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 const links = [
@@ -12,16 +12,23 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+
+  // Lock body scroll while the full-screen mobile menu is open.
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', open)
+    return () => document.body.classList.remove('menu-open')
+  }, [open])
 
   return (
     <header className="nav">
       <div className="nav-inner">
-        <Link to="/" className="brand" onClick={() => setOpen(false)}>
-          <span className="brand-mark">
-            <span className="dot" />
+        <Link to="/" className="brand" onClick={close}>
+          <span className="mark">A</span>
+          <span className="brand-text">
             AI INVENTOR LAB
+            <small>by MetaFront</small>
           </span>
-          <span className="brand-sub">by MetaFront</span>
         </Link>
 
         <nav className="nav-links">
@@ -32,25 +39,25 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="nav-cta">
-          <Link to="/join" className="btn btn-primary btn-sm desktop-only">
-            Register Now
-          </Link>
-          <button className="nav-toggle" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
-            {open ? '✕' : '☰'}
-          </button>
-        </div>
+        <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
+
+        <button
+          className="nav-toggle"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
+          <span /><span /><span />
+        </button>
       </div>
 
       <div className={`nav-mobile ${open ? 'open' : ''}`}>
-        {links.map((l) => (
-          <Link key={l.to} to={l.to} onClick={() => setOpen(false)}>
-            {l.label}
-          </Link>
-        ))}
-        <Link to="/join" onClick={() => setOpen(false)} style={{ paddingTop: 16 }}>
-          <span className="btn btn-primary btn-block">Register Now</span>
-        </Link>
+        <nav>
+          {links.map((l) => (
+            <Link key={l.to} to={l.to} onClick={close}>{l.label}</Link>
+          ))}
+        </nav>
+        <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
       </div>
     </header>
   )
