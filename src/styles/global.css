@@ -462,13 +462,18 @@ main { flex: 1; }
 .hero-pill .mark { width: 7px; height: 7px; border-radius: 2px; background: var(--lime); transform: rotate(45deg); }
 
 .hero-band h1 {
-  font-size: clamp(50px, 7vw, 84px);
+  /* Space Grotesk (the site's chosen display face) runs noticeably wider
+     per character than the reference's Inter — the reference's own 84px
+     cap was tuned for Inter and wraps this headline into 3+ cramped lines
+     here. Scaled down to fit Space Grotesk's metrics while keeping the
+     same bold, tight, tracked-in feel. */
+  font-size: clamp(40px, 5.6vw, 68px);
   font-weight: 700;
   color: #fff;
-  line-height: 0.93;
-  letter-spacing: -0.07em;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
   margin: 16px 0 24px;
-  max-width: 760px;
+  max-width: 700px;
 }
 .hero-band h1 .accent { color: var(--lime); }
 
