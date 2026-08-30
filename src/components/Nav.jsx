@@ -12,6 +12,7 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const close = () => setOpen(false)
 
   // Lock body scroll while the full-screen mobile menu is open.
@@ -20,8 +21,16 @@ export default function Nav() {
     return () => document.body.classList.remove('menu-open')
   }, [open])
 
+  // Compact the bar once the page has scrolled past the very top.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="nav">
+    <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-inner">
         <Link to="/" className="brand" onClick={close}>
           <span className="mark">A</span>

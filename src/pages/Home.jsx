@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { categories } from '../data/projects.js'
 import { programs } from '../data/programs.js'
@@ -14,6 +14,13 @@ const featured = [
 ]
 
 const programClass = ['creator', 'builder', 'inventor']
+
+const stats = [
+  { value: '9–15', label: 'Years' },
+  { value: '3', label: 'Build Levels' },
+  { value: '4', label: 'Core Steps' },
+  { value: '1', label: 'Creator Journey' },
+]
 
 const whyRows = [
   { n: '01', title: 'Think', detail: 'Break problems into manageable steps.' },
@@ -63,8 +70,113 @@ const faqs = [
   { q: 'What happens at the end?', a: 'Every cohort concludes with Ship Day, where children present and demonstrate a project they have built.' },
 ]
 
+const codeLines = [
+  [{ b: true, t: 'idea' }, { t: ' = "help students revise"' }],
+  [{ b: true, t: 'plan' }, { t: ' = build_with_ai(idea)' }],
+  [{ b: true, t: 'test' }, { t: '(plan)' }],
+  [{ b: true, t: 'ship' }, { t: '(improve(plan))' }],
+]
+const codeTotalLen = codeLines.reduce((sum, line) => sum + line.reduce((s, tok) => s + tok.t.length, 0), 0)
+
+function renderTypedCode(revealed) {
+  let used = 0
+  return codeLines.map((line, li) => (
+    <span className="code-line" key={li}>
+      {line.map((tok, ti) => {
+        const remaining = Math.max(0, revealed - used)
+        const take = Math.min(tok.t.length, remaining)
+        used += tok.t.length
+        const text = tok.t.slice(0, take)
+        return tok.b ? <b key={ti}>{text}</b> : <span key={ti}>{text}</span>
+      })}
+    </span>
+  ))
+}
+
+function prefersReducedMotion() {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+// Animated stat — counts up from 0 once it scrolls into view.
+function Stat({ value, label }) {
+  const ref = useRef(null)
+  const reduced = useRef(prefersReducedMotion())
+  const [display, setDisplay] = useState(() => (reduced.current ? value : value.replace(/\d+/g, '0')))
+
+  useEffect(() => {
+    if (reduced.current) return
+    const el = ref.current
+    const nums = value.match(/\d+/g)?.map(Number) ?? []
+    if (!el || !nums.length) return
+    let raf
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        io.disconnect()
+        const duration = 900
+        const start = performance.now()
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration)
+          const eased = 1 - Math.pow(1 - t, 3)
+          let i = 0
+          setDisplay(value.replace(/\d+/g, () => Math.round(nums[i++] * eased)))
+          if (t < 1) raf = requestAnimationFrame(tick)
+        }
+        raf = requestAnimationFrame(tick)
+      },
+      { threshold: 0.4 }
+    )
+    io.observe(el)
+    return () => {
+      io.disconnect()
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [value])
+
+  return (
+    <div className="stat" ref={ref}>
+      <strong>{display}</strong>
+      <span>{label}</span>
+    </div>
+  )
+}
+
+// FAQ row — smooth grid-rows expand/collapse instead of native <details>'s
+// instant snap.
+function FaqItem({ q, a, stagger }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`faq-item reveal ${open ? 'open' : ''}`} style={{ '--stagger': stagger }}>
+      <button type="button" className="faq-summary" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        {q}
+        <span className="faq-plus">+</span>
+      </button>
+      <div className="faq-body">
+        <div className="faq-body-inner">
+          <p>{a}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const projectGridRef = useRef(null)
+  const [typed, setTyped] = useState(() => (prefersReducedMotion() ? codeTotalLen : 0))
+
+  // Types out the code snippet once on mount.
+  useEffect(() => {
+    if (typed >= codeTotalLen) return
+    const id = setInterval(() => {
+      setTyped((n) => {
+        const next = n + 2
+        if (next >= codeTotalLen) clearInterval(id)
+        return Math.min(codeTotalLen, next)
+      })
+    }, 20)
+    return () => clearInterval(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Pointer tilt for project cards — same behavior as the reference's own
   // script, scoped to this grid via event delegation.
@@ -122,10 +234,8 @@ export default function Home() {
               <div className="tiny">AI Inventor Lab · Project</div>
               <h2>AI Study Buddy</h2>
               <div className="code">
-                <b>idea</b> = "help students revise"<br />
-                <b>plan</b> = build_with_ai(idea)<br />
-                <b>test</b>(plan)<br />
-                <b>ship</b>(improve(plan))<span className="cursor" />
+                {renderTypedCode(typed)}
+                {typed >= codeTotalLen && <span className="cursor" />}
               </div>
               <div className="idea-flow">
                 <div className="idea-step"><strong>💡</strong>IDEA</div>
@@ -141,10 +251,7 @@ export default function Home() {
       {/* STATS */}
       <div className="stats">
         <div className="wrap stats-grid">
-          <div className="stat"><strong>9–15</strong><span>Years</span></div>
-          <div className="stat"><strong>3</strong><span>Build Levels</span></div>
-          <div className="stat"><strong>4</strong><span>Core Steps</span></div>
-          <div className="stat"><strong>1</strong><span>Creator Journey</span></div>
+          {stats.map((s) => <Stat key={s.label} value={s.value} label={s.label} />)}
         </div>
       </div>
 
@@ -157,8 +264,8 @@ export default function Home() {
             <p>Your idea is the starting point. Build the skills to make it real.</p>
           </div>
           <div className="types">
-            {categories.map((cat) => (
-              <Link to={`/projects?category=${cat.id}`} key={cat.id} className="type reveal">
+            {categories.map((cat, i) => (
+              <Link to={`/projects?category=${cat.id}`} key={cat.id} className="type reveal" style={{ '--stagger': i }}>
                 <div className="ico">{cat.emoji}</div>
                 <h3>{cat.label}</h3>
                 <p>{cat.blurb}</p>
@@ -178,8 +285,8 @@ export default function Home() {
           </div>
 
           <div className="project-grid" ref={projectGridRef}>
-            {featured.map((p) => (
-              <Link to={`/projects/${p.slug}`} key={p.slug} className="project reveal">
+            {featured.map((p, i) => (
+              <Link to={`/projects/${p.slug}`} key={p.slug} className="project reveal" style={{ '--stagger': i }}>
                 <div className="visual">
                   <div className="window">
                     <div className="window-head"><i /><i /><i /></div>
@@ -212,7 +319,7 @@ export default function Home() {
 
           <div className="program-grid">
             {programs.map((prog, i) => (
-              <article className={`program ${programClass[i] || ''} reveal`} key={prog.id}>
+              <article className={`program ${programClass[i] || ''} reveal`} key={prog.id} style={{ '--stagger': i }}>
                 <div className="level">{prog.levelLabel}</div>
                 <h3>{prog.name}</h3>
                 <div className="promise">{prog.promise}</div>
@@ -238,10 +345,10 @@ export default function Home() {
           </div>
 
           <div className="process">
-            <div className="step reveal"><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn the programming, AI and creative concepts needed to move your project forward.</p></div>
-            <div className="step reveal"><div className="stepnum">02 — BUILD</div><h3>Put it into action.</h3><p>Use what you've learned to create something of your own.</p></div>
-            <div className="step reveal"><div className="stepnum">03 — TEST</div><h3>Find it. Fix it. Improve it.</h3><p>Test projects, discover mistakes, debug code and make creations better.</p></div>
-            <div className="step reveal"><div className="stepnum">04 — SHIP</div><h3>Finish it. Show it.</h3><p>Complete the project, explain your decisions and confidently present what you built.</p></div>
+            <div className="step reveal" style={{ '--stagger': 0 }}><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn the programming, AI and creative concepts needed to move your project forward.</p></div>
+            <div className="step reveal" style={{ '--stagger': 1 }}><div className="stepnum">02 — BUILD</div><h3>Put it into action.</h3><p>Use what you've learned to create something of your own.</p></div>
+            <div className="step reveal" style={{ '--stagger': 2 }}><div className="stepnum">03 — TEST</div><h3>Find it. Fix it. Improve it.</h3><p>Test projects, discover mistakes, debug code and make creations better.</p></div>
+            <div className="step reveal" style={{ '--stagger': 3 }}><div className="stepnum">04 — SHIP</div><h3>Finish it. Show it.</h3><p>Complete the project, explain your decisions and confidently present what you built.</p></div>
           </div>
         </div>
       </section>
@@ -274,8 +381,8 @@ export default function Home() {
             <p>Technology is the tool. Thinking is the skill.</p>
           </div>
           <div className="skill-grid">
-            {skills.map((s) => (
-              <div className="skill reveal" key={s.title}>
+            {skills.map((s, i) => (
+              <div className="skill reveal" key={s.title} style={{ '--stagger': i }}>
                 <div className="ico">{s.emoji}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
@@ -316,7 +423,7 @@ export default function Home() {
             </div>
           </div>
           <div className="ship-list">
-            {shipItems.map((item) => <div className="ship-item reveal" key={item}>{item}</div>)}
+            {shipItems.map((item, i) => <div className="ship-item reveal" key={item} style={{ '--stagger': i }}>{item}</div>)}
           </div>
         </div>
       </section>
@@ -349,12 +456,7 @@ export default function Home() {
             <h2>Questions parents ask.</h2>
           </div>
           <div className="faq-list">
-            {faqs.map((f) => (
-              <details className="reveal" key={f.q}>
-                <summary>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
+            {faqs.map((f, i) => <FaqItem key={f.q} q={f.q} a={f.a} stagger={i} />)}
           </div>
         </div>
       </section>

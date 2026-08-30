@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { programs } from '../data/programs.js'
+import Confetti from '../components/Confetti.jsx'
 
 export default function Join() {
   const [submitted, setSubmitted] = useState(false)
@@ -14,6 +15,7 @@ export default function Join() {
     <section className="section glow-bg">
       <div className="container">
         <div className="join-card">
+          {submitted && <Confetti />}
           {submitted ? (
             <>
               <h1>You're on the list 🎉</h1>
