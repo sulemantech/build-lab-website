@@ -21,7 +21,7 @@ export default function Programs() {
         <div className="container">
           <div className="program-grid">
             {programs.map((p) => (
-              <article className="program-card" key={p.id} style={{ '--prog-color': `var(--${p.themeColor})` }}>
+              <article className="program-card" key={p.id}>
                 <span className="level-label">{p.levelLabel}</span>
                 <h3>{p.name}</h3>
                 <div className="promise">{p.promise}</div>

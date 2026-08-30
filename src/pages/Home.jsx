@@ -137,7 +137,6 @@ export default function Home() {
                 to={`/projects?category=${cat.id}`}
                 key={cat.id}
                 className="category-card"
-                style={{ '--cat-color': `var(--cat-${cat.id})` }}
               >
                 <span className="cat-icon-tile"><span className="emoji">{cat.emoji}</span></span>
                 <h3>{cat.label}</h3>
@@ -177,7 +176,7 @@ export default function Home() {
           </div>
           <div className="program-grid">
             {programs.map((prog) => (
-              <article className="program-card" key={prog.id} style={{ '--prog-color': `var(--${prog.themeColor})` }}>
+              <article className="program-card" key={prog.id}>
                 <span className="level-label">{prog.levelLabel}</span>
                 <h3>{prog.name}</h3>
                 <div className="promise">{prog.promise}</div>
@@ -241,7 +240,7 @@ export default function Home() {
                 — to explore ideas, solve problems, learn new skills and create things of their own.
               </p>
             </div>
-            <div className="split-visual">
+            <div className="split-visual panel-visual">
               <div className="panel-rows">
                 {whyRows.map((r) => (
                   <div className="panel-row" key={r.n}>
@@ -287,7 +286,7 @@ export default function Home() {
                 remains responsible for understanding, testing, improving and making decisions.
               </p>
             </div>
-            <div className="split-visual">
+            <div className="split-visual panel-visual">
               <div className="panel-rows">
                 {aiRows.map((r) => (
                   <div className="panel-row" key={r.title}>
@@ -367,8 +366,8 @@ export default function Home() {
       <section className="section dark-band text-center">
         <div className="container">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>Your idea is waiting</p>
-          <h2 style={{ fontSize: 'clamp(36px, 6vw, 60px)', marginBottom: 14 }}>What will your child build?</h2>
-          <p style={{ color: '#bdb8ca', maxWidth: 520, margin: '0 auto 28px' }}>
+          <h2 style={{ fontSize: 'clamp(40px, 6vw, 70px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: '8px 0 14px' }}>What will your child build?</h2>
+          <p style={{ color: '#bdb8ca', maxWidth: 580, margin: '0 auto 28px' }}>
             Give your child the opportunity to move from consuming technology to creating with it.
           </p>
           <div className="hero-actions" style={{ justifyContent: 'center' }}>
