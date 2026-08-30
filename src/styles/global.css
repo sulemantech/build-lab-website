@@ -130,7 +130,6 @@ main { flex: 1; }
 .story-slide > *,
 .program-grid > *,
 .project-grid > *,
-.category-grid > *,
 .showcase-grid > *,
 .trust-grid > * {
   min-width: 0;
@@ -397,10 +396,10 @@ main { flex: 1; }
   will-change: transform;
 }
 /* Each slide gets its own stable compositing layer so its rounded,
-   clipped content (hero-project-card, story-slide) doesn't render
-   square-cornered for a frame while the track's transform animates —
-   a known Chrome/Safari quirk with border-radius + overflow:hidden
-   inside a transformed ancestor. */
+   clipped content (story-slide) doesn't render square-cornered for a
+   frame while the track's transform animates — a known Chrome/Safari
+   quirk with border-radius + overflow:hidden inside a transformed
+   ancestor. */
 .carousel-slide { flex: 0 0 100%; min-width: 0; transform: translateZ(0); }
 .carousel-controls {
   display: flex;
@@ -440,32 +439,6 @@ main { flex: 1; }
 .carousel--dark .carousel-arrow { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); color: #fff; }
 .carousel--dark .carousel-dot { background: rgba(255, 255, 255, 0.25); }
 .carousel--dark .carousel-dot.active { background: var(--lime); }
-
-/* ============================================================
-   Stats strip
-   ============================================================ */
-.stats-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border-soft);
-  box-shadow: 0 15px 40px rgba(21, 17, 38, 0.04);
-  position: relative;
-  z-index: 5;
-}
-.stat-item {
-  padding: 23px 20px;
-  text-align: center;
-  border-right: 1px solid var(--border-soft);
-}
-.stat-item:last-child { border-right: none; }
-.stat-item .num { display: block; font-size: 25px; letter-spacing: -0.04em; font-weight: 700; color: var(--navy-900); margin-bottom: 4px; }
-.stat-item .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; color: var(--text-secondary); }
-@media (max-width: 760px) {
-  .stats-strip { grid-template-columns: repeat(2, 1fr); }
-  .stat-item:nth-child(2) { border-right: none; }
-}
 
 /* ============================================================
    Project cards
