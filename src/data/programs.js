@@ -2,7 +2,7 @@
 export const programs = [
   {
     id: 'ai-creator',
-    levelLabel: 'Level 01 · Beginner',
+    levelLabel: 'Level 01 · Ages 9–10',
     name: 'AI Creator',
     promise: 'Start creating with AI + programming.',
     description:
@@ -15,7 +15,7 @@ export const programs = [
   },
   {
     id: 'ai-builder',
-    levelLabel: 'Level 02 · Intermediate',
+    levelLabel: 'Level 02 · Ages 11–12',
     name: 'AI Builder',
     promise: 'Turn ideas into working digital products.',
     description:
@@ -28,7 +28,7 @@ export const programs = [
   },
   {
     id: 'ai-inventor',
-    levelLabel: 'Level 03 · Advanced',
+    levelLabel: 'Level 03 · Ages 13–15',
     name: 'AI Inventor',
     promise: "Build something that's truly your own.",
     description:

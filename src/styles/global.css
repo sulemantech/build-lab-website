@@ -3,7 +3,7 @@
    Ink-purple dark bands, a bright lime spark accent, a warm coral
    call-to-action color, and soft pastel category tints on a paper
    background — built for a focused, kid-friendly AI + programming
-   product for ages 10–12.
+   product for ages 9–15.
    ============================================================ */
 :root {
   --bg: #faf9f5;
@@ -322,13 +322,47 @@ main { flex: 1; }
 /* ============================================================
    Hero band (dark, full-bleed, two-column with carousel)
    ============================================================ */
-.hero-band { padding: 76px 0 96px; overflow: hidden; }
+.hero-band { padding: 76px 0 96px; overflow: hidden; position: relative; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 56px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
+
+/* Thin orbiting ring with two "satellite" dots — a decorative flourish
+   behind the hero mock, standalone element (not a pseudo-element) so it
+   doesn't collide with .dark-band's own ::before texture layer. */
+.hero-orbit {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -120px;
+  top: -60px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-orbit::before,
+.hero-orbit::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 24px rgba(217, 255, 63, 0.8);
+}
+.hero-orbit::before { top: 50px; left: 80px; }
+.hero-orbit::after { right: 30px; bottom: 90px; background: var(--coral); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-orbit { animation: orbit-spin 20s linear infinite; }
+}
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@media (max-width: 960px) { .hero-orbit { display: none; } }
 /* Grid items default to min-width:auto, which floors them at their
    content's max-content width and can blow out the track on mobile
    (e.g. the hero-pill's un-wrapped text). Let them shrink and wrap. */
@@ -410,6 +444,7 @@ main { flex: 1; }
 @media (prefers-reduced-motion: reduce) {
   .hero-flow .flow-word { transition: none; }
 }
+.hero-band h3 { font-size: 21px; line-height: 1.3; margin: 0 0 14px; max-width: 600px; color: #fff; font-weight: 700; }
 .hero-band p.sub { max-width: 480px; color: #c7c2d6; font-size: 17px; line-height: 1.65; margin-bottom: 32px; }
 .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 0; }
 .cta-band .hero-actions, .shipday .hero-actions { justify-content: center; }
@@ -434,6 +469,24 @@ main { flex: 1; }
 .hero-mock-screen h2 { font-size: 26px; margin: 6px 0 14px; color: var(--navy-950); }
 .hero-mock-code { background: var(--navy-950); color: #fff; padding: 16px; border-radius: 14px; font: 12px/1.8 ui-monospace, monospace; }
 .hero-mock-code b { color: var(--lime); }
+.hero-mock-code .cursor {
+  display: inline-block;
+  width: 6px;
+  height: 13px;
+  background: var(--lime);
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+@keyframes cursor-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-mock-code .cursor { animation: none; }
+}
+
+.idea-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.idea-step { background: #f0ede8; border-radius: 12px; padding: 10px 6px; text-align: center; font-size: 9px; font-weight: 850; color: var(--navy-950); }
+.idea-step strong { display: block; font-size: 16px; margin-bottom: 2px; }
+@media (max-width: 620px) { .idea-flow { grid-template-columns: repeat(2, 1fr); } }
 .hero-project-card {
   /* Pin light-theme tokens: this card is always a white surface, even
      when it sits inside a .dark-band (the hero carousel does), so its
@@ -862,6 +915,26 @@ main { flex: 1; }
 }
 .project-card h3 { margin: 6px 0; font-size: 18px; }
 .project-card .desc { color: var(--text-secondary); font-size: 13px; margin: 0; }
+.project-card .meta {
+  display: flex;
+  gap: 12px;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 750;
+  color: var(--text-secondary);
+}
+.project-card .project-link {
+  display: inline-flex;
+  margin-top: 17px;
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 900;
+  gap: 7px;
+  transition: gap 0.25s ease;
+}
+.project-card:hover .project-link { gap: 12px; }
 
 .badge {
   font-family: var(--ff-mono);

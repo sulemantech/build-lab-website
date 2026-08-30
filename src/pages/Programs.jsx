@@ -11,7 +11,7 @@ export default function Programs() {
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>
               Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more
-              ambitious projects — for young creators aged 10–12.
+              ambitious projects — for young creators aged 9–15.
             </p>
           </div>
         </div>

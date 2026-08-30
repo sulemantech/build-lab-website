@@ -19,6 +19,12 @@ export default function ProjectCard({ project }) {
         <div className="project-tag">{categoryLabel(project.category)} · {project.level}</div>
         <h3>{project.title}</h3>
         <p className="desc">{project.tagline}</p>
+        <div className="meta">
+          <span>{project.duration}</span>
+          <span>·</span>
+          <span>{project.level}</span>
+        </div>
+        <span className="project-link">Start building →</span>
       </div>
     </Link>
   )

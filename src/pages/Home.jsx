@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom'
-import { categories, featuredProjects } from '../data/projects.js'
+import { categories, getProjectBySlug } from '../data/projects.js'
 import { programs } from '../data/programs.js'
 import ProjectCard from '../components/ProjectCard.jsx'
 
 const stats = [
-  { num: '10–12', lbl: 'Years' },
+  { num: '9–15', lbl: 'Years' },
   { num: '3', lbl: 'Build Levels' },
   { num: '4', lbl: 'Core Steps' },
   { num: '1', lbl: 'Creator Journey' },
 ]
+
+const homeProjects = ['personal-portfolio', 'quiz-game', 'habit-tracker', 'ai-study-assistant']
+  .map(getProjectBySlug)
+  .filter(Boolean)
 
 const whyRows = [
   { n: '01', title: 'Think', detail: 'Break problems into manageable steps.' },
@@ -50,7 +54,7 @@ const parentPoints = [
 ]
 
 const faqs = [
-  { q: 'What age is AI Inventor Lab for?', a: "AI Inventor Lab's current programs are designed for children aged 10–12." },
+  { q: 'What age is AI Inventor Lab for?', a: "AI Inventor Lab's current programs are designed for children aged 9–15." },
   { q: 'Does my child need previous programming experience?', a: 'No. AI Creator is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate level.' },
   { q: 'Will my child actually write code?', a: 'Yes. Children learn programming through projects and progressively take more responsibility for the code they create.' },
   { q: 'How is AI used in the course?', a: 'AI is used as a learning and creative assistant. Children learn how to ask useful questions, understand responses, evaluate output and use AI responsibly.' },
@@ -63,18 +67,17 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="hero-band dark-band">
+        <div className="hero-orbit" aria-hidden="true" />
         <div className="container">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">AI + Programming · Ages 10–12</p>
+              <p className="eyebrow">AI + Programming · Ages 9–15</p>
               <h1>
                 Don't just learn.
                 <br />
                 <span className="accent">Build something real.</span>
               </h1>
-              <p style={{ fontSize: 20, color: '#e7e2ee', maxWidth: 520, marginBottom: 16, fontWeight: 600 }}>
-                Turn ideas into websites, games, apps and AI-powered projects.
-              </p>
+              <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
               <p className="sub">
                 AI Inventor Lab helps young creators learn programming and AI by building things that matter to
                 them. Learn a skill, apply it to a project, test your ideas and build something you can actually
@@ -96,7 +99,13 @@ export default function Home() {
                   <b>idea</b> = "help students revise"<br />
                   <b>plan</b> = build_with_ai(idea)<br />
                   <b>test</b>(plan)<br />
-                  <b>ship</b>(improve(plan))
+                  <b>ship</b>(improve(plan))<span className="cursor" />
+                </div>
+                <div className="idea-flow">
+                  <div className="idea-step"><strong>💡</strong>IDEA</div>
+                  <div className="idea-step"><strong>⚙</strong>BUILD</div>
+                  <div className="idea-step"><strong>🧪</strong>TEST</div>
+                  <div className="idea-step"><strong>🚀</strong>SHIP</div>
                 </div>
               </div>
             </div>
@@ -148,7 +157,7 @@ export default function Home() {
             <p>Don't just complete exercises. Create projects you can explain, improve and show.</p>
           </div>
           <div className="project-grid">
-            {featuredProjects.slice(0, 4).map((p) => (
+            {homeProjects.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}
           </div>
