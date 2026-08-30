@@ -1,27 +1,19 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { categories, getProjectBySlug } from '../data/projects.js'
+import { categories } from '../data/projects.js'
 import { programs } from '../data/programs.js'
-import ProjectCard from '../components/ProjectCard.jsx'
+import '../styles/home-exact.css'
 
-const stats = [
-  { num: '9–15', lbl: 'Years' },
-  { num: '3', lbl: 'Build Levels' },
-  { num: '4', lbl: 'Core Steps' },
-  { num: '1', lbl: 'Creator Journey' },
+// The 4 featured project cards — copied verbatim from the reference
+// (title/tag/copy/duration), each linked to its real project page.
+const featured = [
+  { slug: 'personal-portfolio', tag: 'Web · Beginner', title: 'Personal Portfolio', desc: 'Build a personal website to introduce yourself and showcase your work.', duration: '3 weeks', level: 'Beginner' },
+  { slug: 'quiz-game', tag: 'Game · Beginner', title: 'Quiz Game', desc: 'Create an interactive quiz with questions, points and feedback.', duration: '3 weeks', level: 'Beginner' },
+  { slug: 'habit-tracker', tag: 'App · Intermediate', title: 'Smart Tracker', desc: 'Build a useful tracker for progress, information or everyday tasks.', duration: '5 weeks', level: 'Intermediate' },
+  { slug: 'ai-study-assistant', tag: 'AI · Intermediate', title: 'AI Study Assistant', desc: 'Create a tool that uses AI to help students learn and practise.', duration: '4 weeks', level: 'Intermediate' },
 ]
 
-// Abbreviated tag + display duration for the 4 featured cards, matching
-// the reference's exact card copy (shorter than the catalog's full
-// category labels / this project's real multi-week data-model duration).
-const homeProjects = [
-  { slug: 'personal-portfolio', tagLabel: 'Web' },
-  { slug: 'quiz-game', tagLabel: 'Game' },
-  { slug: 'habit-tracker', tagLabel: 'App', duration: '5 weeks' },
-  { slug: 'ai-study-assistant', tagLabel: 'AI' },
-]
-  .map((o) => ({ ...o, project: getProjectBySlug(o.slug) }))
-  .filter((o) => o.project)
+const programClass = ['creator', 'builder', 'inventor']
 
 const whyRows = [
   { n: '01', title: 'Think', detail: 'Break problems into manageable steps.' },
@@ -74,10 +66,8 @@ const faqs = [
 export default function Home() {
   const projectGridRef = useRef(null)
 
-  // Lightweight pointer tilt for the featured project cards — mirrors the
-  // reference exactly, including its hover/reduced-motion guards. Scoped to
-  // this page's own grid via event delegation so the shared ProjectCard
-  // component stays untouched (the catalog page doesn't get this effect).
+  // Pointer tilt for project cards — same behavior as the reference's own
+  // script, scoped to this grid via event delegation.
   useEffect(() => {
     const grid = projectGridRef.current
     if (!grid) return
@@ -87,7 +77,7 @@ export default function Home() {
     if (!canTilt) return
 
     const onMove = (e) => {
-      const card = e.target.closest('.project-card')
+      const card = e.target.closest('.project')
       if (!card || !grid.contains(card)) return
       const r = card.getBoundingClientRect()
       const x = (e.clientX - r.left) / r.width - 0.5
@@ -95,7 +85,7 @@ export default function Home() {
       card.style.transform = `perspective(900px) rotateX(${y * -2.2}deg) rotateY(${x * 2.2}deg) translateY(-7px)`
     }
     const onLeave = (e) => {
-      const card = e.target.closest('.project-card')
+      const card = e.target.closest('.project')
       if (card) card.style.transform = ''
     }
     grid.addEventListener('pointermove', onMove)
@@ -107,51 +97,41 @@ export default function Home() {
   }, [])
 
   return (
-    <>
-      <div className="scroll-progress" aria-hidden="true" />
+    <div className="home-exact">
+      <div className="progress" aria-hidden="true" />
 
       {/* HERO */}
-      <section className="hero-band dark-band">
+      <section className="hero">
         <div className="hero-orbit" aria-hidden="true" />
-        <div className="container">
-          <div className="hero-grid">
-            <div className="hero-copy reveal">
-              <p className="eyebrow">AI + Programming · Ages 9–15</p>
-              <h1>
-                Don't just learn.
-                <br />
-                <span className="accent">Build something real.</span>
-              </h1>
-              <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
-              <p className="sub">
-                AI Inventor Lab helps young creators learn programming and AI by building things that matter to
-                them. Learn a skill, apply it to a project, test your ideas and build something you can actually
-                show.
-              </p>
-              <div className="hero-actions">
-                <Link to="/programs" className="btn btn-primary">Explore Programs →</Link>
-                <Link to="/projects" className="btn btn-secondary">See What Kids Build</Link>
-              </div>
-              <p className="hero-note">No prior coding experience required for AI Creator.</p>
+        <div className="wrap hero-grid">
+          <div className="reveal">
+            <div className="eyebrow">AI + Programming · Ages 9–15</div>
+            <h1>Don't just learn.<br /><span>Build something real.</span></h1>
+            <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
+            <p>AI Inventor Lab helps young creators learn programming and AI by building things that matter to them. Learn a skill, apply it to a project, test your ideas and build something you can actually show.</p>
+            <div className="actions">
+              <Link to="/programs" className="btn primary">Explore Programs →</Link>
+              <Link to="/projects" className="btn outline">See What Kids Build</Link>
             </div>
+            <div className="note">No prior coding experience required for AI Creator.</div>
+          </div>
 
-            <div className="hero-mock reveal">
-              <div className="hero-mock-bar"><span /><span /><span /></div>
-              <div className="hero-mock-screen">
-                <p className="hero-mock-tiny">AI Inventor Lab · Project</p>
-                <h2>AI Study Buddy</h2>
-                <div className="hero-mock-code">
-                  <b>idea</b> = "help students revise"<br />
-                  <b>plan</b> = build_with_ai(idea)<br />
-                  <b>test</b>(plan)<br />
-                  <b>ship</b>(improve(plan))<span className="cursor" />
-                </div>
-                <div className="idea-flow">
-                  <div className="idea-step"><strong>💡</strong>IDEA</div>
-                  <div className="idea-step"><strong>⚙</strong>BUILD</div>
-                  <div className="idea-step"><strong>🧪</strong>TEST</div>
-                  <div className="idea-step"><strong>🚀</strong>SHIP</div>
-                </div>
+          <div className="mock reveal">
+            <div className="mockbar" />
+            <div className="screen">
+              <div className="tiny">AI Inventor Lab · Project</div>
+              <h2>AI Study Buddy</h2>
+              <div className="code">
+                <b>idea</b> = "help students revise"<br />
+                <b>plan</b> = build_with_ai(idea)<br />
+                <b>test</b>(plan)<br />
+                <b>ship</b>(improve(plan))<span className="cursor" />
+              </div>
+              <div className="idea-flow">
+                <div className="idea-step"><strong>💡</strong>IDEA</div>
+                <div className="idea-step"><strong>⚙</strong>BUILD</div>
+                <div className="idea-step"><strong>🧪</strong>TEST</div>
+                <div className="idea-step"><strong>🚀</strong>SHIP</div>
               </div>
             </div>
           </div>
@@ -159,31 +139,27 @@ export default function Home() {
       </section>
 
       {/* STATS */}
-      <div className="stats-strip">
-        {stats.map((s) => (
-          <div className="stat-item" key={s.lbl}>
-            <div className="num">{s.num}</div>
-            <div className="lbl">{s.lbl}</div>
-          </div>
-        ))}
+      <div className="stats">
+        <div className="wrap stats-grid">
+          <div className="stat"><strong>9–15</strong><span>Years</span></div>
+          <div className="stat"><strong>3</strong><span>Build Levels</span></div>
+          <div className="stat"><strong>4</strong><span>Core Steps</span></div>
+          <div className="stat"><strong>1</strong><span>Creator Journey</span></div>
+        </div>
       </div>
 
       {/* WHAT DO YOU WANT TO BUILD */}
-      <section className="section">
-        <div className="container">
-          <div className="section-head center reveal">
-            <p className="eyebrow" style={{ justifyContent: 'center' }}>Start with an idea</p>
+      <section>
+        <div className="wrap">
+          <div className="head center reveal">
+            <div className="label">Start with an idea</div>
             <h2>What do you want to build?</h2>
             <p>Your idea is the starting point. Build the skills to make it real.</p>
           </div>
-          <div className="category-grid">
+          <div className="types">
             {categories.map((cat) => (
-              <Link
-                to={`/projects?category=${cat.id}`}
-                key={cat.id}
-                className="category-card reveal"
-              >
-                <span className="cat-icon-tile"><span className="emoji">{cat.emoji}</span></span>
+              <Link to={`/projects?category=${cat.id}`} key={cat.id} className="type reveal">
+                <div className="ico">{cat.emoji}</div>
                 <h3>{cat.label}</h3>
                 <p>{cat.blurb}</p>
               </Link>
@@ -193,48 +169,59 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section className="section section--border-top section--alt">
-        <div className="container">
-          <div className="section-head reveal">
-            <p className="eyebrow">Built around creation</p>
+      <section className="projects" id="projects">
+        <div className="wrap">
+          <div className="head reveal">
+            <div className="label">Built around creation</div>
             <h2>See what you could build.</h2>
             <p>Don't just complete exercises. Create projects you can explain, improve and show.</p>
           </div>
-          <div className="project-grid home-projects" ref={projectGridRef}>
-            {homeProjects.map((o) => (
-              <ProjectCard key={o.slug} project={o.project} tagLabel={o.tagLabel} duration={o.duration} />
+
+          <div className="project-grid" ref={projectGridRef}>
+            {featured.map((p) => (
+              <Link to={`/projects/${p.slug}`} key={p.slug} className="project reveal">
+                <div className="visual">
+                  <div className="window">
+                    <div className="window-head"><i /><i /><i /></div>
+                    <div className="line" /><div className="line" /><div className="line short" />
+                  </div>
+                </div>
+                <div className="body">
+                  <div className="tag">{p.tag}</div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                  <div className="meta"><span>{p.duration}</span><span>·</span><span>{p.level}</span></div>
+                  <span className="project-link">Start building →</span>
+                </div>
+              </Link>
             ))}
           </div>
+
           <p className="carousel-note">Explore more projects as you progress through the creator journey.</p>
-          <div className="text-center mt-40">
-            <Link to="/projects" className="btn btn-secondary">View All Projects</Link>
-          </div>
         </div>
       </section>
 
       {/* PROGRAMS */}
-      <section className="section section--border-top dark-band">
-        <div className="container">
-          <div className="section-head programs-head">
-            <p className="eyebrow">Three levels · One creator journey</p>
+      <section className="programs" id="programs">
+        <div className="wrap">
+          <div className="head reveal">
+            <div className="label">Three levels · One creator journey</div>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more ambitious projects.</p>
           </div>
+
           <div className="program-grid">
-            {programs.map((prog) => (
-              <article className="program-card reveal" key={prog.id}>
-                <span className="level-label">{prog.levelLabel}</span>
+            {programs.map((prog, i) => (
+              <article className={`program ${programClass[i] || ''} reveal`} key={prog.id}>
+                <div className="level">{prog.levelLabel}</div>
                 <h3>{prog.name}</h3>
                 <div className="promise">{prog.promise}</div>
-                <p className="desc">{prog.description}</p>
-                <ul className="program-focus">
+                <p>{prog.description}</p>
+                <ul>
                   {prog.skills.map((s) => <li key={s}>{s}</li>)}
                 </ul>
-                <div className="program-build">
-                  <strong>Build examples</strong>
-                  {prog.buildExamples}
-                </div>
-                <Link to="/programs" className="cta-link">Explore {prog.name} →</Link>
+                <div className="build"><strong>Build examples</strong>{prog.buildExamples}</div>
+                <Link to="/programs">Explore {prog.name} →</Link>
               </article>
             ))}
           </div>
@@ -242,76 +229,54 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="section section--border-top">
-        <div className="container">
-          <div className="section-head center reveal">
-            <p className="eyebrow" style={{ justifyContent: 'center' }}>Our approach</p>
+      <section id="how">
+        <div className="wrap">
+          <div className="head center reveal">
+            <div className="label">Our approach</div>
             <h2>Learn. Build. Test. Ship.</h2>
             <p>Because the best way to learn technology is to use it.</p>
           </div>
-          <div className="process-grid">
-            <div className="process-step reveal">
-              <span className="stepnum">01 — LEARN</span>
-              <h3>Understand the skill.</h3>
-              <p>Learn the programming, AI and creative concepts needed to move your project forward.</p>
-            </div>
-            <div className="process-step reveal">
-              <span className="stepnum">02 — BUILD</span>
-              <h3>Put it into action.</h3>
-              <p>Use what you've learned to create something of your own.</p>
-            </div>
-            <div className="process-step reveal">
-              <span className="stepnum">03 — TEST</span>
-              <h3>Find it. Fix it. Improve it.</h3>
-              <p>Test projects, discover mistakes, debug code and make creations better.</p>
-            </div>
-            <div className="process-step reveal">
-              <span className="stepnum">04 — SHIP</span>
-              <h3>Finish it. Show it.</h3>
-              <p>Complete the project, explain your decisions and confidently present what you built.</p>
-            </div>
+
+          <div className="process">
+            <div className="step reveal"><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn the programming, AI and creative concepts needed to move your project forward.</p></div>
+            <div className="step reveal"><div className="stepnum">02 — BUILD</div><h3>Put it into action.</h3><p>Use what you've learned to create something of your own.</p></div>
+            <div className="step reveal"><div className="stepnum">03 — TEST</div><h3>Find it. Fix it. Improve it.</h3><p>Test projects, discover mistakes, debug code and make creations better.</p></div>
+            <div className="step reveal"><div className="stepnum">04 — SHIP</div><h3>Finish it. Show it.</h3><p>Complete the project, explain your decisions and confidently present what you built.</p></div>
           </div>
         </div>
       </section>
 
       {/* WHY AI INVENTOR LAB */}
-      <section className="section section--border-top dark-band">
-        <div className="container">
-          <div className="split-section">
-            <div className="split-copy reveal">
-              <p className="eyebrow">Why AI Inventor Lab?</p>
-              <h2>Turn screen time into creation time.</h2>
-              <p className="lead">
-                Children already spend time with technology. AI Inventor Lab helps them use that time differently
-                — to explore ideas, solve problems, learn new skills and create things of their own.
-              </p>
-            </div>
-            <div className="split-visual panel-visual reveal">
-              <div className="panel-rows">
-                {whyRows.map((r) => (
-                  <div className="panel-row" key={r.n}>
-                    <span className="panel-check">{r.n}</span>
-                    <div><strong>{r.title}</strong><span>{r.detail}</span></div>
-                  </div>
-                ))}
+      <section className="dark">
+        <div className="wrap split">
+          <div className="head reveal">
+            <div className="label">Why AI Inventor Lab?</div>
+            <h2>Turn screen time into creation time.</h2>
+            <p>Children already spend time with technology. AI Inventor Lab helps them use that time differently — to explore ideas, solve problems, learn new skills and create things of their own.</p>
+          </div>
+          <div className="panel reveal">
+            {whyRows.map((r) => (
+              <div className="row" key={r.n}>
+                <div className="check">{r.n}</div>
+                <div><strong>{r.title}</strong><span>{r.detail}</span></div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* SKILLS */}
-      <section className="section section--border-top section--alt">
-        <div className="container">
-          <div className="section-head center reveal">
-            <p className="eyebrow" style={{ justifyContent: 'center' }}>More than coding</p>
+      <section className="skills">
+        <div className="wrap">
+          <div className="head center reveal">
+            <div className="label">More than coding</div>
             <h2>Build skills that go beyond programming.</h2>
             <p>Technology is the tool. Thinking is the skill.</p>
           </div>
           <div className="skill-grid">
             {skills.map((s) => (
-              <div className="skill-card reveal" key={s.title}>
-                <span className="cat-icon-tile"><span className="emoji">{s.emoji}</span></span>
+              <div className="skill reveal" key={s.title}>
+                <div className="ico">{s.emoji}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
               </div>
@@ -321,85 +286,71 @@ export default function Home() {
       </section>
 
       {/* AI PHILOSOPHY */}
-      <section className="section section--border-top dark-band">
-        <div className="container">
-          <div className="split-section">
-            <div className="split-copy reveal">
-              <p className="eyebrow">Our AI philosophy</p>
-              <h2>AI is the assistant.<br />The child is the creator.</h2>
-              <p className="lead">
-                AI can help brainstorm ideas, explain concepts, suggest solutions and find bugs. But the child
-                remains responsible for understanding, testing, improving and making decisions.
-              </p>
-            </div>
-            <div className="split-visual panel-visual reveal">
-              <div className="panel-rows">
-                {aiRows.map((r) => (
-                  <div className="panel-row" key={r.title}>
-                    <span className="panel-check">···</span>
-                    <div><strong>{r.title}</strong><span>{r.detail}</span></div>
-                  </div>
-                ))}
+      <section className="dark">
+        <div className="wrap split">
+          <div className="head reveal">
+            <div className="label">Our AI philosophy</div>
+            <h2>AI is the assistant.<br />The child is the creator.</h2>
+            <p>AI can help brainstorm ideas, explain concepts, suggest solutions and find bugs. But the child remains responsible for understanding, testing, improving and making decisions.</p>
+          </div>
+          <div className="panel reveal">
+            {aiRows.map((r) => (
+              <div className="row" key={r.title}>
+                <div className="check">···</div>
+                <div><strong>{r.title}</strong><span>{r.detail}</span></div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* SHIP DAY */}
-      <section className="section section--border-top shipday-coral">
-        <div className="container">
-          <div className="shipday-inner">
-            <div className="reveal">
-              <p className="eyebrow">The finish line</p>
-              <h2>Every cohort ends with Ship Day. 🚀</h2>
-              <p className="lead">
-                A day to stop learning and start showing. Children present what they built, explain their idea,
-                demonstrate the project and share what they learned.
-              </p>
-              <Link to="/join" className="btn btn-primary">Join the Next Cohort →</Link>
+      <section className="ship">
+        <div className="wrap ship-grid">
+          <div className="reveal">
+            <div className="label" style={{ color: 'var(--lime)' }}>The finish line</div>
+            <h2>Every cohort ends with Ship Day. 🚀</h2>
+            <p>A day to stop learning and start showing. Children present what they built, explain their idea, demonstrate the project and share what they learned.</p>
+            <div className="shipday-actions">
+              <Link to="/join" className="btn">Join the Next Cohort →</Link>
             </div>
-            <div className="ship-list">
-              {shipItems.map((item) => <div className="ship-item reveal" key={item}>{item}</div>)}
-            </div>
+          </div>
+          <div className="ship-list">
+            {shipItems.map((item) => <div className="ship-item reveal" key={item}>{item}</div>)}
           </div>
         </div>
       </section>
 
       {/* PARENTS */}
-      <section className="section section--border-top">
-        <div className="container">
-          <div className="parent-grid">
-            <div className="reveal">
-              <p className="eyebrow">For parents</p>
-              <h2>More than a coding class.</h2>
-              <p style={{ color: 'var(--text-secondary)' }}>
-                AI Inventor Lab gives children a structured way to explore AI and programming while developing
-                skills they can use far beyond the classroom.
-              </p>
-              <div className="parent-points">
-                {parentPoints.map((p) => <div className="parent-point" key={p}>{p}</div>)}
-              </div>
+      <section className="parents" id="parents">
+        <div className="wrap parent-grid">
+          <div className="reveal">
+            <div className="label">For parents</div>
+            <h2>More than a coding class.</h2>
+            <p style={{ color: 'var(--muted)' }}>AI Inventor Lab gives children a structured way to explore AI and programming while developing skills they can use far beyond the classroom.</p>
+            <div className="parent-points">
+              {parentPoints.map((p) => <div className="point" key={p}>{p}</div>)}
             </div>
-            <div className="quote-card reveal">
-              <div className="quote-mark">"</div>
-              <p>A certificate shows that a course was completed. A project shows what a child can create.</p>
-              <small>— The AI Inventor Lab philosophy</small>
-            </div>
+          </div>
+
+          <div className="quote reveal">
+            <div style={{ fontSize: 44, color: '#4a3a88' }}>"</div>
+            <p>A certificate shows that a course was completed. A project shows what a child can create.</p>
+            <small style={{ color: 'var(--muted)' }}>— The AI Inventor Lab philosophy</small>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section section--border-top section--alt">
-        <div className="container">
-          <div className="section-head center reveal">
-            <p className="eyebrow" style={{ justifyContent: 'center' }}>Questions?</p>
+      <section className="faq">
+        <div className="wrap">
+          <div className="head center reveal">
+            <div className="label">Questions?</div>
             <h2>Questions parents ask.</h2>
           </div>
           <div className="faq-list">
             {faqs.map((f) => (
-              <details className="faq-item reveal" key={f.q}>
+              <details className="reveal" key={f.q}>
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>
               </details>
@@ -409,19 +360,17 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="section dark-band text-center final-cta">
-        <div className="container reveal">
-          <p className="eyebrow" style={{ justifyContent: 'center' }}>Your idea is waiting</p>
-          <h2 style={{ fontSize: 'clamp(40px, 6vw, 70px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: '8px 0 14px' }}>What will your child build?</h2>
-          <p style={{ color: '#bdb8ca', maxWidth: 580, margin: '0 auto 28px' }}>
-            Give your child the opportunity to move from consuming technology to creating with it.
-          </p>
-          <div className="hero-actions" style={{ justifyContent: 'center' }}>
-            <Link to="/join" className="btn btn-primary">Register Now →</Link>
-            <Link to="/programs" className="btn btn-secondary">Choose a Program</Link>
+      <section className="final" id="register">
+        <div className="wrap reveal">
+          <div className="label">Your idea is waiting</div>
+          <h2>What will your child build?</h2>
+          <p>Give your child the opportunity to move from consuming technology to creating with it.</p>
+          <div className="actions" style={{ justifyContent: 'center' }}>
+            <Link to="/join" className="btn primary">Register Now →</Link>
+            <Link to="/programs" className="btn outline">Choose a Program</Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
