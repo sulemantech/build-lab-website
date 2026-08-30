@@ -1,8 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { categories } from '../data/projects.js'
 import { programs } from '../data/programs.js'
 import '../styles/home-exact.css'
+
+// Hero panel — its pieces stagger in together once scrolled into view,
+// animated purely via opacity/transform (no layout properties) so it
+// never triggers reflow.
+const panelVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+}
+const panelItemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.2, 0.75, 0.2, 1] } },
+}
 
 // The 4 featured project cards — copied verbatim from the reference
 // (title/tag/copy/duration), each linked to its real project page.
@@ -163,7 +176,18 @@ function FaqItem({ q, a, stagger }) {
 export default function Home() {
   const projectGridRef = useRef(null)
   const processRef = useRef(null)
+  const heroRef = useRef(null)
   const [typed, setTyped] = useState(() => (prefersReducedMotion() ? codeTotalLen : 0))
+
+  // Scroll-scrubbed headline: binds Y-translation to how far the viewer
+  // has scrolled through the hero itself (not the whole page), with a
+  // subtle scrub factor — a small shift, not a dramatic parallax throw.
+  // useTransform outputs a motion value consumed via style={{ y }}, so
+  // React never re-renders on scroll and the browser only ever touches
+  // `transform` — no layout property is read or written per frame.
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const headlineY = useTransform(heroProgress, [0, 1], [0, reduceMotion ? 0 : -50])
 
   // Draws the connecting line across the 4 process steps once the section
   // scrolls into view, instead of it just sitting there statically.
@@ -231,12 +255,12 @@ export default function Home() {
       <div className="progress" aria-hidden="true" />
 
       {/* HERO */}
-      <section className="hero">
+      <section className="hero" ref={heroRef}>
         <div className="hero-orbit" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="reveal">
             <div className="eyebrow">AI + Programming · Ages 9–15</div>
-            <h1>Don't just learn.<br /><span>Build something real.</span></h1>
+            <motion.h1 style={{ y: headlineY }}>Don't just learn.<br /><span>Build something real.</span></motion.h1>
             <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
             <p>AI Inventor Lab helps young creators learn programming and AI by building things that matter to them. Learn a skill, apply it to a project, test your ideas and build something you can actually show.</p>
             <div className="actions">
@@ -246,23 +270,29 @@ export default function Home() {
             <div className="note">No prior coding experience required for AI Creator.</div>
           </div>
 
-          <div className="mock reveal">
-            <div className="mockbar" />
+          <motion.div
+            className="mock"
+            variants={panelVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+          >
+            <motion.div className="mockbar" variants={panelItemVariants} />
             <div className="screen">
-              <div className="tiny">AI Inventor Lab · Project</div>
-              <h2>AI Study Buddy</h2>
-              <div className="code">
+              <motion.div className="tiny" variants={panelItemVariants}>AI Inventor Lab · Project</motion.div>
+              <motion.h2 variants={panelItemVariants}>AI Study Buddy</motion.h2>
+              <motion.div className="code" variants={panelItemVariants}>
                 {renderTypedCode(typed)}
                 {typed >= codeTotalLen && <span className="cursor" />}
-              </div>
-              <div className="idea-flow">
+              </motion.div>
+              <motion.div className="idea-flow" variants={panelItemVariants}>
                 <div className="idea-step"><strong>💡</strong>IDEA</div>
                 <div className="idea-step"><strong>⚙</strong>BUILD</div>
                 <div className="idea-step"><strong>🧪</strong>TEST</div>
                 <div className="idea-step"><strong>🚀</strong>SHIP</div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

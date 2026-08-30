@@ -59,7 +59,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 ::selection { background: var(--lime); color: var(--navy-950); }
 body {
   margin: 0;
@@ -299,7 +299,12 @@ main { flex: 1; }
   transform: translateY(0);
   transition: transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1), background 0.2s ease;
 }
-.nav.nav-hidden { transform: translateY(-100%); }
+/* Hide-on-scroll-down only applies at desktop widths — on mobile the
+   toggle button must always stay reachable, or the menu becomes
+   effectively unreachable the moment the page is scrolled. */
+@media (min-width: 1001px) {
+  .nav.nav-hidden { transform: translateY(-100%); }
+}
 @media (prefers-reduced-motion: reduce) {
   .nav { transition: none; }
 }
@@ -324,6 +329,7 @@ main { flex: 1; }
   font-size: 20px;
   letter-spacing: -0.05em;
   color: var(--navy-950);
+  min-width: 0;
 }
 .mark {
   width: 36px;
@@ -339,8 +345,16 @@ main { flex: 1; }
   flex-shrink: 0;
   transition: width 0.25s ease, height 0.25s ease, font-size 0.25s ease;
 }
-.brand-text { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .brand-text small { display: block; font-size: 8px; color: var(--text-secondary); letter-spacing: 0.12em; font-weight: 500; }
+/* Small phones: the full lockup ("mark" + "AI INVENTOR LAB" + toggle)
+   doesn't fit a ~360px screen at full size — shrink it rather than let
+   it force horizontal overflow. */
+@media (max-width: 420px) {
+  .brand { font-size: 15px; gap: 8px; }
+  .mark { width: 30px; height: 30px; font-size: 13px; }
+  .brand-text small { display: none; }
+}
 .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 750; }
 .nav-links a { position: relative; padding: 8px 0; color: var(--navy-950); }
 .nav-links a::after {

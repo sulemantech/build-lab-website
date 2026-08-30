@@ -598,7 +598,7 @@
 }
 .home-exact .point:hover { transform: translateX(5px); box-shadow: 0 10px 30px rgba(33, 26, 60, 0.07); }
 .home-exact .point::before { content: "✓"; color: var(--coral); margin-right: 9px; }
-.home-exact .quote { background: #f6f2ff; border-radius: 23px; padding: 30px; position: relative; }
+.home-exact .quote { background: #f6f2ff; border-radius: 23px; padding: 30px; position: relative; overflow: hidden; }
 .home-exact .quote::before {
   content: "";
   position: absolute;
