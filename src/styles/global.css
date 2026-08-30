@@ -36,6 +36,7 @@
   --blue: #6f9adf;
   --purple: #8b5cf6;
   --gold: #c98a1c;
+  --lav: #eee8ff;
 
   --cat-website: #6c63c9;
   --cat-game: #8b5cf6;
@@ -358,6 +359,7 @@ main { flex: 1; }
   line-height: 1.05;
   margin-bottom: 22px;
 }
+.hero-band h1 .accent { color: var(--lime); }
 
 /* Second headline line ("Build your ___.") reserves height for up to two
    wrapped lines (longer words like "experience"/"portfolio" can wrap on
@@ -414,6 +416,24 @@ main { flex: 1; }
 
 /* Hero carousel cards */
 .hero-carousel-wrap { max-width: 380px; margin: 0 auto; }
+.hero-note { font-size: 12px; color: #918a9f; margin-top: 16px; }
+
+/* Hero code-editor mockup — a tilted "screenshot" standing in for a real
+   product shot, showing a sample project coming together. */
+.hero-mock {
+  background: #fff;
+  border-radius: 24px;
+  padding: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  transform: rotate(2deg);
+}
+.hero-mock-bar { height: 24px; border-radius: 10px; background: #f1eee9; display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+.hero-mock-bar span { width: 8px; height: 8px; border-radius: 50%; background: #ddd7cd; }
+.hero-mock-screen { background: #faf9f7; border-radius: 16px; margin-top: 10px; padding: 22px; }
+.hero-mock-tiny { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: #88818e; font-weight: 900; }
+.hero-mock-screen h2 { font-size: 26px; margin: 6px 0 14px; color: var(--navy-950); }
+.hero-mock-code { background: var(--navy-950); color: #fff; padding: 16px; border-radius: 14px; font: 12px/1.8 ui-monospace, monospace; }
+.hero-mock-code b { color: var(--lime); }
 .hero-project-card {
   /* Pin light-theme tokens: this card is always a white surface, even
      when it sits inside a .dark-band (the hero carousel does), so its

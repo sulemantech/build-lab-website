@@ -1,22 +1,61 @@
 import { Link } from 'react-router-dom'
 import { categories, featuredProjects } from '../data/projects.js'
-import { showcase } from '../data/showcase.js'
-import ProjectRow from '../components/ProjectRow.jsx'
-import CategoryRow from '../components/CategoryRow.jsx'
-import CategoryExplorer from '../components/CategoryExplorer.jsx'
-import ProgramColumns from '../components/ProgramColumns.jsx'
-import Carousel from '../components/Carousel.jsx'
-import TagChip from '../components/TagChip.jsx'
-import ToolsTicker from '../components/ToolsTicker.jsx'
-import IntentBanner from '../components/IntentBanner.jsx'
-import HeroTagline from '../components/HeroTagline.jsx'
-import HeroHeadlineRotator from '../components/HeroHeadlineRotator.jsx'
+import { programs } from '../data/programs.js'
+import ProjectCard from '../components/ProjectCard.jsx'
 
 const stats = [
-  { num: '3', lbl: 'Age tracks — 10 to university' },
-  { num: '12', lbl: 'Guided build projects' },
-  { num: '3', lbl: 'Steps: Learn → Build → Ship' },
-  { num: '1', lbl: 'Ship Day every cohort' },
+  { num: '10–12', lbl: 'Years' },
+  { num: '3', lbl: 'Build Levels' },
+  { num: '4', lbl: 'Core Steps' },
+  { num: '1', lbl: 'Creator Journey' },
+]
+
+const whyRows = [
+  { n: '01', title: 'Think', detail: 'Break problems into manageable steps.' },
+  { n: '02', title: 'Create', detail: 'Turn an idea into a digital project.' },
+  { n: '03', title: 'Build', detail: 'Use code and AI to make it work.' },
+  { n: '04', title: 'Solve', detail: 'Debug, test and improve.' },
+]
+
+const aiRows = [
+  { title: 'Ask AI', detail: 'Learn how to ask useful questions.' },
+  { title: 'Understand AI', detail: 'Know what the output means.' },
+  { title: 'Question AI', detail: "Don't assume every answer is correct." },
+  { title: 'Test AI', detail: 'Check, debug and improve the result.' },
+]
+
+const skills = [
+  { emoji: '🧠', title: 'Think', desc: 'Problem-solving and computational thinking to break big problems into smaller steps.' },
+  { emoji: '🤖', title: 'Work with AI', desc: 'AI literacy, prompting, evaluation and responsible AI use.' },
+  { emoji: '💻', title: 'Build', desc: 'Programming and digital creation through websites, games, apps and AI projects.' },
+  { emoji: '🚀', title: 'Ship', desc: "Testing, communication and presentation — finish projects and show what you can do." },
+]
+
+const shipItems = [
+  '01 · My idea',
+  '02 · What I built',
+  '03 · How AI helped',
+  '04 · What went wrong',
+  '05 · How I fixed it',
+  "06 · What I'll build next",
+]
+
+const parentPoints = [
+  'Programming and AI skills',
+  'Problem-solving and computational thinking',
+  'Creativity and project ownership',
+  'Debugging and critical thinking',
+  'Communication and presentation',
+  'A portfolio of projects they actually built',
+]
+
+const faqs = [
+  { q: 'What age is AI Inventor Lab for?', a: "AI Inventor Lab's current programs are designed for children aged 10–12." },
+  { q: 'Does my child need previous programming experience?', a: 'No. AI Creator is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate level.' },
+  { q: 'Will my child actually write code?', a: 'Yes. Children learn programming through projects and progressively take more responsibility for the code they create.' },
+  { q: 'How is AI used in the course?', a: 'AI is used as a learning and creative assistant. Children learn how to ask useful questions, understand responses, evaluate output and use AI responsibly.' },
+  { q: 'What will my child build?', a: 'Projects vary by level and may include websites, games, trackers, study tools, AI assistants, applications and original digital products.' },
+  { q: 'What happens at the end?', a: 'Every cohort concludes with Ship Day, where children present and demonstrate a project they have built.' },
 ]
 
 export default function Home() {
@@ -27,106 +66,124 @@ export default function Home() {
         <div className="container">
           <div className="hero-grid">
             <div className="hero-copy">
-              <span className="hero-pill">
-                <span className="mark" /> A hands-on learning initiative by MetaFront
-              </span>
+              <p className="eyebrow">AI + Programming · Ages 10–12</p>
               <h1>
                 Don't just learn.
                 <br />
-                <HeroHeadlineRotator />
+                <span className="accent">Build something real.</span>
               </h1>
-              <HeroTagline />
+              <p style={{ fontSize: 20, color: '#e7e2ee', maxWidth: 520, marginBottom: 16, fontWeight: 600 }}>
+                Turn ideas into websites, games, apps and AI-powered projects.
+              </p>
               <p className="sub">
-                Hands-on programs where kids, teenagers, and university students turn ideas into real digital
-                products — through mentorship, guided projects, and shipped work.
+                AI Inventor Lab helps young creators learn programming and AI by building things that matter to
+                them. Learn a skill, apply it to a project, test your ideas and build something you can actually
+                show.
               </p>
               <div className="hero-actions">
-                <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
-                <Link to="/join" className="btn btn-secondary">Join a Program</Link>
+                <Link to="/programs" className="btn btn-primary">Explore Programs →</Link>
+                <Link to="/projects" className="btn btn-secondary">See What Kids Build</Link>
               </div>
+              <p className="hero-note">No prior coding experience required for AI Creator.</p>
             </div>
 
-            <div className="hero-carousel-wrap">
-              <Carousel
-                ariaLabel="Featured projects"
-                items={featuredProjects}
-                theme="dark"
-                autoPlayMs={4500}
-                renderItem={(p) => (
-                  <Link to={`/projects/${p.slug}`} className="hero-project-card" style={{ '--cat-color': `var(--cat-${p.category})` }}>
-                    <div className="project-cover project-cover--lg">
-                      <span className="cover-emoji">{p.emoji}</span>
-                      <span className="cover-badge">{p.level} · {p.duration}</span>
-                    </div>
-                    <div className="card-body">
-                      <h4>{p.title}</h4>
-                      <p>{p.tagline}</p>
-                      <div className="project-tags">
-                        {p.tags.slice(0, 3).map((t) => <TagChip label={t} key={t} />)}
-                      </div>
-                    </div>
-                  </Link>
-                )}
-              />
+            <div className="hero-mock">
+              <div className="hero-mock-bar"><span /><span /><span /></div>
+              <div className="hero-mock-screen">
+                <p className="hero-mock-tiny">AI Inventor Lab · Project</p>
+                <h2>AI Study Buddy</h2>
+                <div className="hero-mock-code">
+                  <b>idea</b> = "help students revise"<br />
+                  <b>plan</b> = build_with_ai(idea)<br />
+                  <b>test</b>(plan)<br />
+                  <b>ship</b>(improve(plan))
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STATS STRIP */}
-      <div className="container">
-        <div className="stats-strip">
-          {stats.map((s) => (
-            <div className="stat-item" key={s.lbl}>
-              <div className="num">{s.num}</div>
-              <div className="lbl">{s.lbl}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* INTENT BANNER */}
-      <div className="container" style={{ marginTop: 40 }}>
-        <IntentBanner />
-      </div>
-
-      {/* TOOLS TICKER */}
-      <div className="tools-ticker-section">
-        <p className="tools-ticker-label">Real tools you'll actually use</p>
-        <ToolsTicker />
+      {/* STATS */}
+      <div className="stats-strip">
+        {stats.map((s) => (
+          <div className="stat-item" key={s.lbl}>
+            <div className="num">{s.num}</div>
+            <div className="lbl">{s.lbl}</div>
+          </div>
+        ))}
       </div>
 
       {/* WHAT DO YOU WANT TO BUILD */}
       <section className="section">
         <div className="container">
           <div className="section-head center">
-            <p className="eyebrow">Start here</p>
+            <p className="eyebrow" style={{ justifyContent: 'center' }}>Start with an idea</p>
             <h2>What do you want to build?</h2>
-            <p>Pick a direction. We'll teach you everything you need to make it real.</p>
+            <p>Your idea is the starting point. Build the skills to make it real.</p>
           </div>
-          <CategoryRow categories={categories} />
+          <div className="category-grid">
+            {categories.map((cat) => (
+              <Link
+                to={`/projects?category=${cat.id}`}
+                key={cat.id}
+                className="category-card"
+                style={{ '--cat-color': `var(--cat-${cat.id})` }}
+              >
+                <span className="cat-icon-tile"><span className="emoji">{cat.emoji}</span></span>
+                <h3>{cat.label}</h3>
+                <p>{cat.blurb}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
+      {/* PROJECTS */}
       <section className="section section--border-top section--alt">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">Explore Projects</p>
-            <h2>Pick something you want to build.</h2>
-            <p>We'll teach you what you need to make it happen — no prerequisites, just curiosity.</p>
+            <p className="eyebrow">Built around creation</p>
+            <h2>See what you could build.</h2>
+            <p>Don't just complete exercises. Create projects you can explain, improve and show.</p>
           </div>
-          <ProjectRow projects={featuredProjects} />
+          <div className="project-grid">
+            {featuredProjects.slice(0, 4).map((p) => (
+              <ProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
           <div className="text-center mt-40">
             <Link to="/projects" className="btn btn-secondary">View All Projects</Link>
           </div>
         </div>
       </section>
 
-      {/* CATEGORY EXPLORER */}
-      <section className="section section--border-top section--tight">
+      {/* PROGRAMS */}
+      <section className="section section--border-top dark-band">
         <div className="container">
-          <CategoryExplorer />
+          <div className="section-head">
+            <p className="eyebrow">Three levels · One creator journey</p>
+            <h2>Start where you are.<br />Build where you want to go.</h2>
+            <p>Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more ambitious projects.</p>
+          </div>
+          <div className="program-grid">
+            {programs.map((prog) => (
+              <article className="program-card" key={prog.id} style={{ '--prog-color': `var(--${prog.themeColor})` }}>
+                <span className="level-label">{prog.levelLabel}</span>
+                <h3>{prog.name}</h3>
+                <div className="promise">{prog.promise}</div>
+                <p className="desc">{prog.description}</p>
+                <ul className="program-focus">
+                  {prog.skills.map((s) => <li key={s}>{s}</li>)}
+                </ul>
+                <div className="program-build">
+                  <strong>Build examples</strong>
+                  {prog.buildExamples}
+                </div>
+                <Link to="/programs" className="cta-link">Explore {prog.name} →</Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -134,231 +191,180 @@ export default function Home() {
       <section className="section section--border-top">
         <div className="container">
           <div className="section-head center">
-            <p className="eyebrow">The process</p>
-            <h2>How Build Lab works</h2>
-            <p>No 10-step programs. Just three things, done properly.</p>
+            <p className="eyebrow" style={{ justifyContent: 'center' }}>Our approach</p>
+            <h2>Learn. Build. Test. Ship.</h2>
+            <p>Because the best way to learn technology is to use it.</p>
           </div>
-          <div className="steps-row">
-            <div className="step-block">
-              <span className="step-num">01</span>
-              <h3>Learn</h3>
-              <p>Learn the skills you need through live, hands-on sessions — not passive video lectures.</p>
+          <div className="process-grid">
+            <div className="process-step">
+              <span className="stepnum">01 — LEARN</span>
+              <h3>Understand the skill.</h3>
+              <p>Learn the programming, AI and creative concepts needed to move your project forward.</p>
             </div>
-            <div className="step-arrow">→</div>
-            <div className="step-block">
-              <span className="step-num">02</span>
-              <h3>Build</h3>
-              <p>Work on a real project with guidance from mentors who build software and AI products for a living.</p>
+            <div className="process-step">
+              <span className="stepnum">02 — BUILD</span>
+              <h3>Put it into action.</h3>
+              <p>Use what you've learned to create something of your own.</p>
             </div>
-            <div className="step-arrow">→</div>
-            <div className="step-block">
-              <span className="step-num">03</span>
-              <h3>Ship</h3>
-              <p>Deploy your project, put it in your portfolio, and present it on Ship Day.</p>
+            <div className="process-step">
+              <span className="stepnum">03 — TEST</span>
+              <h3>Find it. Fix it. Improve it.</h3>
+              <p>Test projects, discover mistakes, debug code and make creations better.</p>
+            </div>
+            <div className="process-step">
+              <span className="stepnum">04 — SHIP</span>
+              <h3>Finish it. Show it.</h3>
+              <p>Complete the project, explain your decisions and confidently present what you built.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOR KIDS */}
-      <section className="section section--border-top section--alt">
+      {/* WHY AI INVENTOR LAB */}
+      <section className="section section--border-top dark-band">
         <div className="container">
           <div className="split-section">
             <div className="split-copy">
-              <p className="eyebrow">For Young Creators</p>
+              <p className="eyebrow">Why AI Inventor Lab?</p>
               <h2>Turn screen time into creation time.</h2>
               <p className="lead">
-                Instead of simply consuming technology, kids learn to create with it — and finish with something
-                they built themselves.
+                Children already spend time with technology. AI Inventor Lab helps them use that time differently
+                — to explore ideas, solve problems, learn new skills and create things of their own.
               </p>
-              <ul>
-                <li>Build games</li>
-                <li>Create websites</li>
-                <li>Design apps</li>
-                <li>Experiment with AI</li>
-                <li>Build creative projects</li>
-              </ul>
-              <div>
-                <Link to="/projects?audience=kids" className="btn btn-primary">Explore Young Creator Projects</Link>
-              </div>
             </div>
             <div className="split-visual">
-              <div className="visual-chip-grid">
-                <div className="visual-chip">🎮 Games</div>
-                <div className="visual-chip">🌐 Websites</div>
-                <div className="visual-chip">📱 Apps</div>
-                <div className="visual-chip">🤖 AI</div>
+              <div className="panel-rows">
+                {whyRows.map((r) => (
+                  <div className="panel-row" key={r.n}>
+                    <span className="panel-check">{r.n}</span>
+                    <div><strong>{r.title}</strong><span>{r.detail}</span></div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOR UNIVERSITY STUDENTS */}
+      {/* SKILLS */}
       <section className="section section--border-top section--alt">
-        <div className="container">
-          <div className="split-section reverse">
-            <div className="split-copy">
-              <p className="eyebrow">For University Students</p>
-              <h2>Turn knowledge into something you can show.</h2>
-              <p className="lead">
-                University students often learn technologies but struggle to demonstrate practical experience.
-                Build Lab gives them a project they can actually put in their portfolio.
-              </p>
-              <div className="split-highlight">Project + GitHub + Live Demo + Experience</div>
-              <div>
-                <Link to="/projects?audience=university" className="btn btn-primary">Explore Student Projects</Link>
-              </div>
-            </div>
-            <div className="split-visual">
-              <div className="visual-chip-grid">
-                <div className="visual-chip">📦 Project</div>
-                <div className="visual-chip">💻 GitHub</div>
-                <div className="visual-chip">🔗 Live Demo</div>
-                <div className="visual-chip">🎤 Experience</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROGRAM COLUMNS */}
-      <section className="section section--border-top section--alt">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Pick your track</p>
-            <h2>See what each program actually builds.</h2>
-            <p>A quick look at real projects students in each track work on.</p>
-          </div>
-          <ProgramColumns />
-        </div>
-      </section>
-
-      {/* MENTORSHIP */}
-      <section className="section section--border-top">
         <div className="container">
           <div className="section-head center">
-            <p className="eyebrow">Mentorship</p>
-            <h2>Learn from people who build.</h2>
-            <p>Build Lab is powered by practitioners working on real software, AI, and digital products.</p>
+            <p className="eyebrow" style={{ justifyContent: 'center' }}>More than coding</p>
+            <h2>Build skills that go beyond programming.</h2>
+            <p>Technology is the tool. Thinking is the skill.</p>
           </div>
-          <div className="mentor-grid">
-            <div className="mentor-card">
-              <span className="role-tag">MetaFront Team</span>
-              <h3>Software Engineering • AI • Architecture • Product Development</h3>
-              <p>The engineers and AI practitioners behind Build Lab's projects and technical curriculum.</p>
-            </div>
-            <div className="mentor-card">
-              <span className="role-tag">Design Partner</span>
-              <h3>UI/UX • Design • Creativity • Product Design</h3>
-              <p>The design perspective that shapes how every project looks, feels, and functions.</p>
-            </div>
+          <div className="skill-grid">
+            {skills.map((s) => (
+              <div className="skill-card" key={s.title}>
+                <span className="cat-icon-tile"><span className="emoji">{s.emoji}</span></span>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            ))}
           </div>
-          <p className="mentor-statement">
-            You don't just <span className="dim">learn technology.</span><br />
-            You learn how technology is actually used to <span className="bright">build products.</span>
-          </p>
         </div>
       </section>
 
-      {/* SHOWCASE CAROUSEL */}
-      <section className="section section--border-top section--alt">
+      {/* AI PHILOSOPHY */}
+      <section className="section section--border-top dark-band">
         <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Real work, real students</p>
-            <h2>Built at Build Lab</h2>
-            <p>Every project starts with a problem and ends with a real, working product.</p>
-          </div>
-          <Carousel
-            ariaLabel="Student showcase stories"
-            items={showcase}
-            autoPlayMs={5500}
-            renderItem={(s) => (
-              <div className="story-slide" style={{ '--cat-color': `var(--cat-${s.category})` }}>
-                <div className="story-visual">
-                  <span className="emoji">{s.emoji}</span>
-                  <span className="builder-tag">Built by {s.builder} · {s.meta}</span>
-                </div>
-                <div className="story-content">
-                  <h3>{s.name}</h3>
-                  <div className="showcase-line">
-                    <span className="label">Problem</span>
-                    <p>{s.problem}</p>
+          <div className="split-section">
+            <div className="split-copy">
+              <p className="eyebrow">Our AI philosophy</p>
+              <h2>AI is the assistant.<br />The child is the creator.</h2>
+              <p className="lead">
+                AI can help brainstorm ideas, explain concepts, suggest solutions and find bugs. But the child
+                remains responsible for understanding, testing, improving and making decisions.
+              </p>
+            </div>
+            <div className="split-visual">
+              <div className="panel-rows">
+                {aiRows.map((r) => (
+                  <div className="panel-row" key={r.title}>
+                    <span className="panel-check">···</span>
+                    <div><strong>{r.title}</strong><span>{r.detail}</span></div>
                   </div>
-                  <div className="showcase-line">
-                    <span className="label">Product</span>
-                    <p>{s.product}</p>
-                  </div>
-                  <div className="project-tags">
-                    {s.tags.map((t) => <TagChip label={t} key={t} />)}
-                  </div>
-                </div>
+                ))}
               </div>
-            )}
-          />
-          <div className="text-center mt-40">
-            <Link to="/showcase" className="btn btn-secondary">See the Full Showcase</Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* SHIP DAY */}
-      <section className="shipday dark-band section section--tight">
+      <section className="section section--border-top shipday-coral">
         <div className="container">
           <div className="shipday-inner">
             <div>
-              <p className="eyebrow"><span className="rocket">🚀</span> Ship Day</p>
-              <h2>Every cohort ends with Ship Day.</h2>
+              <p className="eyebrow">The finish line</p>
+              <h2>Every cohort ends with Ship Day. 🚀</h2>
               <p className="lead">
-                Students demonstrate what they built to parents, friends, mentors, and potentially companies. It's
-                not a graduation ceremony — it's a product demo.
+                A day to stop learning and start showing. Children present what they built, explain their idea,
+                demonstrate the project and share what they learned.
               </p>
-              <Link to="/how-it-works" className="btn btn-primary">See How It Works</Link>
+              <Link to="/join" className="btn btn-primary">Join the Next Cohort →</Link>
             </div>
-            <div className="shipday-quotes">
-              <p className="shipday-quote">"Here's the problem I wanted to solve."</p>
-              <p className="shipday-quote">"Here's what I designed."</p>
-              <p className="shipday-quote">"Here's what I built."</p>
-              <p className="shipday-quote">"And here's the product."</p>
+            <div className="ship-list">
+              {shipItems.map((item) => <div className="ship-item" key={item}>{item}</div>)}
             </div>
           </div>
         </div>
       </section>
 
-      {/* METAFRONT CREDIBILITY */}
+      {/* PARENTS */}
       <section className="section section--border-top">
-        <div className="container about-body">
-          <p className="eyebrow" style={{ justifyContent: 'center' }}>Built by MetaFront</p>
-          <h2 style={{ marginBottom: 20 }}>Built by people who actually build software and AI products.</h2>
-          <p>
-            MetaFront is a software and AI company building digital products for real-world businesses. Build Lab
-            was created from the same philosophy: the best way to learn technology is to use it to build something
-            real.
-          </p>
-          <div className="brand-chain">
-            <div className="brand-chain-item meta">
-              <h3>MetaFront</h3>
-              <p className="tagline">Software • AI • Products</p>
+        <div className="container">
+          <div className="parent-grid">
+            <div>
+              <p className="eyebrow">For parents</p>
+              <h2>More than a coding class.</h2>
+              <p style={{ color: 'var(--text-secondary)' }}>
+                AI Inventor Lab gives children a structured way to explore AI and programming while developing
+                skills they can use far beyond the classroom.
+              </p>
+              <div className="parent-points">
+                {parentPoints.map((p) => <div className="parent-point" key={p}>{p}</div>)}
+              </div>
             </div>
-            <div className="brand-chain-arrow">↓</div>
-            <div className="brand-chain-item buildlab">
-              <h3>Build Lab</h3>
-              <p className="tagline">Learn → Build → Ship</p>
+            <div className="quote-card">
+              <div className="mark">"</div>
+              <p>A certificate shows that a course was completed. A project shows what a child can create.</p>
+              <small>— The AI Inventor Lab philosophy</small>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section section--border-top section--alt">
+        <div className="container">
+          <div className="section-head center">
+            <p className="eyebrow" style={{ justifyContent: 'center' }}>Questions?</p>
+            <h2>Questions parents ask.</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((f) => (
+              <details className="faq-item" key={f.q}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="section section--tight section--border-top">
+      <section className="section dark-band text-center">
         <div className="container">
-          <div className="cta-band">
-            <h2>What will you build?</h2>
-            <p>Explore the projects, pick one that excites you, and start building this week.</p>
-            <div className="hero-actions" style={{ justifyContent: 'center' }}>
-              <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
-              <Link to="/join" className="btn btn-secondary">Join a Program</Link>
-            </div>
+          <p className="eyebrow" style={{ justifyContent: 'center' }}>Your idea is waiting</p>
+          <h2 style={{ fontSize: 'clamp(36px, 6vw, 60px)', marginBottom: 14 }}>What will your child build?</h2>
+          <p style={{ color: '#bdb8ca', maxWidth: 520, margin: '0 auto 28px' }}>
+            Give your child the opportunity to move from consuming technology to creating with it.
+          </p>
+          <div className="hero-actions" style={{ justifyContent: 'center' }}>
+            <Link to="/join" className="btn btn-primary">Register Now →</Link>
+            <Link to="/programs" className="btn btn-secondary">Choose a Program</Link>
           </div>
         </div>
       </section>

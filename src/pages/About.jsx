@@ -5,10 +5,10 @@ export default function About() {
     <>
       <section className="section section--tight glow-bg">
         <div className="container about-body">
-          <p className="eyebrow" style={{ justifyContent: 'center' }}>About Build Lab</p>
+          <p className="eyebrow" style={{ justifyContent: 'center' }}>About AI Inventor Lab</p>
           <h2 style={{ marginBottom: 24 }}>Built by MetaFront.</h2>
           <p>
-            MetaFront is a software and AI company building digital products for real-world businesses. Build Lab
+            MetaFront is a software and AI company building digital products for real-world businesses. AI Inventor Lab
             was created from the same philosophy: the best way to learn technology is to use it to build something
             real.
           </p>
@@ -24,7 +24,7 @@ export default function About() {
             </div>
             <div className="brand-chain-arrow">↓</div>
             <div className="brand-chain-item buildlab">
-              <h3>Build Lab</h3>
+              <h3>AI Inventor Lab</h3>
               <p className="tagline">Learn → Build → Ship</p>
             </div>
           </div>
@@ -36,13 +36,13 @@ export default function About() {
           <div className="section-head center">
             <p className="eyebrow">Mentorship</p>
             <h2>Learn from people who build.</h2>
-            <p>Build Lab is powered by practitioners working on real software, AI, and digital products — not career instructors.</p>
+            <p>AI Inventor Lab is powered by practitioners working on real software, AI, and digital products — not career instructors.</p>
           </div>
           <div className="mentor-grid">
             <div className="mentor-card">
               <span className="role-tag">MetaFront Team</span>
               <h3>Software Engineering • AI • Architecture • Product Development</h3>
-              <p>The engineers and AI practitioners behind Build Lab's projects and technical curriculum.</p>
+              <p>The engineers and AI practitioners behind AI Inventor Lab's projects and technical curriculum.</p>
             </div>
             <div className="mentor-card">
               <span className="role-tag">Design Partner</span>
@@ -60,7 +60,7 @@ export default function About() {
             <p>Explore the projects, pick one that excites you, and start building this week.</p>
             <div className="hero-actions" style={{ marginBottom: 0 }}>
               <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
-              <Link to="/join" className="btn btn-secondary">Join a Program</Link>
+              <Link to="/join" className="btn btn-secondary">Register Now</Link>
             </div>
           </div>
         </div>

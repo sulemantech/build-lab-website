@@ -9,7 +9,7 @@ export default function AnnouncementBar() {
     <div className="announcement-bar">
       <p>
         🚀 <strong>Next cohort forms in October.</strong> Pick a project and reserve your seat.{' '}
-        <Link to="/join">Join a Program →</Link>
+        <Link to="/join">Register Now →</Link>
       </p>
       <button aria-label="Close announcement" onClick={() => setOpen(false)}>
         ✕

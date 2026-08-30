@@ -18,14 +18,14 @@ export default function Join() {
             <>
               <h1>You're on the list 🎉</h1>
               <p className="lead">
-                Thanks for reaching out — a member of the Build Lab team will follow up with next steps and
+                Thanks for reaching out — a member of the AI Inventor Lab team will follow up with next steps and
                 available cohort dates.
               </p>
               <Link to="/projects" className="btn btn-primary btn-block">Explore Projects While You Wait</Link>
             </>
           ) : (
             <>
-              <h1>Join a Program</h1>
+              <h1>Register Now</h1>
               <p className="lead">Tell us a bit about you and we'll match you with the right program and project.</p>
               <form onSubmit={handleSubmit}>
                 <div className="form-row">
@@ -41,7 +41,7 @@ export default function Join() {
                   <select id="program" defaultValue="">
                     <option value="" disabled>Select a program</option>
                     {programs.map((p) => (
-                      <option key={p.id} value={p.id}>{p.name} — {p.audience}</option>
+                      <option key={p.id} value={p.id}>{p.name} — {p.levelLabel}</option>
                     ))}
                   </select>
                 </div>

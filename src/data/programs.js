@@ -11,6 +11,7 @@ export const programs = [
     buildExamples: 'Mini games · Websites · AI experiments · Interactive stories',
     level: 'Beginner',
     color: 'creator',
+    themeColor: 'coral',
   },
   {
     id: 'ai-builder',
@@ -23,6 +24,7 @@ export const programs = [
     buildExamples: 'Trackers · Study planners · AI assistants · Web apps',
     level: 'Intermediate',
     color: 'builder',
+    themeColor: 'blue',
   },
   {
     id: 'ai-inventor',
@@ -35,6 +37,7 @@ export const programs = [
     buildExamples: 'AI systems · AI apps · Learning tools · Original products',
     level: 'Advanced',
     color: 'inventor',
+    themeColor: 'lime',
   },
 ]
 

@@ -31,7 +31,7 @@ export default function ProjectDetail() {
             <span className="badge"><span className="cat-dot" style={{ background: `var(--cat-${project.category})` }} /> {project.category}</span>
           </div>
           <div className="pd-actions">
-            <Link to="/join" className="btn btn-primary">Join This Program</Link>
+            <Link to="/join" className="btn btn-primary">Register Now</Link>
             <Link to="/projects" className="btn btn-secondary">Browse More Projects</Link>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function ProjectDetail() {
                   {project.learn.map((l) => <TagChip label={l} key={l} />)}
                 </div>
 
-                <Link to="/join" className="btn btn-primary btn-block">Join This Program</Link>
+                <Link to="/join" className="btn btn-primary btn-block">Register Now</Link>
               </div>
             </aside>
           </div>

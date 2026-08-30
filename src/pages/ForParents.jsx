@@ -41,7 +41,7 @@ export default function ForParents() {
                 Instead of consuming technology passively, your child learns to create with it — a website, an app,
                 a game, or an AI project they can show off proudly.
               </p>
-              <Link to="/projects?audience=kids" className="btn btn-primary">Explore Young Creator Projects</Link>
+              <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
             </div>
             <div className="split-visual">
               <div className="visual-chip-grid">
@@ -61,7 +61,7 @@ export default function ForParents() {
             <h2>See it for yourself on Ship Day.</h2>
             <p>Every cohort ends with a live demo where your child presents what they built.</p>
             <div className="hero-actions" style={{ marginBottom: 0 }}>
-              <Link to="/join" className="btn btn-primary">Join a Program</Link>
+              <Link to="/join" className="btn btn-primary">Register Now</Link>
               <Link to="/how-it-works" className="btn btn-secondary">See How It Works</Link>
             </div>
           </div>

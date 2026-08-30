@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { projects, categories, audiences } from '../data/projects.js'
+import { projects, categories } from '../data/projects.js'
 import ProjectCard from '../components/ProjectCard.jsx'
 
 const levels = ['Beginner', 'Intermediate', 'Advanced']
@@ -9,12 +9,10 @@ export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [category, setCategory] = useState(searchParams.get('category') || 'all')
   const [level, setLevel] = useState(searchParams.get('level') || 'all')
-  const [audience, setAudience] = useState(searchParams.get('audience') || 'all')
 
   useEffect(() => {
     setCategory(searchParams.get('category') || 'all')
     setLevel(searchParams.get('level') || 'all')
-    setAudience(searchParams.get('audience') || 'all')
   }, [searchParams])
 
   const updateParam = (key, value) => {
@@ -28,12 +26,9 @@ export default function Projects() {
     return projects.filter((p) => {
       if (category !== 'all' && p.category !== category) return false
       if (level !== 'all' && p.level !== level) return false
-      if (audience !== 'all' && !p.audiences.includes(audience)) return false
       return true
     })
-  }, [category, level, audience])
-
-  const activeAudience = audiences.find((a) => a.id === audience)
+  }, [category, level])
 
   return (
     <>
@@ -41,12 +36,8 @@ export default function Projects() {
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">Explore Projects</p>
-            <h2>{activeAudience ? activeAudience.label : 'Pick something you want to build.'}</h2>
-            <p>
-              {activeAudience
-                ? `Projects designed for ${activeAudience.ageRange.toLowerCase()}.`
-                : "We'll teach you what you need to make it happen. No prerequisites — just pick a direction."}
-            </p>
+            <h2>Pick something you want to build.</h2>
+            <p>We'll teach you what you need to make it happen. No prerequisites — just pick a direction.</p>
           </div>
 
           <div className="filter-bar">
@@ -73,11 +64,6 @@ export default function Projects() {
                 {l}
               </button>
             ))}
-            {audience !== 'all' && (
-              <button className="filter-pill active" onClick={() => updateParam('audience', 'all')}>
-                {activeAudience?.label} ✕
-              </button>
-            )}
           </div>
 
           {filtered.length > 0 ? (

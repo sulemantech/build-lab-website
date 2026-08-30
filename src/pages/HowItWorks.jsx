@@ -7,7 +7,7 @@ export default function HowItWorks() {
         <div className="container">
           <div className="section-head center">
             <p className="eyebrow">The process</p>
-            <h2>How Build Lab works</h2>
+            <h2>How AI Inventor Lab works</h2>
             <p>Three steps. No 10-step curriculum, no passive video lectures — just learn, build, and ship.</p>
           </div>
 
@@ -47,7 +47,7 @@ export default function HowItWorks() {
               </div>
             </div>
             <div className="vs-card new">
-              <span className="vs-label">Build Lab</span>
+              <span className="vs-label">AI Inventor Lab</span>
               <div className="vs-flow">
                 <span>Idea</span> <span className="arrow">→</span> <span>Learning</span> <span className="arrow">→</span> <span>Project</span> <span className="arrow">→</span> <span>Product</span>
               </div>
@@ -66,7 +66,7 @@ export default function HowItWorks() {
                 Parents, friends, mentors, and potentially companies attend. Every student demonstrates a real,
                 working product they built — not a slideshow.
               </p>
-              <Link to="/join" className="btn btn-primary">Join a Program</Link>
+              <Link to="/join" className="btn btn-primary">Register Now</Link>
             </div>
             <div className="shipday-quotes">
               <p className="shipday-quote">"Here's the problem I wanted to solve."</p>
@@ -85,7 +85,7 @@ export default function HowItWorks() {
             <p>Pick a project that excites you and join a program that fits your pace.</p>
             <div className="hero-actions" style={{ marginBottom: 0 }}>
               <Link to="/projects" className="btn btn-primary">Explore Projects</Link>
-              <Link to="/join" className="btn btn-secondary">Join a Program</Link>
+              <Link to="/join" className="btn btn-secondary">Register Now</Link>
             </div>
           </div>
         </div>
