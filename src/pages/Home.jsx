@@ -162,7 +162,25 @@ function FaqItem({ q, a, stagger }) {
 
 export default function Home() {
   const projectGridRef = useRef(null)
+  const processRef = useRef(null)
   const [typed, setTyped] = useState(() => (prefersReducedMotion() ? codeTotalLen : 0))
+
+  // Draws the connecting line across the 4 process steps once the section
+  // scrolls into view, instead of it just sitting there statically.
+  useEffect(() => {
+    const el = processRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        el.classList.add('in-view')
+        io.disconnect()
+      },
+      { threshold: 0.3 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   // Types out the code snippet once on mount.
   useEffect(() => {
@@ -344,7 +362,7 @@ export default function Home() {
             <p>Because the best way to learn technology is to use it.</p>
           </div>
 
-          <div className="process">
+          <div className="process" ref={processRef}>
             <div className="step reveal" style={{ '--stagger': 0 }}><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn the programming, AI and creative concepts needed to move your project forward.</p></div>
             <div className="step reveal" style={{ '--stagger': 1 }}><div className="stepnum">02 — BUILD</div><h3>Put it into action.</h3><p>Use what you've learned to create something of your own.</p></div>
             <div className="step reveal" style={{ '--stagger': 2 }}><div className="stepnum">03 — TEST</div><h3>Find it. Fix it. Improve it.</h3><p>Test projects, discover mistakes, debug code and make creations better.</p></div>
