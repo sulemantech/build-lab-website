@@ -56,9 +56,9 @@ export default function Nav() {
       <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
         <div className="nav-inner">
           <Link to="/" className="brand" onClick={close}>
-            <span className="mark">A</span>
+            <span className="mark">AI</span>
             <span className="brand-text">
-              AI INVENTORS LAB
+              Inventors Lab
               <small>by MetaFront</small>
             </span>
           </Link>

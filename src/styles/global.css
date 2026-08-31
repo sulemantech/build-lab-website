@@ -357,7 +357,7 @@ main { flex: 1; }
   .brand-text small { display: none; }
 }
 .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 750; }
-.nav-links a { position: relative; padding: 8px 0; color: var(--navy-950); }
+.nav-links a { position: relative; padding: 8px 0; color: var(--navy-950); transition: color 0.2s ease; }
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -369,7 +369,7 @@ main { flex: 1; }
   transition: right 0.25s cubic-bezier(0.2, 0.75, 0.2, 1);
 }
 .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
-.nav-links a.active { color: var(--coral-dark); }
+.nav-links a:hover, .nav-links a.active { color: var(--coral-dark); }
 .nav-toggle {
   display: none;
   width: 44px;
@@ -425,10 +425,19 @@ main { flex: 1; }
   color: #fff;
   opacity: 0;
   transform: translateX(-10px);
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1), color 0.2s ease, padding-left 0.2s ease;
 }
 .nav-dropdown.open nav a { opacity: 1; transform: translateX(0); }
-.nav-dropdown .mobile-cta { margin: 12px 24px 24px; }
+.nav-dropdown nav a:hover,
+.nav-dropdown nav a:focus-visible {
+  color: var(--lime);
+  padding-left: 8px;
+}
+/* .btn-block sets width:100% — combined with left/right margins here,
+   that would make the button 100% of the container's width PLUS the
+   margins, overflowing past the right edge (clipped by .nav-dropdown-
+   inner's overflow:hidden). Sizing explicitly around the margins fixes it. */
+.nav-dropdown .mobile-cta { width: calc(100% - 48px); margin: 12px 24px 24px; }
 @media (prefers-reduced-motion: reduce) {
   .nav-dropdown, .nav-dropdown nav a, .nav-toggle span { transition: grid-template-rows 0.15s ease, opacity 0.15s ease; transform: none; }
 }
