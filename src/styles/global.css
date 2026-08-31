@@ -427,6 +427,20 @@ main { flex: 1; }
   .nav-dropdown, .nav-dropdown nav a, .nav-toggle span { transition: grid-template-rows 0.15s ease, opacity 0.15s ease; transform: none; }
 }
 
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  background: rgba(15, 11, 26, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+.nav-backdrop.open { opacity: 1; visibility: visible; pointer-events: auto; }
+@media (min-width: 1001px) { .nav-backdrop { display: none; } }
+@media (prefers-reduced-motion: reduce) { .nav-backdrop { transition: opacity 0.15s ease, visibility 0.15s; } }
+
 @media (max-width: 1000px) {
   .nav-links { display: none; }
   .nav-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }

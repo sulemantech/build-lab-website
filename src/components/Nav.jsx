@@ -52,49 +52,60 @@ export default function Nav() {
   }, [open])
 
   return (
-    <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
-      <div className="nav-inner">
-        <Link to="/" className="brand" onClick={close}>
-          <span className="mark">A</span>
-          <span className="brand-text">
-            AI INVENTOR LAB
-            <small>by MetaFront</small>
-          </span>
-        </Link>
+    <>
+      <header className={`nav ${scrolled ? 'scrolled' : ''} ${hidden ? 'nav-hidden' : ''}`}>
+        <div className="nav-inner">
+          <Link to="/" className="brand" onClick={close}>
+            <span className="mark">A</span>
+            <span className="brand-text">
+              AI INVENTOR LAB
+              <small>by MetaFront</small>
+            </span>
+          </Link>
 
-        <nav className="nav-links">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
-
-        <button
-          className={`nav-toggle ${open ? 'is-open' : ''}`}
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
-
-      {/* A compact dropdown anchored right below the header (not a
-          full-screen takeover) — expands/collapses its real height via
-          the grid-rows trick, so it never needs a guessed max-height. */}
-      <div className={`nav-dropdown ${open ? 'open' : ''}`}>
-        <div className="nav-dropdown-inner">
-          <nav>
+          <nav className="nav-links">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={close}>{l.label}</Link>
+              <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'active' : '')}>
+                {l.label}
+              </NavLink>
             ))}
           </nav>
-          <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
+
+          <Link to="/join" className="btn btn-primary desktop-only">Register Now →</Link>
+
+          <button
+            className={`nav-toggle ${open ? 'is-open' : ''}`}
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+          >
+            <span /><span /><span />
+          </button>
         </div>
-      </div>
-    </header>
+
+        {/* A compact dropdown anchored right below the header (not a
+            full-screen takeover) — expands/collapses its real height via
+            the grid-rows trick, so it never needs a guessed max-height. */}
+        <div className={`nav-dropdown ${open ? 'open' : ''}`}>
+          <div className="nav-dropdown-inner">
+            <nav>
+              {links.map((l) => (
+                <Link key={l.to} to={l.to} onClick={close}>{l.label}</Link>
+              ))}
+            </nav>
+            <Link to="/join" onClick={close} className="btn btn-primary btn-block mobile-cta">Register Now →</Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Dims the rest of the page while the dropdown is open — without
+          it, whatever CTA happens to sit just below the dropdown (e.g.
+          the hero's own buttons) reads as a second, competing button
+          right underneath the menu's own "Register Now". Rendered as a
+          sibling of <header>, not inside it, since .nav carries a
+          `transform` (hide-on-scroll) that would otherwise hijack this
+          element's `position: fixed` containing block. */}
+      <div className={`nav-backdrop ${open ? 'open' : ''}`} onClick={close} aria-hidden="true" />
+    </>
   )
 }
