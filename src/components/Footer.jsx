@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <span className="brand">
               <span className="mark">A</span>
-              <span className="brand-text">AI INVENTOR LAB</span>
+              <span className="brand-text">AI INVENTORS LAB</span>
             </span>
             <p>
               AI + Programming for young creators. Learn skills. Build projects. Test ideas. Ship something real.
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} AI Inventor Lab by MetaFront. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} AI Inventors Lab by MetaFront. All rights reserved.</p>
           <p className="footer-powered">Learn. Build. Test. Ship.</p>
         </div>
       </div>

@@ -75,7 +75,7 @@ const parentPoints = [
 ]
 
 const faqs = [
-  { q: 'What age is AI Inventor Lab for?', a: "AI Inventor Lab's current programs are designed for children aged 9–15." },
+  { q: 'What age is AI Inventors Lab for?', a: "AI Inventors Lab's current programs are designed for children aged 9–15." },
   { q: 'Does my child need previous programming experience?', a: 'No. AI Creator is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate level.' },
   { q: 'Will my child actually write code?', a: 'Yes. Children learn programming through projects and progressively take more responsibility for the code they create.' },
   { q: 'How is AI used in the course?', a: 'AI is used as a learning and creative assistant. Children learn how to ask useful questions, understand responses, evaluate output and use AI responsibly.' },
@@ -269,7 +269,7 @@ export default function Home() {
             <div className="eyebrow">AI + Programming · Ages 9–15</div>
             <motion.h1 style={{ y: headlineY }}>Don't just learn.<br /><span>Build something real.</span></motion.h1>
             <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
-            <p>AI Inventor Lab helps young creators learn programming and AI by building things that matter to them. Learn a skill, apply it to a project, test your ideas and build something you can actually show.</p>
+            <p>AI Inventors Lab helps young creators learn programming and AI by building things that matter to them. Learn a skill, apply it to a project, test your ideas and build something you can actually show.</p>
             <div className="actions">
               <Link to="/programs" className="btn primary">Explore Programs →</Link>
               <Link to="/projects" className="btn outline">See What Kids Build</Link>
@@ -286,7 +286,7 @@ export default function Home() {
           >
             <motion.div className="mockbar" variants={panelItemVariants} />
             <div className="screen">
-              <motion.div className="tiny" variants={panelItemVariants}>AI Inventor Lab · Project</motion.div>
+              <motion.div className="tiny" variants={panelItemVariants}>AI Inventors Lab · Project</motion.div>
               <motion.h2 variants={panelItemVariants}>AI Study Buddy</motion.h2>
               <motion.div className="code" variants={panelItemVariants}>
                 {renderTypedCode(typed)}
@@ -408,13 +408,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY AI INVENTOR LAB */}
+      {/* WHY AI INVENTORS LAB */}
       <section className="dark">
         <div className="wrap split">
           <div className="head reveal">
-            <div className="label">Why AI Inventor Lab?</div>
+            <div className="label">Why AI Inventors Lab?</div>
             <h2>Turn screen time into creation time.</h2>
-            <p>Children already spend time with technology. AI Inventor Lab helps them use that time differently — to explore ideas, solve problems, learn new skills and create things of their own.</p>
+            <p>Children already spend time with technology. AI Inventors Lab helps them use that time differently — to explore ideas, solve problems, learn new skills and create things of their own.</p>
           </div>
           <div className="panel reveal">
             {whyRows.map((r) => (
@@ -489,7 +489,7 @@ export default function Home() {
           <div className="reveal">
             <div className="label">For parents</div>
             <h2>More than a coding class.</h2>
-            <p style={{ color: 'var(--muted)' }}>AI Inventor Lab gives children a structured way to explore AI and programming while developing skills they can use far beyond the classroom.</p>
+            <p style={{ color: 'var(--muted)' }}>AI Inventors Lab gives children a structured way to explore AI and programming while developing skills they can use far beyond the classroom.</p>
             <div className="parent-points">
               {parentPoints.map((p) => <div className="point" key={p}>{p}</div>)}
             </div>
@@ -498,7 +498,7 @@ export default function Home() {
           <div className="quote reveal">
             <div style={{ fontSize: 44, color: '#4a3a88' }}>"</div>
             <p>A certificate shows that a course was completed. A project shows what a child can create.</p>
-            <small style={{ color: 'var(--muted)' }}>— The AI Inventor Lab philosophy</small>
+            <small style={{ color: 'var(--muted)' }}>— The AI Inventors Lab philosophy</small>
           </div>
         </div>
       </section>

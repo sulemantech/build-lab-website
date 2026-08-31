@@ -20,7 +20,7 @@ export default function Join() {
             <>
               <h1>You're on the list 🎉</h1>
               <p className="lead">
-                Thanks for reaching out — a member of the AI Inventor Lab team will follow up with next steps and
+                Thanks for reaching out — a member of the AI Inventors Lab team will follow up with next steps and
                 available cohort dates.
               </p>
               <Link to="/projects" className="btn btn-primary btn-block">Explore Projects While You Wait</Link>

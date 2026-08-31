@@ -7,8 +7,8 @@ export default function HowItWorks() {
         <div className="container">
           <div className="section-head center">
             <p className="eyebrow">The process</p>
-            <h2>How AI Inventor Lab works</h2>
-            <p>Three steps. No 10-step curriculum, no passive video lectures — just learn, build, and ship.</p>
+            <h2>How AI Inventors Lab works</h2>
+            <p>Four steps. No 10-step curriculum, no passive video lectures — just learn, build, test, and ship.</p>
           </div>
 
           <div className="steps-row">
@@ -26,6 +26,12 @@ export default function HowItWorks() {
             <div className="step-arrow">→</div>
             <div className="step-block">
               <span className="step-num">03</span>
+              <h3>Test</h3>
+              <p>Find what's broken, debug it, and make it better — testing is part of the process, not a failure.</p>
+            </div>
+            <div className="step-arrow">→</div>
+            <div className="step-block">
+              <span className="step-num">04</span>
               <h3>Ship</h3>
               <p>Deploy your project, publish it to GitHub, and present it on Ship Day.</p>
             </div>
@@ -47,9 +53,9 @@ export default function HowItWorks() {
               </div>
             </div>
             <div className="vs-card new">
-              <span className="vs-label">AI Inventor Lab</span>
+              <span className="vs-label">AI Inventors Lab</span>
               <div className="vs-flow">
-                <span>Idea</span> <span className="arrow">→</span> <span>Learning</span> <span className="arrow">→</span> <span>Project</span> <span className="arrow">→</span> <span>Product</span>
+                <span>Idea</span> <span className="arrow">→</span> <span>Learn</span> <span className="arrow">→</span> <span>Build</span> <span className="arrow">→</span> <span>Test</span> <span className="arrow">→</span> <span>Ship</span>
               </div>
             </div>
           </div>

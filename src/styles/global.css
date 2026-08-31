@@ -1,5 +1,5 @@
 /* ============================================================
-   AI Inventor Lab — Design Tokens
+   AI Inventors Lab — Design Tokens
    Ink-purple dark bands, a bright lime spark accent, a warm coral
    call-to-action color, and soft pastel category tints on a paper
    background — built for a focused, kid-friendly AI + programming
@@ -210,6 +210,7 @@ main { flex: 1; }
   font-weight: 500;
   text-align: center;
   position: relative;
+  z-index: 46;
 }
 .announcement-bar p { margin: 0; }
 .announcement-bar a { text-decoration: underline; font-weight: 700; }
@@ -347,7 +348,7 @@ main { flex: 1; }
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .brand-text small { display: block; font-size: 8px; color: var(--text-secondary); letter-spacing: 0.12em; font-weight: 500; }
-/* Small phones: the full lockup ("mark" + "AI INVENTOR LAB" + toggle)
+/* Small phones: the full lockup ("mark" + "AI INVENTORS LAB" + toggle)
    doesn't fit a ~360px screen at full size — shrink it rather than let
    it force horizontal overflow. */
 @media (max-width: 420px) {
@@ -390,9 +391,14 @@ main { flex: 1; }
   transition: transform 0.3s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.2s ease;
 }
 /* Morphs into an × when acting as the overlay's close button. */
-.nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+/* Each bar is 2px tall with 4px top+bottom margin, non-collapsing in a
+   flex column — that's a 10px gap between bar centers, not 6px. Using
+   the wrong offset was why the two remaining bars rotated without their
+   centers actually meeting, rendering as a "&gt;" chevron instead of a
+   symmetric ×. */
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
 .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
-.nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
 /* Compact dropdown anchored to the header (not a full-screen takeover) —
    .nav is the nearest positioned ancestor (sticky), so this sits right
@@ -913,9 +919,9 @@ main { flex: 1; }
 .brand-chain-item { text-align: center; padding: 22px 40px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); min-width: 260px; box-shadow: var(--shadow-card); }
 .brand-chain-item.meta h3 { font-size: 22px; }
 .brand-chain-item.meta .tagline { font-family: var(--ff-mono); font-size: 13px; color: var(--text-tertiary); margin-top: 6px; }
-.brand-chain-item.buildlab { border-color: rgba(252, 85, 70, 0.32); background: rgba(252, 85, 70, 0.05); }
-.brand-chain-item.buildlab h3 { font-size: 22px; color: var(--coral-dark); }
-.brand-chain-item.buildlab .tagline { font-family: var(--ff-mono); font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+.brand-chain-item.inventorslab { border-color: rgba(252, 85, 70, 0.32); background: rgba(252, 85, 70, 0.05); }
+.brand-chain-item.inventorslab h3 { font-size: 22px; color: var(--coral-dark); }
+.brand-chain-item.inventorslab .tagline { font-family: var(--ff-mono); font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
 .brand-chain-arrow { color: var(--text-tertiary); font-size: 20px; }
 
 .about-body { max-width: 720px; margin: 0 auto; text-align: center; }

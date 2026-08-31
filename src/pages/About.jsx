@@ -5,10 +5,10 @@ export default function About() {
     <>
       <section className="section section--tight glow-bg">
         <div className="container about-body">
-          <p className="eyebrow" style={{ justifyContent: 'center' }}>About AI Inventor Lab</p>
+          <p className="eyebrow" style={{ justifyContent: 'center' }}>About AI Inventors Lab</p>
           <h2 style={{ marginBottom: 24 }}>Built by MetaFront.</h2>
           <p>
-            MetaFront is a software and AI company building digital products for real-world businesses. AI Inventor Lab
+            MetaFront is a software and AI company building digital products for real-world businesses. AI Inventors Lab
             was created from the same philosophy: the best way to learn technology is to use it to build something
             real.
           </p>
@@ -23,9 +23,9 @@ export default function About() {
               <p className="tagline">Software • AI • Products</p>
             </div>
             <div className="brand-chain-arrow">↓</div>
-            <div className="brand-chain-item buildlab">
-              <h3>AI Inventor Lab</h3>
-              <p className="tagline">Learn → Build → Ship</p>
+            <div className="brand-chain-item inventorslab">
+              <h3>AI Inventors Lab</h3>
+              <p className="tagline">Learn → Build → Test → Ship</p>
             </div>
           </div>
         </div>
@@ -36,17 +36,17 @@ export default function About() {
           <div className="section-head center">
             <p className="eyebrow">Mentorship</p>
             <h2>Learn from people who build.</h2>
-            <p>AI Inventor Lab is powered by practitioners working on real software, AI, and digital products — not career instructors.</p>
+            <p>AI Inventors Lab is powered by practitioners working on real software, AI, and digital products — not career instructors.</p>
           </div>
           <div className="mentor-grid">
             <div className="mentor-card">
               <span className="role-tag">MetaFront Team</span>
-              <h3>Software Engineering • AI • Architecture • Product Development</h3>
-              <p>The engineers and AI practitioners behind AI Inventor Lab's projects and technical curriculum.</p>
+              <h3>People who build software and AI for a living.</h3>
+              <p>The engineers and AI practitioners behind AI Inventors Lab's projects and technical curriculum.</p>
             </div>
             <div className="mentor-card">
               <span className="role-tag">Design Partner</span>
-              <h3>UI/UX • Design • Creativity • Product Design</h3>
+              <h3>People who care how things look and feel.</h3>
               <p>The design perspective that shapes how every project looks, feels, and functions.</p>
             </div>
           </div>

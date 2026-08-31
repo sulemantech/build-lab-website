@@ -58,7 +58,7 @@ export default function Nav() {
           <Link to="/" className="brand" onClick={close}>
             <span className="mark">A</span>
             <span className="brand-text">
-              AI INVENTOR LAB
+              AI INVENTORS LAB
               <small>by MetaFront</small>
             </span>
           </Link>

@@ -10,7 +10,7 @@ export default function Showcase() {
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">Real work, real students</p>
-            <h2>Built at AI Inventor Lab</h2>
+            <h2>Built at AI Inventors Lab</h2>
             <p>Every project starts with a problem and ends with a real, working product — student, problem, product, demo.</p>
           </div>
 
@@ -89,7 +89,7 @@ export default function Showcase() {
               <div className="profile-avatar">AK</div>
               <div>
                 <h4>Ahmed Khan</h4>
-                <span>AI Inventor Lab Student</span>
+                <span>AI Inventors Lab Student</span>
               </div>
             </div>
             <div className="profile-section">

@@ -54,9 +54,9 @@ export default function Programs() {
               </div>
             </div>
             <div className="vs-card new">
-              <span className="vs-label">AI Inventor Lab</span>
+              <span className="vs-label">AI Inventors Lab</span>
               <div className="vs-flow">
-                <span>Idea</span> <span className="arrow">→</span> <span>Learn</span> <span className="arrow">→</span> <span>Build</span> <span className="arrow">→</span> <span>Ship</span>
+                <span>Idea</span> <span className="arrow">→</span> <span>Learn</span> <span className="arrow">→</span> <span>Build</span> <span className="arrow">→</span> <span>Test</span> <span className="arrow">→</span> <span>Ship</span>
               </div>
             </div>
           </div>
