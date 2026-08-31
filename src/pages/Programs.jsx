@@ -7,11 +7,11 @@ export default function Programs() {
       <section className="section section--tight glow-bg">
         <div className="container">
           <div className="section-head programs-head">
-            <p className="eyebrow">Three age tracks · One creator journey</p>
+            <p className="eyebrow">Three levels · One creator journey</p>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>
-              Learn → Create → Celebrate. Every track follows the same loop, scaled to what that age group is
-              ready for — for young creators aged 9–16.
+              Creator → Builder → Inventor. Each level follows the same Learn → Create → Celebrate loop, scaled to
+              what that level is ready for — for young creators aged 9–16.
             </p>
           </div>
         </div>
@@ -43,12 +43,12 @@ export default function Programs() {
       <section className="section section--border-top">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">The same loop, at every age</p>
+            <p className="eyebrow">The same loop, at every level</p>
             <h2>Learn. Create. Celebrate.</h2>
           </div>
           <div className="track-table">
             <div className="track-table-row track-table-head">
-              <span>Track</span>
+              <span>Level</span>
               <span>Learn</span>
               <span>Create</span>
               <span>Celebrate</span>
@@ -89,7 +89,7 @@ export default function Programs() {
             </div>
           </div>
           <div className="text-center mt-40">
-            <Link to="/projects" className="btn btn-primary">See Projects in Each Track</Link>
+            <Link to="/projects" className="btn btn-primary">See Projects in Each Level</Link>
           </div>
         </div>
       </section>

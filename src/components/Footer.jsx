@@ -19,9 +19,9 @@ export default function Footer() {
             <div className="footer-col">
               <h5>Programs</h5>
               <ul>
-                <li><Link to="/programs">AI Explorers</Link></li>
-                <li><Link to="/programs">AI Builders</Link></li>
-                <li><Link to="/programs">AI Inventors</Link></li>
+                <li><Link to="/programs">AI Creator</Link></li>
+                <li><Link to="/programs">AI Builder</Link></li>
+                <li><Link to="/programs">AI Inventor</Link></li>
               </ul>
             </div>
             <div className="footer-col">

@@ -1,16 +1,18 @@
-// Three age tracks, one creator journey — each follows the same
-// Learn → Create → Celebrate loop, scaled to what that age group is ready for.
+// Creator → Builder → Inventor: three levels of capability. Each one still
+// runs on the same Learn → Create → Celebrate loop, scaled to what that
+// level is ready for — the level describes what a learner can do, the loop
+// describes what they actually do at every level.
 export const programs = [
   {
     id: 'ai-creator',
-    levelLabel: 'Track 01 · Ages 9–11',
-    name: 'AI Explorers',
-    promise: 'Start creating with AI + programming.',
+    levelLabel: 'Level 01 · Ages 9–10',
+    name: 'AI Creator',
+    promise: 'Discover AI. Learn to create.',
     description:
       'For young learners beginning their technology journey. Discover how computers work, learn programming fundamentals and use AI as a creative partner.',
-    skills: ['Computational thinking', 'Programming fundamentals', 'AI literacy', 'Creative problem-solving', 'Prompting & AI collaboration'],
+    skills: ['Creative problem-solving', 'Coding fundamentals', 'AI basics', 'Logical thinking', 'Prompting & AI collaboration'],
     buildExamples: 'Mini games · Websites · AI experiments · Interactive stories',
-    learn: 'Discover AI and programming through simple, hands-on concepts.',
+    learn: 'Discover what AI is and pick up coding fundamentals.',
     create: 'Guided creative projects — mini games, websites and interactive stories.',
     celebrate: 'Show what they built to parents, teachers and classmates.',
     level: 'Beginner',
@@ -19,9 +21,9 @@ export const programs = [
   },
   {
     id: 'ai-builder',
-    levelLabel: 'Track 02 · Ages 12–14',
-    name: 'AI Builders',
-    promise: 'Turn ideas into working digital products.',
+    levelLabel: 'Level 02 · Ages 11–12',
+    name: 'AI Builder',
+    promise: 'Turn ideas into working digital projects.',
     description:
       'Go beyond the basics. Develop stronger programming skills and learn how technologies work together to create useful applications.',
     skills: ['Python programming', 'Programming logic', 'APIs', 'AI integration', 'Debugging & product thinking'],
@@ -35,12 +37,12 @@ export const programs = [
   },
   {
     id: 'ai-inventor',
-    levelLabel: 'Track 03 · Ages 15–16',
-    name: 'AI Inventors',
+    levelLabel: 'Level 03 · Ages 13–16',
+    name: 'AI Inventor',
     promise: "Build something that's truly your own.",
     description:
       'For experienced young creators ready to combine programming, AI, product design and problem-solving into original projects.',
-    skills: ['Advanced programming', 'AI systems & data', 'Product design', 'Testing & iteration', 'Responsible AI & shipping'],
+    skills: ['Advanced programming', 'AI systems & data', 'Product design', 'Testing & iteration', 'Responsible AI'],
     buildExamples: 'AI systems · AI apps · Learning tools · Original products',
     learn: 'Learn APIs, Python, and how real AI systems are built and evaluated.',
     create: 'Build complete, original AI applications.',

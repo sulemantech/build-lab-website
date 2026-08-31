@@ -2,7 +2,7 @@ export const showcase = [
   {
     name: 'AI Study Buddy',
     builder: 'Ahmed',
-    meta: 'Age 12 · AI Builders',
+    meta: 'Age 12 · AI Builder',
     problem: 'Struggled to remember material from long lecture notes before tests.',
     product: 'An AI assistant that reads notes and answers questions in plain language.',
     tags: ['AI', 'Prompting'],
@@ -12,7 +12,7 @@ export const showcase = [
   {
     name: 'Habit Tracker',
     builder: 'Sara',
-    meta: 'Age 13 · AI Builders',
+    meta: 'Age 11 · AI Builder',
     problem: 'Wanted a simple way to keep up with daily habits like reading and exercise.',
     product: 'An app with streaks, reminders, and a friendly daily check-in.',
     tags: ['UI/UX', 'Logic'],
@@ -22,7 +22,7 @@ export const showcase = [
   {
     name: 'Choose Your Path',
     builder: 'Ali',
-    meta: 'Age 10 · AI Explorers',
+    meta: 'Age 10 · AI Creator',
     problem: 'Loved writing stories but wanted readers to make the choices.',
     product: 'A branching interactive story website with multiple endings.',
     tags: ['HTML/CSS', 'Storytelling'],
@@ -32,7 +32,7 @@ export const showcase = [
   {
     name: 'Pixel Runner',
     builder: 'Maya',
-    meta: 'Age 11 · AI Explorers',
+    meta: 'Age 11 · AI Builder',
     problem: 'Wanted to make a game like the ones she plays, not just play them.',
     product: 'A side-scrolling arcade game with levels and a scoring system.',
     tags: ['Game Design', 'Logic'],
@@ -42,7 +42,7 @@ export const showcase = [
   {
     name: 'Event Poster Kit',
     builder: 'Zara',
-    meta: 'Age 10 · AI Explorers',
+    meta: 'Age 10 · AI Creator',
     problem: 'Her class needed posters for a school event but had no design budget.',
     product: 'A full poster and card set designed in Canva for the whole class.',
     tags: ['Canva', 'Layout'],
@@ -52,7 +52,7 @@ export const showcase = [
   {
     name: 'Guess My Mood',
     builder: 'Omar',
-    meta: 'Age 15 · AI Inventors',
+    meta: 'Age 15 · AI Inventor',
     problem: 'Wanted to understand how AI could actually "read" what someone writes.',
     product: 'An original AI tool that guesses the mood behind a message, built end-to-end.',
     tags: ['AI', 'Product Design'],

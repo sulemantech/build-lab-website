@@ -31,7 +31,7 @@ const programClass = ['creator', 'builder', 'inventor']
 const stats = [
   { value: '9–16', label: 'Years' },
   { value: '3', label: 'Build Levels' },
-  { value: '4', label: 'Core Steps' },
+  { value: '3', label: 'Core Steps' },
   { value: '1', label: 'Creator Journey' },
 ]
 
@@ -76,7 +76,7 @@ const parentPoints = [
 
 const faqs = [
   { q: 'What age is AI Inventors Lab for?', a: "AI Inventors Lab's current programs are designed for children aged 9–16." },
-  { q: 'Does my child need previous programming experience?', a: 'No. AI Explorers (ages 9–11) is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate track.' },
+  { q: 'Does my child need previous programming experience?', a: 'No. AI Creator (ages 9–10) is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate level.' },
   { q: 'Will my child actually write code?', a: 'Yes. Children learn programming through projects and progressively take more responsibility for the code they create.' },
   { q: 'How is AI used in the course?', a: 'AI is used as a learning and creative assistant. Children learn how to ask useful questions, understand responses, evaluate output and use AI responsibly.' },
   { q: 'What will my child build?', a: 'Projects vary by level and may include websites, games, trackers, study tools, AI assistants, applications and original digital products.' },
@@ -273,7 +273,7 @@ export default function Home() {
               <Link to="/programs" className="btn primary">Enter the Lab →</Link>
               <Link to="/projects" className="btn outline">Start Exploring</Link>
             </div>
-            <div className="note">No prior coding experience required for AI Explorers.</div>
+            <div className="note">No prior coding experience required for AI Creator.</div>
           </div>
 
           <motion.div
@@ -365,9 +365,9 @@ export default function Home() {
       <section className="programs" id="programs">
         <div className="wrap">
           <div className="head reveal">
-            <div className="label">Three age tracks · One creator journey</div>
+            <div className="label">Three levels · One creator journey</div>
             <h2>Start where you are.<br />Build where you want to go.</h2>
-            <p>Learn → Create → Celebrate. Every track introduces new technology, deeper problem-solving and more ambitious projects.</p>
+            <p>Creator → Builder → Inventor. Each level introduces new technology, deeper problem-solving and more ambitious projects.</p>
           </div>
 
           <div className="program-grid">
