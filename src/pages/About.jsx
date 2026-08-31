@@ -13,8 +13,8 @@ export default function About() {
             real.
           </p>
           <p>
-            We don't believe in courses that end in a certificate and nothing else. We believe in a process — idea,
-            learning, project, product — that ends with something you can point to and say, "I built this."
+            We don't believe in courses that end in a certificate and nothing else. We believe in Learn → Create →
+            Celebrate — a process that ends with something you can point to and say, "I built this."
           </p>
 
           <div className="brand-chain">

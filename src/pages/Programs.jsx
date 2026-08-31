@@ -4,14 +4,13 @@ import { programs } from '../data/programs.js'
 export default function Programs() {
   return (
     <>
-      <section className="section section--tight glow-bg">
+      <section className="section section--tight glow-bg programs-hero">
         <div className="container">
           <div className="section-head programs-head">
             <p className="eyebrow">Three levels · One creator journey</p>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>
-              Creator → Builder → Inventor. Each level follows the same Learn → Create → Celebrate loop, scaled to
-              what that level is ready for — for young creators aged 9–16.
+              Creator → Builder → Inventor. Each level builds on the last — for young creators aged 9–16.
             </p>
           </div>
         </div>
@@ -20,22 +19,30 @@ export default function Programs() {
       <section className="section section--border-top dark-band">
         <div className="container">
           <div className="program-grid">
-            {programs.map((p) => (
-              <article className="program-card" key={p.id}>
-                <span className="level-label">{p.levelLabel}</span>
-                <h3>{p.name}</h3>
-                <div className="promise">{p.promise}</div>
-                <p className="desc">{p.description}</p>
-                <ul className="program-focus">
-                  {p.skills.map((s) => <li key={s}>{s}</li>)}
-                </ul>
-                <div className="program-build">
-                  <strong>Build examples</strong>
-                  {p.buildExamples}
-                </div>
-                <Link to={`/projects?level=${p.level}`} className="cta-link">Explore {p.name} →</Link>
-              </article>
-            ))}
+            {programs.map((p) => {
+              const [levelPart, agePart] = p.levelLabel.split(' · ')
+              return (
+                <article className={`program-card ${p.color}`} key={p.id}>
+                  <div className="program-card-top">
+                    <span className="level-label">{levelPart}</span>
+                    <span className="age-badge">{agePart}</span>
+                  </div>
+                  <h3>{p.name}</h3>
+                  <div className="promise">{p.promise}</div>
+                  <p className="desc">{p.description}</p>
+                  <ul className="program-focus">
+                    {p.skills.map((s) => <li key={s}>{s}</li>)}
+                  </ul>
+                  <div className="program-build">
+                    <strong>Build examples</strong>
+                    <div className="program-build-tags">
+                      {p.buildExamples.split(' · ').map((ex) => <span className="tag-chip" key={ex}>{ex}</span>)}
+                    </div>
+                  </div>
+                  <Link to={`/projects?level=${p.level}`} className="btn program-cta">Explore {p.name} →</Link>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
