@@ -3,7 +3,7 @@
    Ink-purple dark bands, a bright lime spark accent, a warm coral
    call-to-action color, and soft pastel category tints on a paper
    background — built for a focused, kid-friendly AI + programming
-   product for ages 9–15.
+   product for ages 9–16.
    ============================================================ */
 :root {
   --bg: #faf9f5;
@@ -920,6 +920,19 @@ main { flex: 1; }
 .vs-flow { font-family: var(--ff-mono); font-size: 17px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .vs-card.new .vs-flow { color: var(--text-primary); font-weight: 600; }
 .vs-flow .arrow { color: var(--coral); }
+
+.track-table { display: grid; gap: 2px; margin-top: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--border); }
+.track-table-row { display: grid; grid-template-columns: 1.1fr 1.3fr 1.3fr 1.3fr; gap: 20px; padding: 20px 24px; background: var(--bg-card); }
+.track-table-head { background: var(--bg-subtle, #f7f5fa); font-family: var(--ff-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); font-weight: 700; }
+.track-table-name { display: flex; flex-direction: column; gap: 2px; }
+.track-table-name strong { font-size: 15px; color: var(--navy-950); }
+.track-table-name small { font-family: var(--ff-mono); font-size: 11px; color: var(--text-tertiary); }
+.track-table-row:not(.track-table-head) span:not(.track-table-name) { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+@media (max-width: 800px) {
+  .track-table-head { display: none; }
+  .track-table-row { grid-template-columns: 1fr; gap: 8px; }
+  .track-table-row:not(.track-table-head) span:not(.track-table-name)::before { content: attr(data-label); display: block; font-family: var(--ff-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); margin-bottom: 2px; }
+}
 
 /* ============================================================
    About / MetaFront relationship

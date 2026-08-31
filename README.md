@@ -1,8 +1,8 @@
 # AI Inventors Lab — by MetaFront
 
-Idea → Learn → Build → Test → Ship
+Learn → Create → Celebrate
 
-A React + Vite marketing site for **AI Inventors Lab**, MetaFront's hands-on AI + programming initiative for young creators aged 9–15. Visitors are guided by category ("What do you want to build?") into a catalog of real projects rather than a traditional course list.
+A React + Vite marketing site for **AI Inventors Lab**, MetaFront's hands-on AI + programming initiative for young creators aged 9–16. Visitors are guided by category ("What do you want to build?") into a catalog of real projects rather than a traditional course list.
 
 ## Stack
 
@@ -19,8 +19,8 @@ A React + Vite marketing site for **AI Inventors Lab**, MetaFront's hands-on AI 
 | `/` | Hero, "What do you want to build?", featured projects, programs, How It Works, "Why AI Inventors Lab", skills, AI philosophy, Ship Day, for parents, FAQ, final CTA |
 | `/projects` | Filterable project catalog (category, level — supports `?category=`, `?level=` query params) |
 | `/projects/:slug` | Project detail — build flow, weekly journey, what you'll ship, sidebar with program details |
-| `/programs` | AI Creator (ages 9–10) → AI Builder (11–12) → AI Inventor (13–15) |
-| `/how-it-works` | Learn → Build → Test → Ship, Ship Day |
+| `/programs` | AI Explorers (ages 9–11) → AI Builders (12–14) → AI Inventors (15–16) |
+| `/how-it-works` | Learn → Create → Celebrate, Ship Day |
 | `/showcase` | Student projects (problem → product) + Builder Profile concept |
 | `/for-parents` | Trust-building section for parents |
 | `/about` | MetaFront ↔ AI Inventors Lab relationship, mentorship |

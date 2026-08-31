@@ -3,8 +3,6 @@ import { useSearchParams } from 'react-router-dom'
 import { projects, categories } from '../data/projects.js'
 import ProjectCard from '../components/ProjectCard.jsx'
 
-const levels = ['Beginner', 'Intermediate', 'Advanced']
-
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [category, setCategory] = useState(searchParams.get('category') || 'all')
@@ -51,17 +49,6 @@ export default function Projects() {
                 onClick={() => updateParam('category', c.id)}
               >
                 {c.emoji} {c.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="filter-bar">
-            <button className={`filter-pill ${level === 'all' ? 'active' : ''}`} onClick={() => updateParam('level', 'all')}>
-              All levels
-            </button>
-            {levels.map((l) => (
-              <button key={l} className={`filter-pill ${level === l ? 'active' : ''}`} onClick={() => updateParam('level', l)}>
-                {l}
               </button>
             ))}
           </div>

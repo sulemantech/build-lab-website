@@ -7,11 +7,11 @@ export default function Programs() {
       <section className="section section--tight glow-bg">
         <div className="container">
           <div className="section-head programs-head">
-            <p className="eyebrow">Three levels · One creator journey</p>
+            <p className="eyebrow">Three age tracks · One creator journey</p>
             <h2>Start where you are.<br />Build where you want to go.</h2>
             <p>
-              Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more
-              ambitious projects — for young creators aged 9–15.
+              Learn → Create → Celebrate. Every track follows the same loop, scaled to what that age group is
+              ready for — for young creators aged 9–16.
             </p>
           </div>
         </div>
@@ -43,6 +43,34 @@ export default function Programs() {
       <section className="section section--border-top">
         <div className="container">
           <div className="section-head">
+            <p className="eyebrow">The same loop, at every age</p>
+            <h2>Learn. Create. Celebrate.</h2>
+          </div>
+          <div className="track-table">
+            <div className="track-table-row track-table-head">
+              <span>Track</span>
+              <span>Learn</span>
+              <span>Create</span>
+              <span>Celebrate</span>
+            </div>
+            {programs.map((p) => (
+              <div className="track-table-row" key={p.id}>
+                <span className="track-table-name">
+                  <strong>{p.name}</strong>
+                  <small>{p.levelLabel.split('· ')[1]}</small>
+                </span>
+                <span data-label="Learn">{p.learn}</span>
+                <span data-label="Create">{p.create}</span>
+                <span data-label="Celebrate">{p.celebrate}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--border-top">
+        <div className="container">
+          <div className="section-head">
             <p className="eyebrow">The difference</p>
             <h2>This isn't a course. It's a build process.</h2>
           </div>
@@ -56,12 +84,12 @@ export default function Programs() {
             <div className="vs-card new">
               <span className="vs-label">AI Inventors Lab</span>
               <div className="vs-flow">
-                <span>Idea</span> <span className="arrow">→</span> <span>Learn</span> <span className="arrow">→</span> <span>Build</span> <span className="arrow">→</span> <span>Test</span> <span className="arrow">→</span> <span>Ship</span>
+                <span>Learn</span> <span className="arrow">→</span> <span>Create</span> <span className="arrow">→</span> <span>Celebrate</span>
               </div>
             </div>
           </div>
           <div className="text-center mt-40">
-            <Link to="/projects" className="btn btn-primary">See Projects in Each Level</Link>
+            <Link to="/projects" className="btn btn-primary">See Projects in Each Track</Link>
           </div>
         </div>
       </section>

@@ -25,7 +25,7 @@ export default function About() {
             <div className="brand-chain-arrow">↓</div>
             <div className="brand-chain-item inventorslab">
               <h3>AI Inventors Lab</h3>
-              <p className="tagline">Learn → Build → Test → Ship</p>
+              <p className="tagline">Learn → Create → Celebrate</p>
             </div>
           </div>
         </div>

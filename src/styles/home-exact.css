@@ -224,6 +224,7 @@
 }
 @keyframes home-blink { 50% { opacity: 0; } }
 .home-exact .idea-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.home-exact .idea-flow--3 { grid-template-columns: repeat(3, 1fr); }
 .home-exact .idea-step {
   background: #f0ede8;
   border-radius: 12px;
@@ -381,6 +382,7 @@
 }
 .home-exact .project:hover .project-link { gap: 12px; }
 .home-exact .carousel-note { text-align: center; color: var(--muted); font-size: 11px; margin-top: 20px; }
+.home-exact .programs .carousel-note { color: #bdb8ca; margin-top: 32px; }
 
 /* -----------------------------
    Programs
@@ -461,6 +463,7 @@
    Process
 ------------------------------ */
 .home-exact .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
+.home-exact .process--3 { grid-template-columns: repeat(3, 1fr); }
 .home-exact .process::before {
   content: "";
   position: absolute;
@@ -717,7 +720,7 @@
   .home-exact .project-grid { grid-template-columns: repeat(2, 1fr); }
   .home-exact .program-grid { grid-template-columns: 1fr; }
   .home-exact .program { min-height: unset; }
-  .home-exact .process, .home-exact .skill-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-exact .process, .home-exact .process--3, .home-exact .skill-grid { grid-template-columns: repeat(2, 1fr); }
   .home-exact .process::before { display: none; }
 }
 @media (max-width: 620px) {
@@ -731,10 +734,11 @@
   .home-exact .screen { padding: 17px; }
   .home-exact .screen h2 { font-size: 23px; }
   .home-exact .idea-flow { grid-template-columns: repeat(2, 1fr); }
+  .home-exact .idea-flow--3 { grid-template-columns: repeat(3, 1fr); }
   .home-exact .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .home-exact .stat { border-bottom: 1px solid var(--line); }
   .home-exact .stat:nth-child(2) { border-right: 0; }
-  .home-exact .types, .home-exact .project-grid, .home-exact .process, .home-exact .skill-grid { grid-template-columns: 1fr; }
+  .home-exact .types, .home-exact .project-grid, .home-exact .process, .home-exact .process--3, .home-exact .skill-grid { grid-template-columns: 1fr; }
   .home-exact .head h2 { font-size: 39px; }
   .home-exact .project p { min-height: auto; }
   .home-exact .program h3 { font-size: 36px; }

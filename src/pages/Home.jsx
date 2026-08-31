@@ -29,7 +29,7 @@ const featured = [
 const programClass = ['creator', 'builder', 'inventor']
 
 const stats = [
-  { value: '9–15', label: 'Years' },
+  { value: '9–16', label: 'Years' },
   { value: '3', label: 'Build Levels' },
   { value: '4', label: 'Core Steps' },
   { value: '1', label: 'Creator Journey' },
@@ -75,8 +75,8 @@ const parentPoints = [
 ]
 
 const faqs = [
-  { q: 'What age is AI Inventors Lab for?', a: "AI Inventors Lab's current programs are designed for children aged 9–15." },
-  { q: 'Does my child need previous programming experience?', a: 'No. AI Creator is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate level.' },
+  { q: 'What age is AI Inventors Lab for?', a: "AI Inventors Lab's current programs are designed for children aged 9–16." },
+  { q: 'Does my child need previous programming experience?', a: 'No. AI Explorers (ages 9–11) is designed as the beginner starting point. Children with previous experience can be guided toward the appropriate track.' },
   { q: 'Will my child actually write code?', a: 'Yes. Children learn programming through projects and progressively take more responsibility for the code they create.' },
   { q: 'How is AI used in the course?', a: 'AI is used as a learning and creative assistant. Children learn how to ask useful questions, understand responses, evaluate output and use AI responsibly.' },
   { q: 'What will my child build?', a: 'Projects vary by level and may include websites, games, trackers, study tools, AI assistants, applications and original digital products.' },
@@ -84,10 +84,9 @@ const faqs = [
 ]
 
 const codeLines = [
-  [{ b: true, t: 'idea' }, { t: ' = "help students revise"' }],
-  [{ b: true, t: 'plan' }, { t: ' = build_with_ai(idea)' }],
-  [{ b: true, t: 'test' }, { t: '(plan)' }],
-  [{ b: true, t: 'ship' }, { t: '(improve(plan))' }],
+  [{ b: true, t: 'learn' }, { t: ' = "how AI works"' }],
+  [{ b: true, t: 'project' }, { t: ' = create_with_ai(learn)' }],
+  [{ b: true, t: 'celebrate' }, { t: '(project)' }],
 ]
 const codeTotalLen = codeLines.reduce((sum, line) => sum + line.reduce((s, tok) => s + tok.t.length, 0), 0)
 
@@ -266,15 +265,15 @@ export default function Home() {
         </motion.div>
         <div className="wrap hero-grid">
           <div className="reveal">
-            <div className="eyebrow">AI + Programming · Ages 9–15</div>
+            <div className="eyebrow">AI + Programming · Ages 9–16</div>
             <motion.h1 style={{ y: headlineY }}>Don't just learn.<br /><span>Build something real.</span></motion.h1>
             <h3>Turn ideas into websites, games, apps and AI-powered projects.</h3>
-            <p>AI Inventors Lab helps young creators learn programming and AI by building things that matter to them. Learn a skill, apply it to a project, test your ideas and build something you can actually show.</p>
+            <p>AI Inventors Lab helps young creators learn programming and AI by building things that matter to them. Learn AI, create with AI, and celebrate what you make.</p>
             <div className="actions">
-              <Link to="/programs" className="btn primary">Explore Programs →</Link>
-              <Link to="/projects" className="btn outline">See What Kids Build</Link>
+              <Link to="/programs" className="btn primary">Enter the Lab →</Link>
+              <Link to="/projects" className="btn outline">Start Exploring</Link>
             </div>
-            <div className="note">No prior coding experience required for AI Creator.</div>
+            <div className="note">No prior coding experience required for AI Explorers.</div>
           </div>
 
           <motion.div
@@ -292,11 +291,10 @@ export default function Home() {
                 {renderTypedCode(typed)}
                 {typed >= codeTotalLen && <span className="cursor" />}
               </motion.div>
-              <motion.div className="idea-flow" variants={panelItemVariants}>
-                <div className="idea-step"><strong>💡</strong>IDEA</div>
-                <div className="idea-step"><strong>⚙</strong>BUILD</div>
-                <div className="idea-step"><strong>🧪</strong>TEST</div>
-                <div className="idea-step"><strong>🚀</strong>SHIP</div>
+              <motion.div className="idea-flow idea-flow--3" variants={panelItemVariants}>
+                <div className="idea-step"><strong>🧠</strong>LEARN</div>
+                <div className="idea-step"><strong>🛠️</strong>CREATE</div>
+                <div className="idea-step"><strong>🏆</strong>CELEBRATE</div>
               </motion.div>
             </div>
           </motion.div>
@@ -367,9 +365,9 @@ export default function Home() {
       <section className="programs" id="programs">
         <div className="wrap">
           <div className="head reveal">
-            <div className="label">Three levels · One creator journey</div>
+            <div className="label">Three age tracks · One creator journey</div>
             <h2>Start where you are.<br />Build where you want to go.</h2>
-            <p>Create → Build → Invent. Each level introduces new technology, deeper problem-solving and more ambitious projects.</p>
+            <p>Learn → Create → Celebrate. Every track introduces new technology, deeper problem-solving and more ambitious projects.</p>
           </div>
 
           <div className="program-grid">
@@ -387,6 +385,7 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <p className="carousel-note">🔓 Every level unlocks harder challenges, new tools and bigger builds.</p>
         </div>
       </section>
 
@@ -395,15 +394,14 @@ export default function Home() {
         <div className="wrap">
           <div className="head center reveal">
             <div className="label">Our approach</div>
-            <h2>Learn. Build. Test. Ship.</h2>
+            <h2>Learn. Create. Celebrate.</h2>
             <p>Because the best way to learn technology is to use it.</p>
           </div>
 
-          <div className="process" ref={processRef}>
-            <div className="step reveal" style={{ '--stagger': 0 }}><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn the programming, AI and creative concepts needed to move your project forward.</p></div>
-            <div className="step reveal" style={{ '--stagger': 1 }}><div className="stepnum">02 — BUILD</div><h3>Put it into action.</h3><p>Use what you've learned to create something of your own.</p></div>
-            <div className="step reveal" style={{ '--stagger': 2 }}><div className="stepnum">03 — TEST</div><h3>Find it. Fix it. Improve it.</h3><p>Test projects, discover mistakes, debug code and make creations better.</p></div>
-            <div className="step reveal" style={{ '--stagger': 3 }}><div className="stepnum">04 — SHIP</div><h3>Finish it. Show it.</h3><p>Complete the project, explain your decisions and confidently present what you built.</p></div>
+          <div className="process process--3" ref={processRef}>
+            <div className="step reveal" style={{ '--stagger': 0 }}><div className="stepnum">01 — LEARN</div><h3>Understand the skill.</h3><p>Learn an AI concept or programming skill through short, engaging lessons.</p></div>
+            <div className="step reveal" style={{ '--stagger': 1 }}><div className="stepnum">02 — CREATE</div><h3>Build it for real.</h3><p>Apply what you learned by making a real AI project — a website, game, app or AI tool you made yourself.</p></div>
+            <div className="step reveal" style={{ '--stagger': 2 }}><div className="stepnum">03 — CELEBRATE</div><h3>Get recognized for it.</h3><p>Finish your project, earn badges and recognition for what you built, and celebrate it on Ship Day.</p></div>
           </div>
         </div>
       </section>
@@ -524,7 +522,7 @@ export default function Home() {
           <p>Give your child the opportunity to move from consuming technology to creating with it.</p>
           <div className="actions" style={{ justifyContent: 'center' }}>
             <Link to="/join" className="btn primary">Register Now →</Link>
-            <Link to="/programs" className="btn outline">Choose a Program</Link>
+            <Link to="/programs" className="btn outline">Build Something</Link>
           </div>
         </div>
       </section>

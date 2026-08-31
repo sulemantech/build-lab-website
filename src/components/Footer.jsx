@@ -11,7 +11,7 @@ export default function Footer() {
               <span className="brand-text">INVENTORS LAB</span>
             </span>
             <p>
-              AI + Programming for young creators. Learn skills. Build projects. Test ideas. Ship something real.
+              AI + Programming for young creators. Learn AI, create with AI, and celebrate what you make.
             </p>
           </div>
 
@@ -19,9 +19,9 @@ export default function Footer() {
             <div className="footer-col">
               <h5>Programs</h5>
               <ul>
-                <li><Link to="/programs">AI Creator</Link></li>
-                <li><Link to="/programs">AI Builder</Link></li>
-                <li><Link to="/programs">AI Inventor</Link></li>
+                <li><Link to="/programs">AI Explorers</Link></li>
+                <li><Link to="/programs">AI Builders</Link></li>
+                <li><Link to="/programs">AI Inventors</Link></li>
               </ul>
             </div>
             <div className="footer-col">
@@ -45,7 +45,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} AI Inventors Lab by MetaFront. All rights reserved.</p>
-          <p className="footer-powered">Learn. Build. Test. Ship.</p>
+          <p className="footer-powered">Learn. Create. Celebrate.</p>
         </div>
       </div>
       <div className="footer-accent-bar" />

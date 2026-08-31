@@ -9,8 +9,8 @@ export const categories = [
 
 export const categoryLabel = (id) => categories.find((c) => c.id === id)?.label || id
 
-// Three levels, one creator journey — matches the AI Creator / AI Builder /
-// AI Inventor program tiers in programs.js.
+// Three levels, one creator journey — matches the AI Explorers / AI Builders /
+// AI Inventors age tracks in programs.js.
 const flow = (steps) => steps
 
 export const projects = [
