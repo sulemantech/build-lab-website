@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <span className="brand">
               <span className="mark">AI</span>
-              <span className="brand-text">Inventors Lab</span>
+              <span className="brand-text">INVENTORS LAB</span>
             </span>
             <p>
               AI + Programming for young creators. Learn skills. Build projects. Test ideas. Ship something real.
